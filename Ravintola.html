@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suomen Opiskelijaravintolat</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Suomen Opiskelijaravintolat</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#etusivu">Etusivu</a></li>
+            <li><a href="#ravintolat">Ravintolat</a></li>
+            <li><a href="#yhteystiedot">Yhteystiedot</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="etusivu">
+            <h2>Tervetuloa!</h2>
+            <p>Tämä sovellus näyttää Suomen opiskelijaravintoloiden päivittäiset ja viikoittaiset ruokalistat.</p>
+        </section>
+        <section id="ravintolat">
+            <h2>Ravintolat</h2>
+            <!-- Tähän voisi lisätä lista ravintoloista ja niiden tiedoista -->
+        </section>
+        <section id="kartta">
+            <h2>Kartta</h2>
+            <div class="kartta-container">
+                <div class="kartta">
+                    <!-- Google Mapsin upotuskoodi -->
+                    <iframe
+                        width="1450"
+                        height="500"
+                        loading="lazy"
+                        allowfullscreen
+                        src="https://www.google.com/maps/embed/v1/place?q=opiskelijaravintola&key=YOUR_API_KEY">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Suomen Opiskelijaravintolat</p>
+    </footer>
+</body>
+</html>
