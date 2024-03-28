@@ -9,6 +9,7 @@ h1 {
     margin-left: 65px;
 }
 
+
 li {
     font-size: large;
     text-align: center;
@@ -85,36 +86,4 @@ nav {
     height: 20px;
     background-image: url('kuvat/usericon.png');
     background-size: cover;
-}
-
-form {
-    border: 1px solid black;
-    box-shadow: 5px 5px 0px black;
-    padding: 50px;
-    background-color: rgb(186, 193, 200);
-}
-
-.register {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 600px;
-}
-
-.register-form {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    height: 450px;
-}
-
-.register-form label {
-    margin: 10px;
-    margin-left: -2px;
-}
-
-button {
-    margin-top: 20px;
-    padding: 5px;
-    cursor: pointer;
 }

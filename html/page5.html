@@ -9,36 +9,55 @@
     <script src="../javascript/page5.js" defer></script>
 </head>
 
-<header>
-    <h1>Suomen Opiskelijaravintolat</h1>
-</header>
-<div class="top-nav">
-    <ul class="menu">
-        <li class="right">
-            <a href="suosikit.html">
-                <span class="heart"></span>
-            </a>
-        </li>
-        <li class="right">
-            <a href="käyttäjä.html">
-                <span class="user"></span>
-            </a>
-        </li>
-        <li class="right"><a href="page4.html">Rekisteröidy</a></li>
-        <li class="right"><a href="page5.html">Kirjaudu</a></li>
-        <li class="left"><a href="page6.html">Opiskelijaravintolat</a></li>
-    </ul>
-</div>
-<nav>
-    <ul>
-        <li><a href="page1.html">Etusivu</a></li>
-        <li><a href="page2.html">Ravintolat</a></li>
-        <li><a href="page3.html">Yhteystiedot</a></li>
-    </ul>
-</nav>
-<footer>
-    <p>&copy; 2024 Suomen Opiskelijaravintolat</p>
-</footer>
+<body>
+    <header>
+        <img src="../css/kuvat/restaurant.png" alt="restaurant" style="width:50px;height:50px;float:left;">
+        <h1>Suomen Opiskelijaravintolat</h1>
+    </header>
+    <div class="top-nav">
+        <ul class="menu">
+            <li class="right">
+                <a href="suosikit.html">
+                    <span class="heart"></span>
+                </a>
+            </li>
+            <li class="right">
+                <a href="käyttäjä.html">
+                    <span class="user"></span>
+                </a>
+            </li>
+            <li class="right"><a href="page4.html">Rekisteröidy</a></li>
+            <li class="right"><a href="page5.html">Kirjaudu</a></li>
+            <li class="left"><a href="page6.html">Opiskelijaravintolat</a></li>
+        </ul>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="page1.html">Etusivu</a></li>
+            <li><a href="page2.html">Ravintolat</a></li>
+            <li><a href="page3.html">Yhteystiedot</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="login" id="login-id">
+            <form class="login-form">
+                <label for="login-username"><b>Käyttäjätunnus</b></label>
+                <input type="text" name="login-username" id="login-username" placeholder="Syötä käyttäjätunnus"
+                    required />
+
+                <label for="login-password"><b>Salasana</b></label>
+                <input type="password" name="login-password" id="login-password" placeholder="Syötä salasana"
+                    required />
+
+                <button id="button1" type="submit">Kirjaudu</button>
+                <p>Jos sinulla ei ole vielä käyttäjää, voit rekisteröityä tästä.</p>
+                <button id="button2" type="submit">Rekisteröidy</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Suomen Opiskelijaravintolat</p>
+    </footer>
 </body>
 
 </html>

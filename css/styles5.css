@@ -5,7 +5,8 @@ body {
 }
 
 h1 {
-    margin-top: -3px;
+    margin-top: 10px;
+    margin-left: 65px;
 }
 
 li {
@@ -84,4 +85,42 @@ nav {
     height: 20px;
     background-image: url('kuvat/usericon.png');
     background-size: cover;
+}
+
+form {
+    border: 1px solid black;
+    box-shadow: 5px 5px 0px black;
+    padding: 50px;
+    background-color: rgb(186, 193, 200);
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 250px;
+}
+
+.login-form label {
+    margin: 10px;
+    margin-left: -2px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+p {
+    font-size: 13px;
+    margin-top: 20px;
+    margin-bottom: -5px;
 }
