@@ -41,7 +41,7 @@ th {
 }
 
 #kartta {
-    padding-top: 40px;
+    padding-top: 55px;
 }
 
 li {
@@ -101,7 +101,7 @@ nav {
 
 .right {
     order: 2;
-    margin-left: 60px;
+    margin-left: 45px;
     font-size: 15px;
 }
 
@@ -120,4 +120,9 @@ nav {
     height: 20px;
     background-image: url('kuvat/usericon.png');
     background-size: cover;
+}
+
+p {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

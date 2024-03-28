@@ -9,6 +9,10 @@ h1 {
     margin-left: 65px;
 }
 
+h3 {
+    padding-bottom: 20px;
+}
+
 li {
     font-size: large;
     text-align: center;
@@ -66,7 +70,7 @@ nav {
 
 .right {
     order: 2;
-    margin-left: 60px;
+    margin-left: 45px;
     font-size: 15px;
 }
 
@@ -85,4 +89,41 @@ nav {
     height: 20px;
     background-image: url('kuvat/usericon.png');
     background-size: cover;
+}
+
+.socials p,
+.socials a {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.socials {
+    margin-top: 50px;
+    padding-left: 150px;
+}
+
+.instagram,
+.facebook,
+.twitter {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    margin-right: 50px;
+}
+
+main {
+    background-color: rgb(186, 193, 200);
+    border: 1px black solid;
+    padding-left: 100px;
+    padding-right: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+footer {
+    padding-top: 10px;
 }

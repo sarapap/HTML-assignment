@@ -9,6 +9,10 @@ h1 {
   margin-left: 65px;
 }
 
+h2 {
+  padding-left: 40px;
+  padding-top: 10px;
+}
 
 li {
   font-size: large;
@@ -67,7 +71,7 @@ nav {
 
 .right {
   order: 2;
-  margin-left: 60px;
+  margin-left: 45px;
   font-size: 15px;
 }
 
@@ -93,4 +97,9 @@ img.img {
   border: 1px black solid;
   width: 100%;
   height: auto;
+}
+
+p {
+  padding-left: 40px;
+  padding-bottom: 10px;
 }
