@@ -88,7 +88,7 @@ nav {
 }
 
 form {
-    border: 1px solid black;
+    border: 2px solid black;
     box-shadow: 5px 5px 0px black;
     padding: 50px;
     background-color: rgb(186, 193, 200);
@@ -98,14 +98,15 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 600px;
+    height: 650px;
 }
 
 .register-form {
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 500px;
     height: 450px;
+    padding-bottom: 80px;
 }
 
 .register-form label {
@@ -117,4 +118,8 @@ button {
     margin-top: 20px;
     padding: 5px;
     cursor: pointer;
+}
+
+footer {
+    padding-top: 10px;
 }

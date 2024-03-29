@@ -115,7 +115,7 @@ nav {
 
 main {
     background-color: rgb(186, 193, 200);
-    border: 1px black solid;
+    border: 2px black solid;
     padding-left: 100px;
     padding-right: 100px;
     display: flex;

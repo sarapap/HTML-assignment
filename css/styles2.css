@@ -24,14 +24,16 @@ td {
     border: 1px solid black;
     padding: 8px;
     text-align: left;
+    cursor: pointer;
 }
 
 th {
     background-color: #f2f2f2;
 }
 
+
 .kartta-container {
-    height: 1451px;
+    height: 400px;
     position: relative;
 }
 
@@ -41,7 +43,7 @@ th {
 }
 
 #kartta {
-    padding-top: 55px;
+    padding-top: 112px;
 }
 
 li {
@@ -125,4 +127,23 @@ nav {
 p {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+input[type="search"] {
+    width: 300px;
+    height: 40px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 2px solid black;
+    padding-left: 10px;
+}
+
+footer {
+    padding-top: 10px;
+}
+
+.highlight {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: white;
 }

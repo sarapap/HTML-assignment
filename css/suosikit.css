@@ -87,3 +87,15 @@ nav {
     background-image: url('kuvat/usericon.png');
     background-size: cover;
 }
+
+main {
+    display: block;
+    padding: 2rem;
+    border: 2px black solid;
+    width: 1347px;
+    height: 400px;
+}
+
+footer {
+    padding-top: 10px;
+}

@@ -88,7 +88,7 @@ nav {
 }
 
 form {
-    border: 1px solid black;
+    border: 2px solid black;
     box-shadow: 5px 5px 0px black;
     padding-bottom: 400px;
     padding-left: 100px;
@@ -139,7 +139,7 @@ p {
 }
 
 .tiedot {
-    border: 1px solid black;
+    border: 2px solid black;
     box-shadow: 5px 5px 0px black;
     margin-top: 45px;
     margin-left: 40px;
@@ -155,4 +155,12 @@ h3 {
 
 .save {
     margin-top: 30px;
+}
+
+.footer {
+    font-size: 16px;
+}
+
+footer {
+    padding-top: 10px;
 }

@@ -88,7 +88,7 @@ nav {
 }
 
 form {
-    border: 1px solid black;
+    border: 2px solid black;
     box-shadow: 5px 5px 0px black;
     padding: 50px;
     background-color: rgb(186, 193, 200);
@@ -98,7 +98,7 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 400px;
+    height: 450px;
 }
 
 .login-form {
@@ -119,7 +119,11 @@ button {
     cursor: pointer;
 }
 
-p {
+footer {
+    padding-top: 10px;
+}
+
+.kayttajaP {
     font-size: 13px;
     margin-top: 20px;
     margin-bottom: -5px;
