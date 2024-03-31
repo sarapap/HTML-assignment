@@ -1,18 +1,31 @@
 body {
     font-family: 'Times New Roman', Times, serif;
-    padding: 20px;
+    padding: 0;
     background-color: rgb(207, 216, 219);
 }
+
+/* header */
 
 h1 {
     margin-top: 10px;
     margin-left: 65px;
+    text-shadow: 2px 0.5px 0.5px gray;
 }
+
+header {
+    left: 890px;
+    padding: 5px;
+    height: 58px;
+    width: 1400px;
+}
+
+/* nav */
 
 li {
     font-size: large;
     text-align: center;
     width: 100%;
+    font-weight: bold;
 }
 
 ul {
@@ -37,26 +50,19 @@ li a:hover {
     color: white;
 }
 
-header {
-    left: 890px;
-    padding: 5px;
-    height: 58px;
-    width: 1400px;
-}
-
 .top-nav {
     background-color: #333;
     padding: 5px;
 }
 
-nav {
+.mainNav {
     background-color: #333;
     padding-bottom: 5px;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.left {
+.leftLI {
     order: 1;
     display: grid;
     margin-right: 500px;
@@ -64,9 +70,9 @@ nav {
 
 }
 
-.right {
+.rightLI {
     order: 2;
-    margin-left: 60px;
+    margin-left: 45px;
     font-size: 15px;
 }
 
@@ -87,14 +93,17 @@ nav {
     background-size: cover;
 }
 
+/* main */
+
 form {
     border: 2px solid black;
-    box-shadow: 5px 5px 0px black;
+    box-shadow: 0 8px 16px 0 black;
     padding-bottom: 400px;
     padding-left: 100px;
     padding-right: 100px;
     background-color: rgb(186, 193, 200);
 }
+
 
 .profile {
     display: flex;
@@ -119,9 +128,10 @@ button {
     margin-top: 20px;
     padding: 5px;
     cursor: pointer;
+    box-shadow: 0 2px 2px 0 black;
 }
 
-p {
+.inputP {
     font-size: 15px;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -140,7 +150,7 @@ p {
 
 .tiedot {
     border: 2px solid black;
-    box-shadow: 5px 5px 0px black;
+    box-shadow: 0 8px 16px 0 black;
     margin-top: 45px;
     margin-left: 40px;
     margin-bottom: 250px;
@@ -151,15 +161,10 @@ h2,
 h3 {
     text-align: center;
     padding-top: 40px;
+    text-shadow: 0.5px 0.5px 0.5px gray;
 }
 
-.save {
-    margin-top: 30px;
-}
-
-.footer {
-    font-size: 16px;
-}
+/* footer */
 
 footer {
     padding-top: 10px;

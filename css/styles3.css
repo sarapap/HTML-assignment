@@ -1,22 +1,31 @@
 body {
     font-family: 'Times New Roman', Times, serif;
-    padding: 20px;
+    padding: 0;
     background-color: rgb(207, 216, 219);
 }
+
+/* header */
 
 h1 {
     margin-top: 10px;
     margin-left: 65px;
+    text-shadow: 2px 0.5px 0.5px gray;
 }
 
-h3 {
-    padding-bottom: 20px;
+header {
+    left: 890px;
+    padding: 5px;
+    height: 58px;
+    width: 1400px;
 }
+
+/* nav */
 
 li {
     font-size: large;
     text-align: center;
     width: 100%;
+    font-weight: bold;
 }
 
 ul {
@@ -41,26 +50,19 @@ li a:hover {
     color: white;
 }
 
-header {
-    left: 890px;
-    padding: 5px;
-    height: 58px;
-    width: 1400px;
-}
-
 .top-nav {
     background-color: #333;
     padding: 5px;
 }
 
-nav {
+.mainNav {
     background-color: #333;
     padding-bottom: 5px;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.left {
+.leftLI {
     order: 1;
     display: grid;
     margin-right: 500px;
@@ -68,7 +70,7 @@ nav {
 
 }
 
-.right {
+.rightLI {
     order: 2;
     margin-left: 45px;
     font-size: 15px;
@@ -90,6 +92,8 @@ nav {
     background-image: url('kuvat/usericon.png');
     background-size: cover;
 }
+
+/* main */
 
 .socials p,
 .socials a {
@@ -113,9 +117,14 @@ nav {
     margin-right: 50px;
 }
 
+h3 {
+    text-shadow: 1px 1px 1px gray;
+}
+
 main {
     background-color: rgb(186, 193, 200);
     border: 2px black solid;
+    box-shadow: 0 8px 16px 0 black;
     padding-left: 100px;
     padding-right: 100px;
     display: flex;
@@ -123,6 +132,8 @@ main {
     align-items: center;
     height: 400px;
 }
+
+/* footer */
 
 footer {
     padding-top: 10px;

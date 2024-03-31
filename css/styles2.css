@@ -1,18 +1,108 @@
 body {
     font-family: 'Times New Roman', Times, serif;
-    padding: 20px;
+    padding: 0;
     background-color: rgb(207, 216, 219);
 }
+
+/* header */
 
 h1 {
     margin-top: 10px;
     margin-left: 65px;
+    text-shadow: 2px 0.5px 0.5px gray;
 }
+
+header {
+    left: 890px;
+    padding: 5px;
+    height: 58px;
+    width: 1400px;
+}
+
+/* nav */
+
+li {
+    font-size: large;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    background-color: rgb(186, 193, 200);
+}
+
+li a {
+    color: black;
+    width: 100%;
+    display: block;
+    text-align: center;
+    line-height: 4rem;
+    text-decoration: none;
+}
+
+li a:hover {
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+.top-nav {
+    background-color: #333;
+    padding: 5px;
+}
+
+.mainNav {
+    background-color: #333;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.leftLI {
+    order: 1;
+    display: grid;
+    margin-right: 500px;
+    font-size: 15px;
+
+}
+
+.rightLI {
+    order: 2;
+    margin-left: 45px;
+    font-size: 15px;
+}
+
+.heart {
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+    background-image: url('kuvat/heart.png');
+    background-size: cover;
+    margin-left: 200px;
+}
+
+.user {
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    background-image: url('kuvat/usericon.png');
+    background-size: cover;
+}
+
+/* main */
 
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+}
+
+h2 {
+    text-shadow: 1px 1px 1px gray;
 }
 
 table {
@@ -39,89 +129,12 @@ th {
 
 #map {
     border: 1px solid black;
+    box-shadow: 0 8px 10px 0 black;
     padding: 8px;
 }
 
 #kartta {
     padding-top: 112px;
-}
-
-li {
-    font-size: large;
-    text-align: center;
-    width: 100%;
-}
-
-ul {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    background-color: rgb(186, 193, 200);
-}
-
-li a {
-    color: black;
-    width: 100%;
-    display: block;
-    text-align: center;
-    line-height: 4rem;
-    text-decoration: none;
-}
-
-li a:hover {
-    height: 100%;
-    width: 100%;
-    color: white;
-}
-
-header {
-    left: 890px;
-    padding: 5px;
-    height: 58px;
-    width: 1400px;
-}
-
-.top-nav {
-    background-color: #333;
-    padding: 5px;
-}
-
-nav {
-    background-color: #333;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.left {
-    order: 1;
-    display: grid;
-    margin-right: 500px;
-    font-size: 15px;
-
-}
-
-.right {
-    order: 2;
-    margin-left: 45px;
-    font-size: 15px;
-}
-
-.heart {
-    display: inline-block;
-    width: 25px;
-    height: 20px;
-    background-image: url('kuvat/heart.png');
-    background-size: cover;
-    margin-left: 200px;
-}
-
-.user {
-    display: inline-block;
-    width: 30px;
-    height: 20px;
-    background-image: url('kuvat/usericon.png');
-    background-size: cover;
 }
 
 p {
@@ -138,12 +151,14 @@ input[type="search"] {
     padding-left: 10px;
 }
 
-footer {
-    padding-top: 10px;
-}
-
 .highlight {
     background-color: #f2f2f2;
     font-weight: bold;
     color: white;
+}
+
+/* footer */
+
+footer {
+    padding-top: 10px;
 }
