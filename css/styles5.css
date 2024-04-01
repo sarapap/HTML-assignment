@@ -1,7 +1,7 @@
 body {
     font-family: 'Times New Roman', Times, serif;
     padding: 0;
-    background-color: rgb(207, 216, 219);
+    background-color: rgb(247, 237, 237);
 }
 
 /* header */
@@ -15,14 +15,14 @@ h1 {
 header {
     left: 890px;
     padding: 5px;
-    height: 58px;
+    height: 80px;
     width: 1400px;
 }
 
 /* nav */
 
 li {
-    font-size: large;
+    font-size: medium;
     text-align: center;
     width: 100%;
     font-weight: bold;
@@ -32,21 +32,16 @@ ul {
     display: flex;
     list-style-type: none;
     margin: 0;
-    background-color: rgb(186, 193, 200);
+    background-color: rgb(184, 163, 163);
 }
 
 li a {
     color: black;
-    width: 100%;
-    display: block;
-    text-align: center;
     line-height: 4rem;
     text-decoration: none;
 }
 
 li a:hover {
-    height: 100%;
-    width: 100%;
     color: white;
 }
 
@@ -57,23 +52,24 @@ li a:hover {
 
 .mainNav {
     background-color: #333;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 0px 5px 5px 5px;
 }
 
 .leftLI {
     order: 1;
     display: grid;
-    margin-right: 500px;
-    font-size: 15px;
-
+    font-size: 14px;
 }
 
 .rightLI {
     order: 2;
-    margin-left: 45px;
-    font-size: 15px;
+    font-size: 14px;
+}
+
+.loginLI {
+    font-size: medium;
+    order: 2;
+    font-size: 14px;
 }
 
 .heart {
@@ -82,7 +78,6 @@ li a:hover {
     height: 20px;
     background-image: url('kuvat/heart.png');
     background-size: cover;
-    margin-left: 200px;
 }
 
 .user {
@@ -96,10 +91,10 @@ li a:hover {
 /* main */
 
 form {
-    border: 2px solid black;
-    box-shadow: 0 8px 16px 0 black;
+    border: 1px solid rgb(179, 149, 149);
+    box-shadow: 0 15px 25px 0 rgb(179, 149, 149);
+    background-color: white;
     padding: 50px;
-    background-color: rgb(186, 193, 200);
 }
 
 .login {
@@ -122,11 +117,28 @@ form {
 }
 
 button {
+    font-family: 'Times New Roman', Times, serif;
     margin-top: 20px;
     padding: 5px;
     cursor: pointer;
-    box-shadow: 0 2px 2px 0 black;
+    border: 1px solid black;
+    box-shadow: 0 1px 1px 0 black;
+    background-color: rgb(215, 178, 178);
 }
+
+#button2 {
+    margin-top: 20px;
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid black;
+    box-shadow: 0 2px 2px 0 black;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    background-color: rgb(215, 178, 178);
+}
+
+
 
 /* footer */
 
@@ -138,4 +150,68 @@ footer {
     font-size: 13px;
     margin-top: 20px;
     margin-bottom: -5px;
+}
+
+/* media */
+
+@media only screen and (max-width: 2000px) {
+    h1 {
+        margin-left: 20px;
+    }
+
+    header {
+        width: 100%;
+    }
+
+    .leftLI {
+        margin-right: 100px;
+    }
+
+    .rightLI {
+        margin-left: 100px;
+    }
+
+    .heart {
+        margin-right: -350px;
+    }
+
+    .user {
+        margin-left: 50px;
+    }
+}
+
+
+@media only screen and (max-width: 700px) {
+    h1 {
+        margin-left: 10px;
+
+    }
+
+    header {
+        width: 100%;
+    }
+
+    nav {
+        width: 150%;
+    }
+
+    .leftLI {
+        margin-right: 5px;
+    }
+
+    .rightLI {
+        margin-left: 5px;
+    }
+
+    .heart {
+        margin-right: 5px;
+    }
+
+    .user {
+        margin-left: 5px;
+    }
+
+    main {
+        width: 150%;
+    }
 }
