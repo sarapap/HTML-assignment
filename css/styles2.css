@@ -144,12 +144,20 @@ input[type="search"] {
     border-radius: 5px;
     border: 2px solid black;
     padding-left: 10px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .highlight {
-    background-color: #f2f2f2;
+    background-color: rgb(184, 163, 163);
     font-weight: bold;
-    color: white;
+    color: black;
+}
+
+.filter {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid black;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 /* footer */
@@ -219,5 +227,9 @@ footer {
 
     main {
         width: 190%;
+    }
+
+    .filter {
+        margin-left: 10px;
     }
 }

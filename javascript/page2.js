@@ -5,21 +5,23 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-async function getAPI() {
-    try {
-        const response = await fetch('https://10.120.32.94/restaurant/api/v1/restaurants');
-        if (!response.ok) {
-            throw new Error('Failed to fetch data');
-        }
-        const restaurants = await response.json();
-        displayRestaurants(restaurants);
-    } catch (error) {
-        console.error('Error fetching restaurant data:', error);
-        alert('Failed to fetch restaurant data. Please try again later.');
-    }
-}
+// ravintolat
 
-async function getMenu(restaurantID) {
+import { restaurantModal, restaurantRow } from "./components.js";
+import { fetchAPI } from "./utils.js";
+
+const getAPI = async () => {
+    try {
+        const response = await fetchAPI('restaurants');
+        displayRestaurants(response);
+        document.getElementById('companyFilter').addEventListener('change', () => handleFilterChange(response));
+    } catch (error) {
+        handleError(error);
+    }
+};
+
+
+const getMenu = async (restaurantID) => {
     try {
         const response = await fetch(`https://10.120.32.94/restaurant/api/v1/restaurants/daily/${restaurantID}/fi`);
         if (!response.ok) {
@@ -28,12 +30,11 @@ async function getMenu(restaurantID) {
         const menu = await response.json();
         return menu;
     } catch (error) {
-        console.error('Error fetching menu data:', error);
-        alert('Failed to fetch menu data. Please try again later.');
+        handleError(error);
     }
-}
+};
 
-function displayRestaurants(restaurants) {
+const displayRestaurants = (restaurants) => {
     navigator.geolocation.getCurrentPosition(function (position) {
         const userLocation = {
             latitude: position.coords.latitude,
@@ -51,40 +52,38 @@ function displayRestaurants(restaurants) {
     });
 
     const table = document.querySelector('table');
+    table.innerHTML = '';
 
     restaurants.forEach(restaurant => {
         const marker = L.marker([restaurant.location.coordinates[1], restaurant.location.coordinates[0]]).addTo(map);
-        marker.bindPopup(`<h3>${restaurant.name}</h3><p>${restaurant.address}</p>`);
+        marker.bindPopup(`<h3>${restaurant.name}</h3><p>${restaurant.address}</p><p>${restaurant.menu}`);
         marker.openPopup();
+        const row = restaurantRow(restaurant);
 
-        const row = document.createElement('tr');
-
-        const nameTD = document.createElement('td');
-        nameTD.textContent = restaurant.name;
-
-        nameTD.addEventListener('click', async () => {
-            document.querySelectorAll('td').forEach(item => {
+        row.addEventListener('click', async () => {
+            document.querySelectorAll('tr').forEach(item => {
                 item.classList.remove('highlight');
             });
 
-            nameTD.classList.add('highlight');
-            const menu = await getMenu(restaurant._id);
-            openModal(restaurant, menu)
+            row.classList.add('highlight');
+
+            try {
+                const menu = await getMenu(restaurant._id);
+                openModal(restaurant, menu);
+            } catch (error) {
+                handleError(error);
+            }
         });
-
-        row.appendChild(nameTD);
-
-        const addressTD = document.createElement('td');
-        addressTD.textContent = restaurant.address;
-        row.appendChild(addressTD);
 
         table.appendChild(row);
     });
-}
+};
 
-function openModal(restaurant, menu) {
+const openModal = (restaurant, menu) => {
     const modal = document.querySelector('dialog');
-    const modalContent = document.createElement('div');
+    const modalContent = restaurantModal(restaurant, menu);
+    modal.innerHTML = modalContent;
+    modal.showModal();
 
     const closeButton = document.createElement('button');
     closeButton.textContent = 'Close';
@@ -92,48 +91,28 @@ function openModal(restaurant, menu) {
         modal.close();
     });
 
-    modalContent.appendChild(closeButton);
+    modal.appendChild(closeButton);
+};
 
-    const name = document.createElement('p');
-    name.textContent = restaurant.name;
-    modalContent.appendChild(name);
+const handleError = (error) => {
+    console.log("error " + error);
+    alert('Failed to fetch data. Please try again later.');
+};
 
-    const address = document.createElement('p');
-    address.textContent = restaurant.address;
-    modalContent.appendChild(address);
+const handleFilterChange = (restaurants) => {
+    const selectedCompany = document.getElementById('companyFilter').value;
+    const filteredRestaurants = [];
 
-    const postal = document.createElement('p');
-    postal.textContent = restaurant.postalCode;
-    modalContent.appendChild(postal);
-
-    const city = document.createElement('p');
-    city.textContent = restaurant.city;
-    modalContent.appendChild(city);
-
-    const phone = document.createElement('p');
-    phone.textContent = restaurant.phone;
-    modalContent.appendChild(phone);
-
-    const company = document.createElement('p');
-    company.textContent = restaurant.company;
-    modalContent.appendChild(company);
-
-    const menuHeading = document.createElement('h3');
-    menuHeading.textContent = 'Menu';
-    modalContent.appendChild(menuHeading);
-
-    const menuList = document.createElement('ul');
-    menu.courses.forEach(course => {
-        const menuItem = document.createElement('li');
-        menuItem.textContent = `${course.name}: ${course.price} ${course.diets}`;
-        menuList.appendChild(menuItem);
+    restaurants.forEach(restaurant => {
+        if (selectedCompany && restaurant.company === selectedCompany) {
+            filteredRestaurants.push(restaurant);
+        } else if (!selectedCompany) {
+            filteredRestaurants.push(restaurant);
+        }
     });
-    modalContent.appendChild(menuList);
 
-    modal.innerHTML = '';
-    modal.appendChild(modalContent);
-
-    modal.showModal();
-}
+    displayRestaurants(filteredRestaurants);
+};
 
 getAPI();
+

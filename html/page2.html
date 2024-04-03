@@ -7,7 +7,7 @@
     <link rel="shortcut icon" type="image" href="../css/kuvat/restaurant.png">
     <title>Suomen Opiskelijaravintolat</title>
     <link rel="stylesheet" href="../css/styles2.css">
-    <script src="../javascript/page2.js" defer></script>
+    <script src="../javascript/page2.js" type="module"></script>
 </head>
 
 <body>
@@ -51,6 +51,11 @@
             <p>Tältä sivulta voi tarkastella ravintoloiden sijainteja sekä ruokalistoja.</p>
             <img src="../css/kuvat/search.png" alt="search" style="width:20px;height:20px;">
             <input type="search" placeholder="Syötä ravintolan nimi" />
+            <select class="filter" id="companyFilter">
+                <option value="">Kaikki yritykset</option>
+                <option value="Sodexo">Sodexo</option>
+                <option value="Compass Group">Compass Group</option>
+            </select>
             <h2>Ravintolat</h2>
             <table>
                 <tr>
