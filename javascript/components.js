@@ -10,17 +10,41 @@ const restaurantRow = (restaurant) => {
     return row;
 };
 
-const restaurantModal = (restaurant, menu) => {
+const restaurantModal = (restaurant) => {
     const { name, address, postalCode, city, phone, company } = restaurant;
-    const { courses } = menu;
-    const menuHTML = courses.map(course => {
-        return `<li>${course.name}: ${course.price} ${course.diets}</li>`;
-    }).join('');
 
-    const html = `<div><p>Name: ${name}</p><p>Address: ${address}</p><p>Postal code: ${postalCode}</p>
-    <p>City: ${city}</p><p>Phone: ${phone}</p><p>Company: ${company}</p></div><h3>Menu</h3><ul>${menuHTML}</ul>`;
+    const modalContent = document.createElement('div');
+    modalContent.innerHTML = `<p>Nimi: ${name}</p><p>Osoite: ${address}</p><p>Postinumero: ${postalCode}</p>
+    <p>Kaupunki: ${city}</p><p>Puhelinnumero: ${phone}</p><p>Yritys: ${company}</p>`;
 
-    return html;
+    return modalContent;
 };
 
-export { restaurantModal, restaurantRow };
+
+const dailyModal = (menuDaily) => {
+    let menuHTML;
+    const { courses } = menuDaily;
+    const dailyMenuHTML = courses.map(course => {
+        return `<li class="menu-item">${course.name}: ${course.price} ${course.diets}</li>`;
+    }).join('');
+    menuHTML = `<h4>Päivän Menu</h4><ul class="menu-list">${dailyMenuHTML}</ul>`;
+
+    return menuHTML;
+};
+
+const weeklyModal = (menuWeekly) => {
+    let menuHTML;
+
+    const { days } = menuWeekly;
+    const weeklyMenuHTML = days.map(day => {
+        const coursesHTML = day.courses.map(course => {
+            return `<li class="menu-item">${course.name}: ${course.price} ${course.diets}</li>`;
+        }).join('');
+        return `<li class="menu-day">${day.date}: <ul class="menu-list">${coursesHTML}</ul></li>`;
+    }).join('');
+    menuHTML = `<h4>Viikon Menu</h4><ul class="menu-list">${weeklyMenuHTML}</ul>`;
+
+    return menuHTML;
+};
+
+export { restaurantModal, dailyModal, weeklyModal, restaurantRow };

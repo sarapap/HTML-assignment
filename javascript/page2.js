@@ -1,34 +1,25 @@
 'use script';
 
+// kartta
+
 const map = L.map('map').setView([60.2826627, 25.0101836], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+
 // ravintolat
 
-import { restaurantModal, restaurantRow } from "./components.js";
-import { fetchAPI } from "./utils.js";
+import { restaurantModal, dailyModal, weeklyModal, restaurantRow } from "./components.js";
+import { fetchAPI, fetchDailyMenu, fetchWeeklyMenu, fetchCitiesFromAPI } from "./utils.js";
 
 const getAPI = async () => {
     try {
         const response = await fetchAPI('restaurants');
         displayRestaurants(response);
-        document.getElementById('companyFilter').addEventListener('change', () => handleFilterChange(response));
-    } catch (error) {
-        handleError(error);
-    }
-};
-
-
-const getMenu = async (restaurantID) => {
-    try {
-        const response = await fetch(`https://10.120.32.94/restaurant/api/v1/restaurants/daily/${restaurantID}/fi`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch menu data');
-        }
-        const menu = await response.json();
-        return menu;
+        document.getElementById('filterCity').addEventListener('change', () => handleFilterChange(response));
+        document.getElementById('filterCompany').addEventListener('change', () => handleFilterChange(response));
+        populateCities();
     } catch (error) {
         handleError(error);
     }
@@ -68,8 +59,7 @@ const displayRestaurants = (restaurants) => {
             row.classList.add('highlight');
 
             try {
-                const menu = await getMenu(restaurant._id);
-                openModal(restaurant, menu);
+                openModal(restaurant, 'weekly');
             } catch (error) {
                 handleError(error);
             }
@@ -79,11 +69,61 @@ const displayRestaurants = (restaurants) => {
     });
 };
 
-const openModal = (restaurant, menu) => {
-    const modal = document.querySelector('dialog');
-    const modalContent = restaurantModal(restaurant, menu);
-    modal.innerHTML = modalContent;
+const openModal = async (restaurant) => {
+    const modal = document.createElement('dialog');
+    const restaurantContent = restaurantModal(restaurant);
+
+    const selectMenu = document.createElement('select');
+    selectMenu.id = 'menuType';
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = 'Menu';
+    selectMenu.appendChild(defaultOption);
+
+    const dailyOption = document.createElement('option');
+    dailyOption.value = 'daily';
+    dailyOption.textContent = 'Päivän Menu';
+    selectMenu.appendChild(dailyOption);
+
+    const weeklyOption = document.createElement('option');
+    weeklyOption.value = 'weekly';
+    weeklyOption.textContent = 'Viikon Menu';
+    selectMenu.appendChild(weeklyOption);
+
+    modal.appendChild(restaurantContent);
+    modal.appendChild(selectMenu);
+    document.body.appendChild(modal);
+
     modal.showModal();
+
+    selectMenu.addEventListener('change', async () => {
+        const menuType = selectMenu.value;
+        try {
+            let menuContent;
+            if (menuType === 'daily') {
+                const menu = await fetchDailyMenu(restaurant._id);
+                menuContent = dailyModal(menu);
+            } else if (menuType === 'weekly') {
+                const menu = await fetchWeeklyMenu(restaurant._id);
+                menuContent = weeklyModal(menu);
+            } else {
+                throw new Error('Invalid menu type');
+            }
+
+            modal.innerHTML = menuContent;
+
+            const closeButton = document.createElement('button');
+            closeButton.textContent = 'Close';
+            closeButton.addEventListener('click', () => {
+                modal.close();
+            });
+
+            modal.appendChild(closeButton);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
 
     const closeButton = document.createElement('button');
     closeButton.textContent = 'Close';
@@ -94,25 +134,40 @@ const openModal = (restaurant, menu) => {
     modal.appendChild(closeButton);
 };
 
+
 const handleError = (error) => {
     console.log("error " + error);
     alert('Failed to fetch data. Please try again later.');
 };
 
-const handleFilterChange = (restaurants) => {
-    const selectedCompany = document.getElementById('companyFilter').value;
-    const filteredRestaurants = [];
 
-    restaurants.forEach(restaurant => {
-        if (selectedCompany && restaurant.company === selectedCompany) {
-            filteredRestaurants.push(restaurant);
-        } else if (!selectedCompany) {
-            filteredRestaurants.push(restaurant);
-        }
+const handleFilterChange = (restaurants) => {
+    const selectedCity = document.getElementById('filterCity').value;
+    const selectedCompany = document.getElementById('filterCompany').value;
+
+    const filteredRestaurants = restaurants.filter(restaurant => {
+        const cityMatch = !selectedCity || restaurant.city === selectedCity;
+        const companyMatch = !selectedCompany || restaurant.company === selectedCompany;
+        return cityMatch && companyMatch;
     });
 
     displayRestaurants(filteredRestaurants);
 };
+
+const populateCities = async () => {
+    const select = document.getElementById('filterCity');
+    const cities = await fetchCitiesFromAPI();
+
+    cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        select.appendChild(option);
+    });
+
+};
+
+
 
 getAPI();
 

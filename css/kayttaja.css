@@ -145,6 +145,10 @@ h3 {
     text-shadow: 0.5px 0.5px 0.5px gray;
 }
 
+h3 {
+    color: white;
+}
+
 /* footer */
 
 footer {

@@ -112,10 +112,6 @@ td {
     cursor: pointer;
 }
 
-th {
-    background-color: #f2f2f2;
-}
-
 
 .kartta-container {
     height: 400px;
@@ -158,6 +154,32 @@ input[type="search"] {
     border-radius: 5px;
     border: 2px solid black;
     font-family: 'Times New Roman', Times, serif;
+}
+
+.buttonMenu {
+    padding: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: rgb(218, 200, 200);
+    cursor: pointer;
+    margin: 0px 0px 10px 10px;
+}
+
+dialog {
+    width: 500px;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+}
+
+.menu-item {
+    margin-bottom: 10px;
+}
+
+.menu-day {
+    margin-left: 20px;
 }
 
 /* footer */
