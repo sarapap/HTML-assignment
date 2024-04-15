@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image" href="../../css/kuvat/restaurant.png">
+    <title>Suomen Opiskelijaravintolat</title>
+    <link rel="stylesheet" href="../../css/styles2.css">
+    <script src="../../javascript/page2.js" type="module"></script>
+</head>
+
+<body>
+    <header>
+        <img src="../../css/kuvat/restaurant.png" alt="restaurant" style="width:50px;height:50px;float:left;">
+        <h1>Suomen Opiskelijaravintolat</h1>
+    </header>
+
+    <!-- nav -->
+
+    <nav class="upperNav">
+        <div class="top-nav">
+            <ul class="menu">
+                <li class="rightLI">
+                    <a href="suosikit_sv.html">
+                        <span class="heart"></span>
+                    </a>
+                </li>
+                <li class="rightLI">
+                    <a href="käyttäjä_sv.html">
+                        <span class="user"></span>
+                    </a>
+                </li>
+                <li class="loginLI"><a href="page5_sv.html">Kirjaudu</a></li>
+                <li class="leftLI"><a href="page6_sv.html">Opiskelijaravintolat</a></li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="mainNav">
+        <ul>
+            <li><a href="page1_sv.html">Etusivu</a></li>
+            <li><a href="page2_sv.html">Ravintolat</a></li>
+            <li><a href="page3_sv.html">Yhteystiedot</a></li>
+        </ul>
+    </nav>
+
+    <!-- ravintolat main -->
+
+    <div class="container">
+        <section id="ravintolat">
+            <p>Tältä sivulta voi tarkastella ravintoloiden sijainteja sekä ruokalistoja.</p>
+            <img src="../../css/kuvat/search.png" alt="search" style="width:20px;height:20px;">
+            <input type="search" placeholder="Syötä ravintolan nimi" />
+            <select class="filter" id="filterCity">
+                <option value="">Kaupunki</option>
+            </select>
+
+            <select class="filter" id="filterCompany">
+                <option value="">Yritys</option>
+                <option value="Sodexo">Sodexo</option>
+                <option value="Compass Group">Compass Group</option>
+            </select>
+
+            <h2>Ravintolat</h2>
+            <table>
+                <tr>
+                    <th>Nimi</th>
+                    <th>Osoite</th>
+                </tr>
+            </table>
+            <dialog>
+                <dialog></dialog>
+            </dialog>
+            </main>
+        </section>
+        <main>
+            <section id="kartta">
+                <h2>Kartta</h2>
+                <div class="kartta-container">
+                    <div id="map" style="width: 95%; height: 200%;"></div>
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+                </div>
+            </section>
+        </main>
+
+        <!--footer-->
+
+        <footer>
+            <p>&copy; 2024 Suomen Opiskelijaravintolat</p>
+        </footer>
+
+</body>
+
+</html>
