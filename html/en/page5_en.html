@@ -14,6 +14,14 @@
     <header>
         <img src="../../css/kuvat/restaurant.png" alt="restaurant" style="width:50px;height:50px;float:left;">
         <h1>Suomen Opiskelijaravintolat</h1>
+        <li class="kieli">
+            <label for="kieli">Valitse kieli: </label>
+            <select id="kieli" onchange="changeLanguage(this.value)">
+                <option value="FI">Suomi</option>
+                <option value="EN" selected>Englanti</option>
+                <option value="SV">Ruotsi</option>
+            </select>
+        </li>
     </header>
 
     <!-- nav -->

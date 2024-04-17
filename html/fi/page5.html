@@ -8,12 +8,21 @@
     <title>Suomen Opiskelijaravintolat</title>
     <link rel="stylesheet" href="../../css/styles5.css">
     <script src="../../javascript/page5.js" defer></script>
+    <script src="../../javascript/kieli.js" defer></script>
 </head>
 
 <body>
     <header>
         <img src="../../css/kuvat/restaurant.png" alt="restaurant" style="width:50px;height:50px;float:left;">
         <h1>Suomen Opiskelijaravintolat</h1>
+        <li class="kieli">
+            <label for="kieli">Valitse kieli: </label>
+            <select id="kieli" onchange="changeLanguage(this.value)">
+                <option value="FI" selected>Suomi</option>
+                <option value="EN">Englanti</option>
+                <option value="SV">Ruotsi</option>
+            </select>
+        </li>
     </header>
 
     <!-- nav -->
