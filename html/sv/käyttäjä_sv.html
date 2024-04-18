@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image" href="../../css/kuvat/restaurant.png">
-    <title>Suomen Opiskelijaravintolat</title>
+    <title>Finska Studentrestauranger</title>
     <link rel="stylesheet" href="../../css/kayttaja.css">
     <script src="../../javascript/kayttaja.js" defer></script>
     <script src="../../javascript/kieli.js" defer></script>
@@ -13,14 +13,15 @@
 
 <body>
     <header>
-        <img src="../../css/kuvat/restaurant.png" alt="restaurant" style="width:50px;height:50px;float:left;">
-        <h1>Suomen Opiskelijaravintolat</h1>
+        <img src="../../css/kuvat/restaurant.png" alt="restaurant"
+            style="width:50px;height:50px;float:left;margin-top:15px;">
+        <h1>Finska Studentrestauranger</h1>
         <li class="kieli">
-            <label for="kieli">Valitse kieli: </label>
+            <label for="kieli">Välj språk: </label>
             <select id="kieli" onchange="changeLanguage(this.value)">
-                <option value="FI">Suomi</option>
-                <option value="EN">Englanti</option>
-                <option value="SV" selected>Ruotsi</option>
+                <option value="FI">Finska</option>
+                <option value="EN">Engelska</option>
+                <option value="SV" selected>Svenska</option>
             </select>
         </li>
     </header>
@@ -40,16 +41,16 @@
                         <span class="user"></span>
                     </a>
                 </li>
-                <li class="loginLI"><a href="page5_sv.html">Kirjaudu</a></li>
-                <li class="leftLI"><a href="page6_sv.html">Opiskelijaravintolat</a></li>
+                <li class="loginLI"><a href="page5_sv.html">Logga in</a></li>
+                <li class="leftLI"><a href="page6_sv.html">Studentrestauranger</a></li>
             </ul>
         </div>
     </nav>
     <nav class="mainNav">
         <ul>
-            <li><a href="page1_sv.html">Etusivu</a></li>
-            <li><a href="page2_sv.html">Ravintolat</a></li>
-            <li><a href="page3_sv.html">Yhteystiedot</a></li>
+            <li><a href="page1_sv.html">Hem</a></li>
+            <li><a href="page2_sv.html">Restauranger</a></li>
+            <li><a href="page3_sv.html">Kontakt</a></li>
         </ul>
     </nav>
 
@@ -58,28 +59,28 @@
     <main>
         <div class="kayttaja">
             <section class="tiedot">
-                <h2>Omat tiedot</h2>
-                <h3>Tällä sivulla voit päivittää omia tietojasi.</h3>
+                <h2>Mina Uppgifter</h2>
+                <h3>På denna sida kan du uppdatera dina egna uppgifter.</h3>
             </section>
             <section class="profilesection">
                 <div class="profile">
                     <form class="profileform">
-                        <p class="inputP">✎ Päivitä profiilikuvasi </p>
+                        <p class="inputP">✎ Uppdatera din profilbild</p>
                         <label for="picture">
                             <img id="profile-picture" src="https://placehold.co/200x200" alt="profile picture" />
                         </label>
-                        <input type="picture" id="picture-input" style="display: none" />
-                        <p class="inputP">✎ Vaihda käyttäjätunnus </p>
-                        <label for="changename"><b>Käyttäjätunnus:</b></label>
-                        <input type="text" name="changename" id="changename" placeholder="Käyttäjätunnus" />
-                        <button type="submit"><b>Muokkaa</b></button>
+                        <input type="file" id="picture-input" style="display: none" />
+                        <p class="inputP">✎ Ändra användarnamn</p>
+                        <label for="changename"><b>Användarnamn:</b></label>
+                        <input type="text" name="changename" id="changename" placeholder="Användarnamn" />
+                        <button type="submit"><b>Redigera</b></button>
 
-                        <p class="inputP">✎ Vaihda salasana </p>
-                        <label for="changepassword"><b>Salasana:</b></label>
-                        <input type="password" name="changepassword" id="changepassword" placeholder="Salasana" />
-                        <button type="submit"><b>Muokkaa</b></button>
+                        <p class="inputP">✎ Ändra lösenord</p>
+                        <label for="changepassword"><b>Lösenord:</b></label>
+                        <input type="password" name="changepassword" id="changepassword" placeholder="Lösenord" />
+                        <button type="submit"><b>Redigera</b></button>
 
-                        <button class="save" type="submit"><b>Tallenna muutokset</b></button>
+                        <button class="save" type="submit"><b>Spara ändringar</b></button>
                     </form>
                 </div>
             </section>
@@ -89,7 +90,7 @@
     <!--footer-->
 
     <footer>
-        <p class="footer">&copy; 2024 Suomen Opiskelijaravintolat</p>
+        <p>&copy; 2024 Finska Studentrestauranger</p>
     </footer>
 </body>
 

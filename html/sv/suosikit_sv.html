@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image" href="../../css/kuvat/restaurant.png">
-    <title>Suomen Opiskelijaravintolat</title>
+    <title>Finska Studentrestauranger</title>
     <link rel="stylesheet" href="../../css/suosikit.css">
     <script src="../../javascript/suosikit.js" defer></script>
     <script src="../../javascript/kieli.js" defer></script>
@@ -13,14 +13,15 @@
 
 <body>
     <header>
-        <img src="../../css/kuvat/restaurant.png" alt="restaurant" style="width:50px;height:50px;float:left;">
-        <h1>Suomen Opiskelijaravintolat</h1>
+        <img src="../../css/kuvat/restaurant.png" alt="restaurant"
+            style="width:50px;height:50px;float:left;margin-top:15px;">
+        <h1>Finska Studentrestauranger</h1>
         <li class="kieli">
-            <label for="kieli">Valitse kieli: </label>
+            <label for="kieli">Välj språk: </label>
             <select id="kieli" onchange="changeLanguage(this.value)">
-                <option value="FI">Suomi</option>
-                <option value="EN">Englanti</option>
-                <option value="SV" selected>Ruotsi</option>
+                <option value="FI">Finska</option>
+                <option value="EN">Engelska</option>
+                <option value="SV" selected>Svenska</option>
             </select>
         </li>
     </header>
@@ -40,24 +41,25 @@
                         <span class="user"></span>
                     </a>
                 </li>
-                <li class="loginLI"><a href="page5_sv.html">Kirjaudu</a></li>
-                <li class="leftLI"><a href="page6_sv.html">Opiskelijaravintolat</a></li>
+                <li class="loginLI"><a href="page5_sv.html">Logga in</a></li>
+                <li class="leftLI"><a href="page6_sv.html">Studentrestauranger</a></li>
             </ul>
         </div>
     </nav>
     <nav class="mainNav">
         <ul>
-            <li><a href="page1_sv.html">Etusivu</a></li>
-            <li><a href="page2_sv.html">Ravintolat</a></li>
-            <li><a href="page3_sv.html">Yhteystiedot</a></li>
+            <li><a href="page1_sv.html">Hem</a></li>
+            <li><a href="page2_sv.html">Restauranger</a></li>
+            <li><a href="page3_sv.html">Kontakt</a></li>
         </ul>
     </nav>
 
     <!-- suosikit main -->
 
     <main>
-        <h2>SUOSIKKI RAVINTOLASI</h2>
-        <h3>Kaikki yhdessä paikassa</h3>
+        <h2>DINA FAVORITRESTAURANGER</h2>
+        <h3>Allt på ett ställe</h3>
+
         <dialog>
             <!-- lisää suosikit -->
         </dialog>
@@ -66,7 +68,7 @@
     <!--footer-->
 
     <footer>
-        <p>&copy; 2024 Suomen Opiskelijaravintolat</p>
+        <p>&copy; 2024 Finska Studentrestauranger</p>
     </footer>
 </body>
 

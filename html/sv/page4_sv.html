@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image" href="../../css/kuvat/restaurant.png">
-    <title>Suomen Opiskelijaravintolat</title>
+    <title>Finska Studentrestauranger</title>
     <link rel="stylesheet" href="../../css/styles4.css">
     <script src="../../javascript/page4.js" defer></script>
     <script src="../../javascript/kieli.js" defer></script>
@@ -13,14 +13,15 @@
 
 <body>
     <header>
-        <img src="../../css/kuvat/restaurant.png" alt="restaurant" style="width:50px;height:50px;float:left;">
-        <h1>Suomen Opiskelijaravintolat</h1>
+        <img src="../../css/kuvat/restaurant.png" alt="restaurant"
+            style="width:50px;height:50px;float:left;margin-top:15px;">
+        <h1>Finska Studentrestauranger</h1>
         <li class="kieli">
-            <label for="kieli">Valitse kieli: </label>
+            <label for="kieli">Välj språk: </label>
             <select id="kieli" onchange="changeLanguage(this.value)">
-                <option value="FI">Suomi</option>
-                <option value="EN">Englanti</option>
-                <option value="SV" selected>Ruotsi</option>
+                <option value="FI">Finska</option>
+                <option value="EN">Engelska</option>
+                <option value="SV" selected>Svenska</option>
             </select>
         </li>
     </header>
@@ -40,16 +41,16 @@
                         <span class="user"></span>
                     </a>
                 </li>
-                <li class="loginLI"><a href="page5_sv.html">Kirjaudu</a></li>
-                <li class="leftLI"><a href="page6.html">Opiskelijaravintolat</a></li>
+                <li class="loginLI"><a href="page5_sv.html">Logga in</a></li>
+                <li class="leftLI"><a href="page6_sv.html">Studentrestauranger</a></li>
             </ul>
         </div>
     </nav>
     <nav class="mainNav">
         <ul>
-            <li><a href="page1_sv.html">Etusivu</a></li>
-            <li><a href="page2_sv.html">Ravintolat</a></li>
-            <li><a href="page3_sv.html">Yhteystiedot</a></li>
+            <li><a href="page1_sv.html">Hem</a></li>
+            <li><a href="page2_sv.html">Restauranger</a></li>
+            <li><a href="page3_sv.html">Kontakt</a></li>
         </ul>
     </nav>
 
@@ -58,35 +59,37 @@
     <main>
         <div class="register" id="register-id">
             <form class="register-form">
-                <h2>Olen uusi käyttäjä</h2>
-                <label for="register-name"><b>Etunimi</b></label>
-                <input type="text" name="register-name" id="register-name" placeholder="Etunimi" required />
+                <h2>Jag är en ny användare</h2>
+                <label for="register-name"><b>Förnamn</b></label>
+                <input type="text" name="register-name" id="register-name" placeholder="Förnamn" required />
 
-                <label for="register-lastname"><b>Sukunimi</b></label>
-                <input type="text" name="register-lastname" id="register-lastname" placeholder="Sukunimi" required />
+                <label for="register-lastname"><b>Efternamn</b></label>
+                <input type="text" name="register-lastname" id="register-lastname" placeholder="Efternamn" required />
 
-                <label for="register-number"><b>Puhelinnumero</b></label>
-                <input type="text" name="register-number" id="register-number" placeholder="Puhelinnumero" required />
+                <label for="register-number"><b>Telefonnummer</b></label>
+                <input type="text" name="register-number" id="register-number" placeholder="Telefonnummer" required />
 
-                <label for="register-email"><b>Sähköposti</b></label>
-                <input type="text" name="register-email" id="register-email" placeholder="Sähköposti" required />
+                <label for="register-email"><b>E-post</b></label>
+                <input type="text" name="register-email" id="register-email" placeholder="E-post" required />
 
-                <label for="register-username"><b>Käyttäjätunnus</b></label>
-                <input type="text" name="register-username" id="register-username" placeholder="Syötä käyttäjätunnus"
+                <label for="register-username"><b>Användarnamn</b></label>
+                <input type="text" name="register-username" id="register-username" placeholder="Ange användarnamn"
                     required />
 
-                <label for="register-password"><b>Salasana</b></label>
-                <input type="register-password" name="register-password" id="register-password"
-                    placeholder="Syötä salasana" required />
+                <label for="register-password"><b>Lösenord</b></label>
+                <input type="password" name="register-password" id="register-password" placeholder="Ange lösenord"
+                    required />
 
-                <button type="submit">Rekisteröidy</button>
+                <button type="submit">Registrera</button>
             </form>
+        </div>
     </main>
+
 
     <!--footer-->
 
     <footer>
-        <p>&copy; 2024 Suomen Opiskelijaravintolat</p>
+        <p>&copy; 2024 Finska Studentrestauranger</p>
     </footer>
 </body>
 

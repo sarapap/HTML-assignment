@@ -1,14 +1,13 @@
 body {
   font-family: 'Times New Roman', Times, serif;
   padding: 0;
-  background-color: white;
+  margin: 0;
 }
 
 /* header */
 
 h1 {
-  margin-top: 10px;
-  margin-left: 65px;
+  margin-top: 25px;
   text-shadow: 2px 0.5px 0.5px gray;
 }
 
@@ -20,11 +19,11 @@ header {
 }
 
 .kieli {
-  margin: -30px 0px 0px 550px;
+  margin: -50px 0px 0px 550px;
 }
 
 #kieli {
-  background-color: rgb(184, 163, 163);
+  background-color: rgba(211, 179, 179, 0.751);
   color: white;
   border: 1px solid black;
   border-radius: 5px;
@@ -46,7 +45,7 @@ ul {
   display: flex;
   list-style-type: none;
   margin: 0;
-  background-color: rgb(184, 163, 163);
+  background-color: rgba(221, 204, 204, 0.751);
 }
 
 li a {
@@ -60,13 +59,11 @@ li a:hover {
 }
 
 .top-nav {
-  background-color: #333;
-  padding: 5px;
+  box-shadow: 0 0px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .mainNav {
-  background-color: #333;
-  padding: 0px 5px 5px 5px;
+  box-shadow: 0 0px 20px 25px rgba(0, 0, 0, 0.2);
 }
 
 .leftLI {
