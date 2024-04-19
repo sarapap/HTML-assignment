@@ -1,4 +1,4 @@
-'use script';
+'use strict';
 
 const restaurantRow = (restaurant) => {
     const { name, address } = restaurant;

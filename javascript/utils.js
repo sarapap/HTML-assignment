@@ -1,4 +1,4 @@
-'use script';
+'use strict';
 
 import { baseUrl, menuURL, menuURL2 } from "./variables.js";
 

@@ -133,7 +133,7 @@ button {
     cursor: pointer;
     border-radius: 0.75rem;
     border: none;
-    background-color: rgba(152, 128, 135, 0.959);
+    background-color: rgb(74, 72, 72);
     color: white;
 }
 

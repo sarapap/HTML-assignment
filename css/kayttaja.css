@@ -126,7 +126,7 @@ button {
     cursor: pointer;
     border-radius: 0.75rem;
     border: none;
-    background-color: rgba(152, 128, 135, 0.959);
+    background-color: rgb(74, 72, 72);
     color: white;
 }
 
@@ -156,7 +156,7 @@ h3 {
     text-align: center;
     padding-top: 40px;
     text-shadow: 0.5px 0.5px 0.5px gray;
-    color: rgba(90, 76, 79, 0.959);
+    color: rgb(74, 72, 72);
 }
 
 
