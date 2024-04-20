@@ -1,26 +1,42 @@
 'use strict';
 
-// Tarkistaa, onko käyttäjä jo kirjautunut
 window.onload = function () {
     if (localStorage.getItem('loggedIn') === 'true') {
-        // Jos käyttäjä on kirjautunut, ohjaa hänet etusivulle
-        window.location.href = 'etusivu.html'; // Vaihda etusivu.html oikeaksi etusivun tiedostopolkusi mukaan
+        window.location.href = '../fi/käyttäjä.html';
     }
 };
 
-// Kuuntelee kirjautumisnapin painallusta
 document.getElementById('button1').addEventListener('click', function () {
     var username = document.getElementById('login-username').value;
     var password = document.getElementById('login-password').value;
 
-    // Tässä voit tarkistaa käyttäjänimen ja salasanan oikeellisuuden
-    // Tässä vain yksinkertainen esimerkki, jossa oletetaan, että oikea käyttäjänimi on "admin" ja salasana on "password"
-    if (username === 'admin' && password === 'password') {
-        // Tallentaa kirjautumisen tilan paikalliseen varastoon
+    if (checkCredentials(username, password)) {
         localStorage.setItem('loggedIn', 'true');
-        // Ohjaa käyttäjän etusivulle
-        window.location.href = 'etusivu.html'; // Vaihda etusivu.html oikeaksi etusivun tiedostopolkusi mukaan
+        window.location.href = '../fi/käyttäjä.html';
     } else {
         alert('Väärä käyttäjätunnus tai salasana');
     }
 });
+
+import promisePool from 'utils/database.js';
+
+async function checkCredentials(username, password) {
+    try {
+        const [rows, fields] = await promisePool.execute(
+            'SELECT * FROM wsk_users WHERE kayttajatunnus = ? AND salasana = ?',
+            [username, password]
+        );
+
+        if (rows.length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error('Virhe tietojen tarkistamisessa tietokannasta:', error);
+        return false;
+    }
+}
+
+export default checkCredentials;
+

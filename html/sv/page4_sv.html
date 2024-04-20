@@ -37,11 +37,10 @@
                     </a>
                 </li>
                 <li class="rightLI">
-                    <a href="käyttäjä_sv.html">
+                    <a href="page5_sv.html">
                         <span class="user"></span>
                     </a>
                 </li>
-                <li class="loginLI"><a href="page5_sv.html">Logga in</a></li>
                 <li class="leftLI"><a href="page6_sv.html">Studentrestauranger</a></li>
             </ul>
         </div>
@@ -82,6 +81,33 @@
 
                 <button type="submit">Registrera</button>
             </form>
+            <script>
+                document.querySelector('.register-form').addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    const formData = new FormData(event.target);
+                    const requestBody = Object.fromEntries(formData.entries());
+
+                    try {
+                        const response = await fetch('/rekisteroidy', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(requestBody),
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Rekisteröityminen epäonnistui');
+                        }
+
+                        alert('Rekisteröityminen onnistui');
+                    } catch (error) {
+                        console.error('Virhe rekisteröitymisessä:', error);
+                        alert('Rekisteröityminen epäonnistui');
+                    }
+                });
+            </script>
         </div>
     </main>
 
