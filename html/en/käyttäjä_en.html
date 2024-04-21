@@ -63,12 +63,14 @@
             </section>
             <section class="profilesection">
                 <div class="profile">
-                    <form class="profileform">
+                    <form id="profile-form" enctype="multipart/form-data" method="post" action="/update-profile">
+
                         <p class="inputP">✎ Update your profile picture</p>
-                        <label for="picture">
-                            <img id="profile-picture" src="https://placehold.co/200x200" alt="profile picture" />
+                        <label for="picture" class="update-profile">
+                            <img id="profile-picture" src="https://placehold.co/200x200" alt="Profiilikuvasi" />
                         </label>
-                        <input type="file" id="picture-input" style="display: none" />
+                        <input type="file" id="picture" style="display:none" accept="image/*"
+                            onchange="previewProfilePicture(event)" />
                         <p class="inputP">✎ Change username</p>
                         <label for="changename"><b>Username:</b></label>
                         <input type="text" name="changename" id="changename" placeholder="Username" />

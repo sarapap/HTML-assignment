@@ -1,5 +1,5 @@
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Tahoma', sans-serif;
     padding: 0;
     margin: 0;
 }
@@ -28,7 +28,7 @@ header {
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Tahoma', sans-serif;
 }
 
 /* nav */
@@ -105,14 +105,8 @@ li a:hover {
 form {
     box-shadow: 0 5px 20px 0 rgba(111, 94, 94, 0.448);
     background-color: white;
-    padding: 0px 50px 400px 50px;
-}
-
-.profileform {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    height: 280px;
+    padding: 20px 50px 50px 50px;
+    margin-top: 20px;
 }
 
 .profileform label {
@@ -120,20 +114,20 @@ form {
     margin-left: -2px;
 }
 
+.profileform {
+    margin-left: 100px;
+}
+
 button {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Tahoma', sans-serif;
+    display: flex;
     margin-top: 20px;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
     border-radius: 0.75rem;
     border: none;
     background-color: rgb(74, 72, 72);
     color: white;
-}
-
-.inputP {
-    font-size: 15px;
-    margin: 20px 0px 10px -10px;
 }
 
 .kayttaja {
@@ -160,6 +154,21 @@ h3 {
     color: rgb(74, 72, 72);
 }
 
+.inputP {
+    font-size: 16px;
+    color: #333;
+}
+
+#profile-picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.update-profile {
+    cursor: pointer;
+}
 
 /* footer */
 

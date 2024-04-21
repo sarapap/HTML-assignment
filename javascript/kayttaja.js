@@ -1,25 +1,31 @@
 'use strict';
 
-document.querySelector('.profile-form').addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append('picture', document.getElementById('picture-input').files[0]);
-
-    try {
-        const response = await fetch('/upload', {
-            method: 'POST',
-            body: formData,
-        });
-
-        if (!response.ok) {
-            throw new Error('Kuvan lataaminen epäonnistui');
-        }
-
-        alert('Kuva ladattu onnistuneesti');
-        // Voit päivittää profiilikuvan esikatselun tässä
-    } catch (error) {
-        console.error('Virhe kuvan lataamisessa:', error);
-        alert('Kuvan lataaminen epäonnistui');
+function previewProfilePicture(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("profile-picture").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
     }
-});
+}
+
+function saveChanges() {
+    const form = document.getElementById("profile-form");
+    const formData = new FormData(form);
+
+    fetch("/update-profile", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log("Muutokset tallennettu");
+            } else {
+                console.error("Tallennus epäonnistui");
+            }
+        })
+        .catch(error => console.error("Virhe:", error));
+}

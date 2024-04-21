@@ -1,5 +1,5 @@
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Tahoma', sans-serif;
     padding: 0;
     margin: 0;
 }
@@ -28,7 +28,7 @@ header {
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Tahoma', sans-serif;
 }
 
 /* nav */
@@ -128,7 +128,7 @@ form {
 }
 
 button {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Tahoma', sans-serif;
     margin-top: 20px;
     padding: 5px;
     cursor: pointer;
@@ -149,8 +149,6 @@ button {
     color: white;
     border-radius: 0.75rem;
 }
-
-
 
 /* footer */
 

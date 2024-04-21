@@ -2,10 +2,12 @@
   "name": "json",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "javascript/index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon javascript/index.js",
+    "dev": "nodemon javascript/index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,9 +16,11 @@
     "eslint": "^8.57.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3"
+    "eslint-plugin-prettier": "^5.1.3",
+    "nodemon": "^3.1.0"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.9.6"
