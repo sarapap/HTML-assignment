@@ -1,29 +1,86 @@
 'use strict';
 
-// kartta
 
 const map = L.map('map').setView([60.2826627, 25.0101836], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+// Aseta ravintolatiedot yhteiseen muuttujaan
+let ravintolat;
 
 // ravintolat
 
 import { restaurantModal, dailyModal, weeklyModal, restaurantRow } from "./components.js";
 import { fetchAPI, fetchDailyMenu, fetchWeeklyMenu, fetchCitiesFromAPI } from "./utils.js";
 
+// Aseta yleinen muuttuja ravintolatiedoille
+ravintolat = null;
+
 const getAPI = async () => {
     try {
-        const response = await fetchAPI('restaurants');
-        displayRestaurants(response);
-        document.getElementById('filterCity').addEventListener('change', () => handleFilterChange(response));
-        document.getElementById('filterCompany').addEventListener('change', () => handleFilterChange(response));
+        // Hae ravintolatiedot API:sta ja tallenna yhteiseen muuttujaan
+        ravintolat = await fetchAPI('restaurants');
+        displayRestaurants(ravintolat);
+
+        // Lisää event-listenerit filtteritoiminnoille
+        document.getElementById('filterCity').addEventListener('change', () => handleFilterChange(ravintolat));
+        document.getElementById('filterCompany').addEventListener('change', () => handleFilterChange(ravintolat));
         populateCities();
     } catch (error) {
         handleError(error);
     }
+
+    // Käyttäjän sijainnin haku ja lähimmän ravintolan löytäminen
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => showPosition(pos, ravintolat));
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
 };
+
+
+// kartta
+
+// Funktio etäisyyden laskemiseen
+function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Maan säde kilometreinä
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+// Funktio, joka käsittelee käyttäjän sijainnin ja etsii lähimmän ravintolan
+function showPosition(position, ravintolat) {
+    const userLat = position.coords.latitude;
+    const userLon = position.coords.longitude;
+
+    let nearestRestaurant = null;
+    let minDistance = Infinity;
+
+    // Etsi lähin ravintola
+    ravintolat.forEach(restaurant => {
+        const distance = getDistance(userLat, userLon, restaurant.lat, restaurant.lon);
+        if (distance < minDistance) {
+            nearestRestaurant = restaurant;
+            minDistance = distance;
+        }
+    });
+
+    // Korosta lähin ravintola kartalla
+    if (nearestRestaurant) {
+        const marker = L.marker([nearestRestaurant.lat, nearestRestaurant.lon]).addTo(map);
+        marker.bindPopup(`Lähin ravintola: ${nearestRestaurant.name}`).openPopup();
+
+        // Keskity kartta lähimpään ravintolaan ja zoomaa
+        map.setView([nearestRestaurant.lat, nearestRestaurant.lon], 15);
+    }
+}
+
 
 const displayRestaurants = (restaurants) => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -166,8 +223,6 @@ const populateCities = async () => {
     });
 
 };
-
-
 
 getAPI();
 
