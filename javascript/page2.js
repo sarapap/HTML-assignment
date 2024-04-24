@@ -3,13 +3,17 @@
 import { restaurantModal, dailyModal, weeklyModal, restaurantRow } from "./components.js";
 import { fetchAPI, fetchDailyMenu, fetchWeeklyMenu, fetchCitiesFromAPI } from "./utils.js";
 
+// kartta
+
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+
+// api
+
 let ravintolat;
-ravintolat = null;
 
 const getAPI = async () => {
     try {
@@ -22,55 +26,9 @@ const getAPI = async () => {
     } catch (error) {
         handleError(error);
     }
-
-    const highlightedIcon = L.icon({
-        iconUrl: '../css/kuvat/usericon.png',
-        iconSize: [45, 100],
-    });
-
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-            const userLat = position.coords.latitude;
-            const userLon = position.coords.longitude;
-
-            map.setView([userLat, userLon], 13);
-
-            let nearestRestaurant = null;
-            let minDistance = Infinity;
-
-            L.marker([userLat, userLon]).addTo(map).bindPopup('Oma sijainti').openPopup();
-
-            ravintolat.forEach((restaurant) => {
-                const distance = getDistance(userLat, userLon, restaurant.lat, restaurant.lon);
-                if (distance < minDistance) {
-                    nearestRestaurant = restaurant;
-                    minDistance = distance;
-                }
-            });
-
-            if (nearestRestaurant) {
-                // Erityinen kuvake lähimmälle ravintolalle
-                const highlightedIcon = L.icon({
-                    iconUrl: 'path/to/special_marker_icon.png', // Korostettu kuvake
-                    iconSize: [45, 100], // Esimerkiksi isompi kuvake
-                });
-
-                // Lisää korostettu markkeri ja popup-lähimmälle ravintolalle
-                const nearestMarker = L.marker([nearestRestaurant.lat, nearestRestaurant.lon], {
-                    icon: highlightedIcon,
-                }).addTo(map);
-
-                nearestMarker.bindPopup(`<h3>${nearestRestaurant.name}</h3><p>${nearestRestaurant.address}</p><p>${nearestRestaurant.menu}`).openPopup();
-
-                // Zoomaa karttaa korostettuun ravintolaan
-                map.setView([nearestRestaurant.lat, nearestRestaurant.lon], 15);
-            }
-        },
-        (error) => {
-            console.error('Virhe sijainnin haussa:', error);
-        }
-    );
 };
+
+// kartalle
 
 function getDistance(lat1, lon1, lat2, lon2) {
     const R = 6371;
@@ -85,17 +43,76 @@ function getDistance(lat1, lon1, lat2, lon2) {
 
 
 const displayRestaurants = (restaurants) => {
-    restaurants.sort((a, b) => {
-        return a.name.localeCompare(b.name);
-    });
+    restaurants.sort((a, b) => a.name.localeCompare(b.name));
 
     const table = document.querySelector('table');
     table.innerHTML = '';
 
+    // kartta
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
+
+            map.setView([userLat, userLon], 13);
+
+            const redIcon = L.icon({
+                iconUrl: '../../css/kuvat/redMarker.png',
+                iconSize: [70, 60],
+
+            });
+
+            const defaultIcon = L.icon({
+                iconUrl: '../../css/kuvat/marker.png',
+                iconSize: [45, 45],
+
+            });
+
+            L.marker([userLat, userLon], { icon: redIcon })
+                .addTo(map)
+                .bindPopup('Oma sijainti')
+                .openPopup();
+
+            let nearestRestaurant = null;
+            let minDistance = Infinity;
+
+            ravintolat.forEach((restaurant) => {
+                const distance = getDistance(
+                    userLat,
+                    userLon,
+                    restaurant.location.coordinates[1],
+                    restaurant.location.coordinates[0]
+                );
+                if (distance < minDistance) {
+                    nearestRestaurant = restaurant;
+                    minDistance = distance;
+                }
+            });
+
+            ravintolat.forEach((restaurant) => {
+                const marker = L.marker([restaurant.location.coordinates[1], restaurant.location.coordinates[0]], { icon: defaultIcon }).addTo(map);
+
+                marker.bindPopup(`<h3>${restaurant.name}</h3><p>${restaurant.address}</p><p>${restaurant.menu}`);
+
+                if (restaurant === nearestRestaurant) {
+                    // Korosta lähintä ravintolaa
+                    marker.setOpacity(0.8);
+                    setInterval(() => {
+                        marker.setOpacity(marker.options.opacity === 1 ? 0.5 : 1);
+                    }, 500);
+                    marker.openPopup();
+                }
+            });
+        },
+        (error) => {
+            console.error('Virhe sijainnin haussa:', error);
+        }
+    );
+
+    // ravintola lista
+
     restaurants.forEach(restaurant => {
-        const marker = L.marker([restaurant.location.coordinates[1], restaurant.location.coordinates[0]]).addTo(map);
-        marker.bindPopup(`<h3>${restaurant.name}</h3><p>${restaurant.address}</p><p>${restaurant.menu}`);
-        marker.openPopup();
         const row = restaurantRow(restaurant);
 
         row.addEventListener('click', async () => {
