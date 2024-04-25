@@ -3,7 +3,29 @@
 const addToFavorites = (restaurant) => {
     console.log(`Ravintola ${restaurant.name} on lisätty suosikkeihin!`);
     alert(`Ravintola ${restaurant.name} on lisätty suosikkeihin!`);
+
+    try {
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        const isFavorite = favorites.some((fav) => fav.name === restaurant.name);
+
+        if (!isFavorite) {
+            favorites.push(restaurant);
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+
+            console.log(`Ravintola ${restaurant.name} on lisätty suosikkeihin!`);
+            alert(`Ravintola ${restaurant.name} on lisätty suosikkeihin!`);
+        } else {
+            console.log(`Ravintola ${restaurant.name} on jo suosikeissa!`);
+            alert(`Ravintola ${restaurant.name} on jo suosikeissa!`);
+        }
+
+
+    } catch (error) {
+        console.error("Virhe suosikkien käsittelyssä:", error);
+    }
 };
+
+
 
 const restaurantRow = (restaurant) => {
     const { name, address } = restaurant;

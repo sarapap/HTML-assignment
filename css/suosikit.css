@@ -89,7 +89,7 @@ li a:hover {
     height: 20px;
     background-image: url('kuvat/heart.png');
     background-size: cover;
-    margin-left: 350px;
+    margin-left: 220px;
 }
 
 .user {
@@ -103,16 +103,61 @@ li a:hover {
 /* main */
 
 main {
-    display: block;
     padding: 2rem;
-    box-shadow: 0 5px 20px 0 rgba(111, 94, 94, 0.448);
     height: 400px;
-    margin: 20px;
 }
 
-h2 {
-    text-shadow: 1px 1px 1px gray;
+h2,
+h3 {
+    padding-left: 20px;
+    text-shadow: 1px 0px 0px gray;
 }
+
+dialog {
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    margin: 20px 0px 0px 70px;
+    width: 750px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 8px;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+th {
+    background-color: rgba(221, 204, 204, 0.751);
+}
+
+button {
+    cursor: pointer;
+    background-color: rgb(230, 228, 228);
+    border: none;
+    border-radius: 5px;
+    font-family: 'Tahoma', sans-serif;
+}
+
+button:hover {
+    background-color: #bcbcbc;
+    color: white;
+}
+
 
 /* footer */
 
