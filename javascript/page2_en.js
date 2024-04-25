@@ -1,7 +1,7 @@
 'use strict';
 
 import { restaurantModal, dailyModal, weeklyModal, restaurantRow } from "./components.js";
-import { fetchAPI, fetchDailyMenu, fetchWeeklyMenu, fetchCitiesFromAPI } from "./utils.js";
+import { fetchAPI, fetchDailyMenuEN, fetchWeeklyMenuEN, fetchCitiesFromAPI } from "./utils.js";
 
 // kartta
 
@@ -40,6 +40,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
+
 
 const displayRestaurants = (restaurants) => {
     restaurants.sort((a, b) => a.name.localeCompare(b.name));
@@ -92,7 +93,7 @@ const displayRestaurants = (restaurants) => {
             ravintolat.forEach((restaurant) => {
                 const marker = L.marker([restaurant.location.coordinates[1], restaurant.location.coordinates[0]], { icon: defaultIcon }).addTo(map);
 
-                marker.bindPopup(`<h3>${restaurant.name}</h3><p>${restaurant.address}</p>`);
+                marker.bindPopup(`<h3>${restaurant.name}</h3><p>${restaurant.address}</p><p>`);
 
                 if (restaurant === nearestRestaurant) {
                     // Korosta lähintä ravintolaa
@@ -122,7 +123,7 @@ const displayRestaurants = (restaurants) => {
             row.classList.add('highlight');
 
             try {
-                openModal(restaurant);
+                openModal(restaurant, 'weekly');
             } catch (error) {
                 handleError(error);
             }
@@ -135,7 +136,6 @@ const displayRestaurants = (restaurants) => {
 const openModal = async (restaurant) => {
     const modal = document.createElement('dialog');
     const restaurantContent = restaurantModal(restaurant);
-
 
     const selectMenu = document.createElement('select');
     selectMenu.id = 'menuType';
@@ -166,14 +166,10 @@ const openModal = async (restaurant) => {
         try {
             let menuContent;
             if (menuType === 'daily') {
-                const menu = await fetchDailyMenu(restaurant._id);
+                const menu = await fetchDailyMenuEN(restaurant._id);
                 menuContent = dailyModal(menu);
-                const otsikko = document.createElement('h4');
-                otsikko.id = 'otsikko';
-                otsikko.textContent = 'Tässä Päivän Menu';
-                modal.appendChild(otsikko);
             } else if (menuType === 'weekly') {
-                const menu = await fetchWeeklyMenu(restaurant._id);
+                const menu = await fetchWeeklyMenuEN(restaurant._id);
                 menuContent = weeklyModal(menu);
             } else {
                 throw new Error('Invalid menu type');
@@ -182,8 +178,8 @@ const openModal = async (restaurant) => {
             modal.innerHTML = menuContent;
 
             const closeButton = document.createElement('button');
-            closeButton.id = 'closeButton';
             closeButton.textContent = 'Close';
+            closeButton.id = 'closeButton';
             closeButton.addEventListener('click', () => {
                 modal.close();
             });
@@ -200,7 +196,6 @@ const openModal = async (restaurant) => {
     closeButton.addEventListener('click', () => {
         modal.close();
     });
-
 
     modal.appendChild(closeButton);
 };
@@ -235,7 +230,7 @@ const populateCities = async () => {
         option.textContent = city;
         select.appendChild(option);
     });
-};
 
+};
 
 getAPI();

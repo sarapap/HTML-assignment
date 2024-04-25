@@ -1,11 +1,28 @@
 'use strict';
 
+const addToFavorites = (restaurant) => {
+    console.log(`Ravintola ${restaurant.name} on lisätty suosikkeihin!`);
+    alert(`Ravintola ${restaurant.name} on lisätty suosikkeihin!`);
+};
+
 const restaurantRow = (restaurant) => {
     const { name, address } = restaurant;
 
     const row = document.createElement('tr');
 
     row.innerHTML = `<td>${name}</td><td>${address}</td>`;
+
+    const favoriteButton = document.createElement('button');
+    favoriteButton.id = 'favoriteButton';
+    favoriteButton.textContent = '❤️';
+    favoriteButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        addToFavorites(restaurant);
+    });
+
+    const actionCell = document.createElement('td');
+    actionCell.appendChild(favoriteButton);
+    row.appendChild(actionCell);
 
     return row;
 };

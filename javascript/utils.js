@@ -28,9 +28,35 @@ const fetchDailyMenu = async (restaurantID) => {
     }
 };
 
+const fetchDailyMenuEN = async (restaurantID) => {
+    try {
+        const response = await fetch(`${menuURL}/${restaurantID}/en`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch daily menu data');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching daily menu data:', error);
+        throw error;
+    }
+};
+
 const fetchWeeklyMenu = async (restaurantID) => {
     try {
         const response = await fetch(`${menuURL2}/${restaurantID}/fi`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch weekly menu data');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching weekly menu data:', error);
+        throw error;
+    }
+};
+
+const fetchWeeklyMenuEN = async (restaurantID) => {
+    try {
+        const response = await fetch(`${menuURL2}/${restaurantID}/en`);
         if (!response.ok) {
             throw new Error('Failed to fetch weekly menu data');
         }
@@ -60,4 +86,7 @@ const fetchCitiesFromAPI = async () => {
 };
 
 
-export { fetchAPI, fetchDailyMenu, fetchWeeklyMenu, fetchCitiesFromAPI };
+export {
+    fetchAPI, fetchDailyMenu, fetchWeeklyMenu,
+    fetchCitiesFromAPI, fetchDailyMenuEN, fetchWeeklyMenuEN
+};
