@@ -7,6 +7,36 @@
     <link rel="shortcut icon" type="image" href="../../css/kuvat/restaurant.png">
     <title>Finska Studentrestauranger</title>
     <link rel="stylesheet" href="../../css/styles.css">
+
+    <style>
+        .changecontent::after {
+            content: '';
+            color: rgba(176, 161, 161, 0.751);
+            text-shadow: 1px 0px 0px grå;
+            animation: changetext 10s infinite linear;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        @keyframes changetext {
+            0% {
+                content: "Den här sidan visar dagliga och veckovisa menyer för studentrestauranger i Finland.";
+            }
+
+            40% {
+                content: "Restauranger över hela Finland!";
+            }
+
+            70% {
+                content: "Veckovis uppdaterade menyer!";
+            }
+
+            100% {
+                content: "Välkommen att utforska!";
+            }
+        }
+    </style>
+
     <script src="../../javascript/page1.js" defer></script>
     <script src="../../javascript/kieli.js" defer></script>
 </head>
@@ -59,7 +89,7 @@
         <main>
             <section id="home">
                 <h2>Välkommen!</h2>
-                <p>Den här applikationen visar dagliga och veckovisa menyer för finska studentrestauranger.</p>
+                <span class="changecontent"></span>
                 <figure>
                     <img class="img" src="../../css/kuvat/cafeteria.png" alt="cafeteria" class="center"
                         style="width:600px;height:400px;">

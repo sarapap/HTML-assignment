@@ -7,6 +7,35 @@
     <link rel="shortcut icon" type="image" href="../../css/kuvat/restaurant.png">
     <title>Suomen Opiskelijaravintolat</title>
     <link rel="stylesheet" href="../../css/styles.css">
+
+    <style>
+        .changecontent::after {
+            content: '';
+            color: rgba(176, 161, 161, 0.751);
+            text-shadow: 1px 0px 0px gray;
+            animation: changetext 10s infinite linear;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        @keyframes changetext {
+            0% {
+                content: "Tämä sivu näyttää Suomen opiskelijaravintoloiden päivittäiset ja viikoittaiset ruokalistat.";
+            }
+
+            40% {
+                content: "Ravintoloita ympäri Suomea!";
+            }
+
+            70% {
+                content: "Päivittyviä viikottaisia ruokalistoja!";
+            }
+
+            100% {
+                content: "Tervetuloa tutustumaan!";
+            }
+        }
+    </style>
     <script src="../../javascript/page1.js" defer></script>
     <script src="../../javascript/kieli.js" defer></script>
 </head>
@@ -56,19 +85,18 @@
     <!-- etusivu main -->
 
     <div class="container">
-        <main>
-            <section id="etusivu">
+        <main class="main">
+            <section id="etusivu" class="section">
                 <h2>Tervetuloa!</h2>
-                <p>Tämä sovellus näyttää Suomen opiskelijaravintoloiden päivittäiset ja viikoittaiset ruokalistat.</p>
+                <span class="changecontent"></span>
                 <figure>
-                    <img class="img" src="../../css/kuvat/cafeteria.png" alt="cafeteria" class="center"
-                        style="width:600px;height:400px;">
-                    <img class="img" src="../../css/kuvat/cafeteria2.jpeg" alt="cafeteria2" class="center"
-                        style="width:600px;height:400px;">
+                    <img src="../../css/kuvat/cafeteria.png" alt="cafeteria" style="width:600px;height:400px;">
+                    <img src="../../css/kuvat/cafeteria2.jpeg" alt="cafeteria2" style="width:600px;height:400px;">
                 </figure>
             </section>
         </main>
     </div>
+
 
     <!--footer-->
 

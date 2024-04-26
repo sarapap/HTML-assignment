@@ -1,0 +1,19 @@
+### 
+GET http://localhost:3000/api/v1/kayttaja
+
+### uusi tuote 
+POST http://localhost:3000/api/v1/kayttaja 
+Content-Type: application/json
+{
+
+"etunimi": "Iina", "sukunimi": "Pasila", "tunnus": "iisin", "salasana": "12345", "rooli": "admin", "email": "iina@ascafe.fi", "puhelin": "1234567", "syntymapaiva": "2009-04-05", "ehdot_hyvaksytty": "true", "allennus_ryhma": ""
+
+}
+
+###update user 
+PUT http://localhost:3000/api/v1/asiakas/5 Content-Type: application/json
+
+{
+"etunimi": "Lali", "sukunimi": "Viisku", "tunnus": "iisin", "salasana": "12345", "rooli": "admin", "email": "ghd@asccafe.fi", "puhelin": "1234567", "syntymapaiva": "2009-04-05", "ehdot_hyvaksytty": "true", "allennus_ryhma": ""
+
+}

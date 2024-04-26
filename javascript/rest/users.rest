@@ -1,7 +1,0 @@
-### Post
-
-POST http://localhost:3000/api/v1/users Content-Type: application/json
-
-{
-"password": "password", "email": "asd", "username": "sara", "name": "pekka", "role": "admin"
-}

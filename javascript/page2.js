@@ -41,6 +41,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
     return R * c;
 }
 
+
 const displayRestaurants = (restaurants) => {
     restaurants.sort((a, b) => a.name.localeCompare(b.name));
 

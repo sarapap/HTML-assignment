@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
     dialog.style.display = "flex";
 
     if (favorites.length === 0) {
-        dialog.innerHTML = "<p>Ei suosikkeja. Lisää ravintoloita suosikkeihin!</p>";
+        dialog.innerHTML = "<p>Inga favoriter. Lägg till restauranger i dina favoriter!</p>";
     } else {
         const table = document.createElement("table");
         const headerRow = document.createElement("tr");
-        headerRow.innerHTML = "<th>Nimi</th><th>Osoite</th><th>Toiminnot</th>";  // Lisää toiminto-otsikko
+        headerRow.innerHTML = "<th>Namn</th><th>Adress</th><th>Ta bort från favoriter</th>";
         table.appendChild(headerRow);
 
         favorites.forEach((restaurant, index) => {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
             row.innerHTML = `<td>${restaurant.name}</td><td>${restaurant.address}</td>`;
 
             const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Poista";
+            deleteButton.textContent = "Ta bort";
             deleteButton.addEventListener("click", () => {
                 favorites.splice(index, 1);
                 localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -36,5 +36,3 @@ document.addEventListener("DOMContentLoaded", () => {
         dialog.appendChild(table);
     }
 });
-
-

@@ -1,6 +1,6 @@
 'use strict';
 
-import { restaurantModal, dailyModal, weeklyModal, restaurantRow } from "./components.js";
+import { restaurantModal, dailyModal_en, weeklyModal_en, restaurantRow } from "./components.js";
 import { fetchAPI, fetchDailyMenuEN, fetchWeeklyMenuEN, fetchCitiesFromAPI } from "./utils.js";
 
 // kartta
@@ -167,10 +167,10 @@ const openModal = async (restaurant) => {
             let menuContent;
             if (menuType === 'daily') {
                 const menu = await fetchDailyMenuEN(restaurant._id);
-                menuContent = dailyModal(menu);
+                menuContent = dailyModal_en(menu);
             } else if (menuType === 'weekly') {
                 const menu = await fetchWeeklyMenuEN(restaurant._id);
-                menuContent = weeklyModal(menu);
+                menuContent = weeklyModal_en(menu);
             } else {
                 throw new Error('Invalid menu type');
             }
