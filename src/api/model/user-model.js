@@ -53,6 +53,33 @@ const addUser = async (user) => {
 
 };
 
+const userLogin = async (user) => {
+    const {
+        username,
+        password,
+    } = user;
+
+    const sql = `INSERT INTO kayttaja (username, password) VALUES (?, ?)`;
+
+    const data = [
+        username,
+        password,
+    ];
+
+    try {
+        const [rows] = await promisePool.execute(sql, data);
+        if (rows && rows.affectedRows !== 0) {
+            return { user_id: rows.insertId };
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error("Error executing SQL query:", error);
+        return false;
+    }
+};
+
+
 const findUserByUsername = async (tunnus) => {
     try {
         const [rows] = await promisePool.execute(
@@ -68,8 +95,6 @@ const findUserByUsername = async (tunnus) => {
         return false;
     }
 };
-
-
 
 const removeUser = async (id) => {
     const connection = await promisePool.getConnection();
@@ -123,4 +148,5 @@ export {
     findUserByUsername,
     removeUser,
     updateUser,
+    userLogin
 };

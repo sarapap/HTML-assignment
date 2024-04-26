@@ -1,42 +1,62 @@
-'use strict';
+document.addEventListener('DOMContentLoaded', function () {
+    const loginButton = document.getElementById('button1');
 
-window.onload = function () {
-    if (localStorage.getItem('loggedIn') === 'true') {
-        window.location.href = '../fi/käyttäjä.html';
-    }
-};
+    if (loginButton) {
+        loginButton.addEventListener('click', function (event) {
+            event.preventDefault();
 
-document.getElementById('button1').addEventListener('click', function () {
-    var username = document.getElementById('login-username').value;
-    var password = document.getElementById('login-password').value;
+            const username = document.getElementById('login-username').value;  // Hae käyttäjätunnus
+            const password = document.getElementById('login-password').value;  // Hae salasana
 
-    if (checkCredentials(username, password)) {
-        localStorage.setItem('loggedIn', 'true');
-        window.location.href = '../fi/käyttäjä.html';
+            const data = {
+                username: username,
+                password: password,
+            };
+
+            fetch('http://localhost:3000/api/v1/kayttaja/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Kirjautuminen epäonnistui');
+                    }
+                })
+                .then(data => {
+                    console.log('Kirjautuminen onnistui:', data);
+                    window.location.href = '../fi/käyttäjä.html';
+                })
+                .catch(error => {
+                    console.error('Virhe kirjautumisessa:', error);
+                    alert('Kirjautuminen epäonnistui. Tarkista käyttäjätunnus ja salasana.');
+                });
+        });
     } else {
-        alert('Väärä käyttäjätunnus tai salasana');
+        console.error('Kirjautumispainiketta ei löydy');
     }
 });
 
-import promisePool from 'utils/database.js';
+document.addEventListener('DOMContentLoaded', function () {
+    const userLink = document.querySelector('.rightLI a');
 
-async function checkCredentials(username, password) {
-    try {
-        const [rows, fields] = await promisePool.execute(
-            'SELECT * FROM wsk_users WHERE kayttajatunnus = ? AND salasana = ?',
-            [username, password]
-        );
+    const isLoggedIn = document.cookie.includes('auth_token');
 
-        if (rows.length > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    } catch (error) {
-        console.error('Virhe tietojen tarkistamisessa tietokannasta:', error);
-        return false;
+    if (userLink) {
+        userLink.addEventListener('click', function (event) {
+            if (isLoggedIn) {
+                event.preventDefault();
+                window.location.href = '../fi/käyttäjä.html';
+            } else {
+                event.preventDefault();
+                window.location.href = '../fi/page5.html';
+            }
+        });
     }
-}
+});
 
-export default checkCredentials;
 
