@@ -1,4 +1,4 @@
-import { listAllUsers, findUserById, findUserByUsername, addUser, updateUser, removeUser } from '../models/user-model.js';
+import { listAllUsers, findUserById, findUserByUsername, addUser, updateUser, removeUser } from '../model/user-model.js';
 import bcrypt from 'bcrypt';
 
 const getUser = async (req, res) => {

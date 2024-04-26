@@ -1,9 +1,14 @@
 import express from 'express';
-import multer from 'multer';
+import api from './api/index.js';
+
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const upload = multer({ dest: 'uploads/' });
+app.use('/api/v1', api);
+
+/*const upload = multer({ dest: 'uploads/' });
 
 app.post('/upload', upload.single('picture'), (req, res) => {
     try {
@@ -16,6 +21,6 @@ app.post('/upload', upload.single('picture'), (req, res) => {
         console.error('Virhe kuvan lataamisessa:', error);
         res.status(500).send('Jotain meni pieleen');
     }
-});
+});*/
 
 export default app;
