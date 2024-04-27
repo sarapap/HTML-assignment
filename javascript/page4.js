@@ -1,37 +1,38 @@
-'use strict';
+const registerForm = document.querySelector('.register-form');
 
-import express from 'express';
-import promisePool from 'utils/database.js';
+registerForm.addEventListener('submit', function (event) {
+    event.preventDefault();
 
-const app = express();
-const port = 3000;
+    const data = {
+        name: document.getElementById('register-name').value,
+        lastname: document.getElementById('register-lastname').value,
+        username: document.getElementById('register-username').value,
+        password: document.getElementById('register-password').value,
+        email: document.getElementById('register-email').value,
+        phone: document.getElementById('register-number').value
+    };
 
-app.use(express.json());
-
-app.post('/rekisteroidy', async (req, res) => {
-    try {
-        const { etunimi, sukunimi, puhelinnumero, sahkoposti, kayttajatunnus, salasana } = req.body;
-
-        const [existingUserRows, existingUserFields] = await promisePool.execute(
-            'SELECT * FROM kayttajat WHERE kayttajatunnus = ?',
-            [kayttajatunnus]
-        );
-
-        if (existingUserRows.length > 0) {
-            return res.status(400).send('Käyttäjätunnus on jo käytössä');
-        }
-        const [insertedRows, insertedFields] = await promisePool.execute(
-            'INSERT INTO kayttajat (etunimi, sukunimi, puhelinnumero, sahkoposti, kayttajatunnus, salasana) VALUES (?, ?, ?, ?, ?, ?)',
-            [etunimi, sukunimi, puhelinnumero, sahkoposti, kayttajatunnus, salasana]
-        );
-
-        res.status(201).send('Rekisteröityminen onnistui');
-    } catch (error) {
-        console.error('Virhe rekisteröitymisen käsittelyssä:', error);
-        res.status(500).send('Jotain meni pieleen');
-    }
+    fetch('http://localhost:3000/api/v1/kayttaja', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Rekisteröinti epäonnistui');
+            }
+        })
+        .then(data => {
+            console.log('Rekisteröinti onnistui:', data);
+            window.location.href = '../fi/käyttäjä.html';
+        })
+        .catch(error => {
+            console.error('Virhe rekisteröinnissä:', error);
+            alert('Rekisteröinti epäonnistui. Yritä uudelleen.');
+        });
 });
 
-app.listen(port, () => {
-    console.log(`Palvelin käynnissä osoitteessa http://localhost:${port}`);
-});

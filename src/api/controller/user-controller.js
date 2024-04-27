@@ -32,6 +32,8 @@ const getUserById = async (req, res) => {
 };
 
 const postUser = async (req, res) => {
+    console.log('Pyynnön data:', req.body);
+
     try {
         if (req.body.password) {
             req.body.password = bcrypt.hashSync(req.body.password, 10);
@@ -47,9 +49,11 @@ const postUser = async (req, res) => {
         res.status(201).json(result);
 
     } catch (error) {
+        console.error('Virhe lisättäessä käyttäjää:', error.message);
         res.status(400).json({ error: error.message });
     }
 };
+
 
 const userLoginPost = async (req, res) => {
     try {
