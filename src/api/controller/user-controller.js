@@ -1,7 +1,8 @@
 import { listAllUsers, findUserById, findUserByUsername, addUser, updateUser, removeUser } from '../model/user-model.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import promisePool from '../../utils/database.js';
-
+import config from '../../config/config.js';
 
 const getUser = async (req, res) => {
     const users = await listAllUsers();
@@ -11,7 +12,6 @@ const getUser = async (req, res) => {
     } res
     res.json(users);
 };
-
 
 const getUserByUsername = async (req, res) => {
     const user = await findUserByUsername(req.params.tunnus);
@@ -31,29 +31,36 @@ const getUserById = async (req, res) => {
     }
 };
 
-const postUser = async (req, res) => {
-    console.log('Pyynnön data:', req.body);
+const SECRET_KEY = config.SECRET_KEY;
 
+const postUser = async (req, res) => {
     try {
-        if (req.body.password) {
-            req.body.password = bcrypt.hashSync(req.body.password, 10);
-        } else {
+        const { name, lastname, username, password, email, phone } = req.body;
+
+        if (!req.body.password) {
             throw new Error('Salasana puuttuu');
         }
 
-        const result = await addUser(req.body);
-        if (!result) {
+        const hashedPassword = bcrypt.hashSync(password, 10);
+
+        const newUser = await addUser({ name, lastname, username, password: hashedPassword, email, phone });
+
+        if (!newUser) {
             throw new Error('Käyttäjän lisääminen epäonnistui');
         }
 
-        res.status(201).json(result);
+        const token = jwt.sign(
+            { user_id: newUser.user_id, username: username },
+            SECRET_KEY,
+        );
+
+        res.status(201).json({ success: true, token, user_id: newUser.user_id });
 
     } catch (error) {
-        console.error('Virhe lisättäessä käyttäjää:', error.message);
+        console.error('Virhe postUser-toiminnossa:', error.message);
         res.status(400).json({ error: error.message });
     }
 };
-
 
 const userLoginPost = async (req, res) => {
     try {
@@ -78,12 +85,20 @@ const userLoginPost = async (req, res) => {
             return res.status(401).json({ error: 'Väärä käyttäjätunnus tai salasana' });
         }
 
-        res.status(200).json({ message: 'Kirjautuminen onnistui', user_id: user.id });
+        const token = jwt.sign(
+            { user_id: user.id, username: user.username },
+            SECRET_KEY,
+            { expiresIn: '1h' }
+        );
+
+        res.status(200).json({ success: true, message: 'Kirjautuminen onnistui', token, user_id: user.id });
 
     } catch (error) {
+        console.error('Virhe kirjautumisessa:', error.message);
         res.status(400).json({ error: error.message });
     }
 };
+
 
 const putUser = async (req, res) => {
     // if (

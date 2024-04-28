@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
         loginButton.addEventListener('click', function (event) {
             event.preventDefault();
 
-            const username = document.getElementById('login-username').value;  // Hae käyttäjätunnus
-            const password = document.getElementById('login-password').value;  // Hae salasana
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
 
             const data = {
                 username: username,
@@ -28,8 +28,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 })
                 .then(data => {
-                    console.log('Kirjautuminen onnistui:', data);
-                    window.location.href = '../fi/käyttäjä.html';
+                    const token = data.token;
+
+                    if (token) {
+                        localStorage.setItem('authToken', token);
+                    }
+
+                    if (token) {
+                        window.location.href = '../fi/käyttäjä.html';
+                    } else {
+                        window.location.href = '../fi/page5.html';
+                    }
                 })
                 .catch(error => {
                     console.error('Virhe kirjautumisessa:', error);
@@ -39,9 +48,28 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.error('Kirjautumispainiketta ei löydy');
     }
+
+    const links = document.querySelectorAll('a');
+
+    links.forEach(link => {
+        if (link.href.endsWith('page5.html')) {
+            link.addEventListener('click', function (event) {
+                event.preventPreventDefault();
+
+                const authToken = localStorage.getItem('authToken');
+
+                if (authToken) {
+                    window.location.href = '../fi/käyttäjä.html';
+                } else {
+                    window.location.href = '../fi/page5.html';
+                }
+            });
+        }
+    });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+
+/*document.addEventListener('DOMContentLoaded', function () {
     const userLink = document.querySelector('.rightLI a');
 
     const isLoggedIn = document.cookie.includes('auth_token');
@@ -57,6 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-});
+});*/
 
 

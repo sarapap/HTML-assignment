@@ -79,12 +79,39 @@
                         <input type="password" name="changepassword" placeholder="Salasana" />
 
                         <button class="save" type="button" onclick="saveChanges()"><b>Tallenna muutokset</b></button>
+                        <button class="logOut" type="button" onclick="logOut()"><b>Kirjaudu ulos</b></button>
                     </form>
                 </div>
             </section>
-
         </div>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('a');
+
+            links.forEach(link => {
+                if (link.href.endsWith('page5.html')) {
+                    link.addEventListener('click', function (event) {
+                        event.preventDefault();
+
+                        const authToken = localStorage.getItem('authToken');
+
+                        if (authToken) {
+                            window.location.href = 'käyttäjä.html';
+                        } else {
+                            window.location.href = 'page5.html';
+                        }
+                    });
+                }
+            });
+        });
+        function logOut() {
+            localStorage.removeItem('authToken');
+
+            window.location.href = 'page5.html';
+        }
+
+    </script>
 
     <!--footer-->
 

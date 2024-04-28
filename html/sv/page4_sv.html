@@ -7,7 +7,6 @@
     <link rel="shortcut icon" type="image" href="../../css/kuvat/restaurant.png">
     <title>Finska Studentrestauranger</title>
     <link rel="stylesheet" href="../../css/styles4.css">
-    <script src="../../javascript/page4.js" defer></script>
     <script src="../../javascript/kieli.js" defer></script>
 </head>
 
@@ -82,30 +81,69 @@
                 <button type="submit">Registrera</button>
             </form>
             <script>
-                document.querySelector('.register-form').addEventListener('submit', async (event) => {
-                    event.preventDefault();
+                document.addEventListener('DOMContentLoaded', function () {
+                    const registerForm = document.querySelector('.register-form');
 
-                    const formData = new FormData(event.target);
-                    const requestBody = Object.fromEntries(formData.entries());
+                    registerForm.addEventListener('submit', function (event) {
+                        event.preventDefault();
 
-                    try {
-                        const response = await fetch('/rekisteroidy', {
+                        const data = {
+                            name: document.getElementById('register-name').value,
+                            lastname: document.getElementById('register-lastname').value,
+                            username: document.getElementById('register-username').value,
+                            password: document.getElementById('register-password').value,
+                            email: document.getElementById('register-email').value,
+                            phone: document.getElementById('register-number').value,
+                        };
+
+                        fetch('http://localhost:3000/api/v1/kayttaja', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify(requestBody),
-                        });
+                            body: JSON.stringify(data),
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.json();
+                                } else {
+                                    throw new Error('Rekisteröinti epäonnistui');
+                                }
+                            })
+                            .then(data => {
+                                const token = data.token;
+                                if (token) {
+                                    localStorage.setItem('authToken', token);
+                                }
+                                if (token) {
+                                    window.location.href = 'käyttäjä_sv.html';
+                                } else {
+                                    window.location.href = 'page5_sv.html';
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Virhe rekisteröinnissä:', error);
+                                alert('Rekisteröinti epäonnistui. Yritä uudelleen.');
+                            });
+                    });
 
-                        if (!response.ok) {
-                            throw new Error('Rekisteröityminen epäonnistui');
+                    const links = document.querySelectorAll('a');
+
+                    links.forEach(link => {
+                        if (link.href.endsWith('page5_sv.html')) {
+                            link.addEventListener('click', function (event) {
+                                event.preventPreventDefault();
+
+                                const authToken = localStorage.getItem('authToken');
+
+                                if (authToken) {
+                                    window.location.href = 'käyttäjä_sv.html';
+                                } else {
+                                    window.location.href = 'page5_sv.html';
+                                }
+                            });
                         }
-
-                        alert('Rekisteröityminen onnistui');
-                    } catch (error) {
-                        console.error('Virhe rekisteröitymisessä:', error);
-                        alert('Rekisteröityminen epäonnistui');
-                    }
+                    });
                 });
             </script>
         </div>

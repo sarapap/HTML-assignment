@@ -50,7 +50,6 @@ const addUser = async (user) => {
         console.error("Error executing SQL query:", error);
         return false;
     }
-
 };
 
 const userLogin = async (user) => {
