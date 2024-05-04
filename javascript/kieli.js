@@ -1,5 +1,11 @@
 'use strict';
 
+/*funktio kielen vaihtoon */
+function getSelectedLanguage() {
+    const kieli = document.getElementById('kieli');
+    return kieli && kieli.value ? kieli.value : 'FI';
+}
+
 document.getElementById("kieli").addEventListener("change", function () {
     var selectedLanguage = this.value;
     if (selectedLanguage === 'FI') {
@@ -27,8 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 let redirectPage;
 
-                const kieli = document.getElementById('kieli');
-                const selectedLanguage = kieli && kieli.value ? kieli.value : 'FI';
+                const selectedLanguage = getSelectedLanguage();
 
                 if (authToken) {
                     switch (selectedLanguage) {

@@ -1,7 +1,14 @@
 'use strict';
 
+/*funktio kielen vaihtoon */
+function getSelectedLanguage() {
+    const kieli = document.getElementById('kieli');
+    return kieli && kieli.value ? kieli.value : 'FI';
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-    const registerForm = document.querySelector('.register-form'); // Varmista oikea luokka tai ID
+    const registerForm = document.querySelector('.register-form');
+    const selectedLanguage = getSelectedLanguage();
 
     if (registerForm) {
         registerForm.addEventListener('submit', function (event) {
@@ -19,8 +26,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
             };
 
+            const translations = {
+                EN: {
+                    emptyFields: 'All required fields must be filled.',
+                    failed: "Registration failed. Please try again.",
+                    successTarget: "../../html/en/käyttäjä_en.html"
+                },
+                SV: {
+                    emptyFields: 'Alla obligatoriska fält måste fyllas i.',
+                    failed: "Registreringen misslyckades. Försök igen.",
+                    successTarget: "../../html/sv/käyttäjä_sv.html"
+                },
+                FI: {
+                    emptyFields: 'Kaikki pakolliset kentät on täytettävä.',
+                    failed: "Rekisteröinti epäonnistui. Yritä uudelleen.",
+                    successTarget: "../../html/fi/käyttäjä.html"
+                }
+            };
+
             if (!data.name || !data.lastname || !data.email || !data.username || !data.password) {
-                alert('Kaikki pakolliset kentät on täytettävä.');
+                alert(translations[selectedLanguage].emptyFields);
                 return;
             }
 
@@ -45,9 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (token) {
                         localStorage.setItem('authToken', token);
 
-                        const kieli = document.getElementById('kieli');
-                        const selectedLanguage = kieli && kieli.value ? kieli.value : 'FI';
-
                         let targetPage = '';
                         switch (selectedLanguage) {
                             case 'EN':
@@ -64,12 +86,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         window.location.href = targetPage;
                     } else {
-                        alert('Rekisteröinti epäonnistui. Yritä uudelleen.');
+                        const translation = translations[selectedLanguage];
+                        alert(translation.failed);
                     }
                 })
                 .catch(error => {
-                    console.error('Virhe rekisteröinnissä:', error);
-                    alert('Rekisteröinti epäonnistui. Yritä uudelleen.');
+                    const translation = translations[selectedLanguage];
+                    alert(translation.failed);
+
                 });
         });
     }

@@ -1,3 +1,11 @@
+'use strict';
+
+/*funktio kielen vaihtoon */
+function getSelectedLanguage() {
+    const kieli = document.getElementById('kieli');
+    return kieli && kieli.value ? kieli.value : 'FI';
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const loginButton = document.getElementById('button1');
 
@@ -32,21 +40,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (token) {
                         localStorage.setItem('authToken', token);
-                    }
-
-                    if (token) {
-                        window.location.href = '../fi/käyttäjä.html';
+                        switch (selectedLanguage) {
+                            case 'EN':
+                                targetPage = '../../html/en/käyttäjä_en.html';
+                                break;
+                            case 'SV':
+                                targetPage = '../../html/sv/käyttäjä_sv.html';
+                                break;
+                            case 'FI':
+                            default:
+                                targetPage = '../../html/fi/käyttäjä.html';
+                                break;
+                        }
+                        window.location.href = targetPage;
                     } else {
-                        window.location.href = '../fi/page5.html';
+                        switch (selectedLanguage) {
+                            case 'EN':
+                                targetPage = '../../html/en/page5_en.html';
+                                break;
+                            case 'SV':
+                                targetPage = '../../html/sv/page5_sv.html';
+                                break;
+                            case 'FI':
+                            default:
+                                targetPage = '../../html/fi/page5.html';
+                                break;
+                        }
+                        window.location.href = targetPage;
+
                     }
                 })
                 .catch(error => {
-                    console.error('Virhe kirjautumisessa:', error);
                     alert('Kirjautuminen epäonnistui. Tarkista käyttäjätunnus ja salasana.');
                 });
         });
-    } else {
-        console.error('Kirjautumispainiketta ei löydy');
     }
 
     const links = document.querySelectorAll('a');
@@ -67,24 +94,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-
-/*document.addEventListener('DOMContentLoaded', function () {
-    const userLink = document.querySelector('.rightLI a');
-
-    const isLoggedIn = document.cookie.includes('auth_token');
-
-    if (userLink) {
-        userLink.addEventListener('click', function (event) {
-            if (isLoggedIn) {
-                event.preventDefault();
-                window.location.href = '../fi/käyttäjä.html';
-            } else {
-                event.preventDefault();
-                window.location.href = '../fi/page5.html';
-            }
-        });
-    }
-});*/
-
 

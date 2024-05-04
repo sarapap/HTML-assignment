@@ -1,12 +1,17 @@
 'use strict';
 
+/*funktio kielen vaihtoon */
+function getSelectedLanguage() {
+    const kieli = document.getElementById('kieli');
+    return kieli && kieli.value ? kieli.value : 'FI';
+}
+
 /* kirjaudu ulos */
 
 function logOut() {
     localStorage.removeItem('authToken');
 
-    const kieli = document.getElementById('kieli');
-    const selectedLanguage = kieli && kieli.value ? kieli.value : 'FI';
+    const selectedLanguage = getSelectedLanguage();
 
     let logoutPage = '';
     switch (selectedLanguage) {
@@ -28,11 +33,7 @@ function logOut() {
 
 document.addEventListener("DOMContentLoaded", async function () {
     const token = localStorage.getItem("authToken");
-
-    if (!token) {
-        console.error("Authentication token not found.");
-        return;
-    }
+    const selectedLanguage = getSelectedLanguage();
 
     let userId;
 
@@ -51,7 +52,18 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
 
         if (!response.ok) {
-            throw new Error("Error fetching user information.");
+            switch (selectedLanguage) {
+                case 'EN':
+                    alert("An error occurred: " + error.message);
+                    break;
+                case 'SV':
+                    alert("Ett fel inträffade: " + error.message);
+                    break;
+                case 'FI':
+                default:
+                    alert("Tapahtui virhe: " + error.message);
+                    break;
+            }
         }
 
         const userData = await response.json();
@@ -59,9 +71,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         const userUsername = userData.tunnus || "";
         const userEmail = userData.email || "";
         const userPhone = userData.puhelin || "";
-
-        const kieli = document.getElementById("kieli");
-        const selectedLanguage = kieli && kieli.value ? kieli.value : 'FI';
 
         const translations = {
             FI: {
@@ -94,11 +103,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         const omatTiedotSection = document.getElementById("tiedot");
 
-        if (!omatTiedotSection) {
-            console.error("Element with ID 'tiedot' not found.");
-            return;
-        }
-
         omatTiedotSection.innerHTML = `
             <h2>${t.title}</h2><br>
             <p>${t.name}: ${userName}</p>
@@ -109,7 +113,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         `;
 
     } catch (error) {
-        console.error("Error fetching user information:", error.message);
     }
 });
 
@@ -131,6 +134,8 @@ async function submitForm(event) {
     const parsedPayload = JSON.parse(payload);
     const userId = parsedPayload.user_id;
 
+    const selectedLanguage = getSelectedLanguage();
+
     try {
         const response = await fetch(`http://localhost:3000/api/v1/kayttaja/info/${userId}`, {
             method: 'PUT',
@@ -142,9 +147,6 @@ async function submitForm(event) {
         });
 
         if (response.ok) {
-            const kieli = document.getElementById('kieli');
-            const selectedLanguage = kieli && kieli.value ? kieli.value : 'FI';
-
             let targetPage = '';
             switch (selectedLanguage) {
                 case 'EN':
@@ -164,10 +166,32 @@ async function submitForm(event) {
 
             window.location.href = targetPage;
         } else {
-            throw new Error('Päivitys epäonnistui');
+            switch (selectedLanguage) {
+                case 'EN':
+                    alert("Update was not successful.");
+                    break;
+                case 'SV':
+                    alert("Uppdateringen var inte framgångsrik.");
+                    break;
+                case 'FI':
+                default:
+                    alert("Päivitys ei onnistunut.");
+                    break;
+            }
         }
     } catch (error) {
-        alert("Tapahtui virhe: " + error.message);
+        switch (selectedLanguage) {
+            case 'EN':
+                alert("An error occurred: " + error.message);
+                break;
+            case 'SV':
+                alert("Ett fel inträffade: " + error.message);
+                break;
+            case 'FI':
+            default:
+                alert("Tapahtui virhe: " + error.message);
+                break;
+        }
     }
 }
 
@@ -180,18 +204,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     const changePasswordForm = document.getElementById("changePasswordForm");
+    const selectedLanguage = getSelectedLanguage();
 
     if (changePasswordForm) {
         changePasswordForm.addEventListener("submit", function (event) {
             event.preventDefault();
 
             const token = localStorage.getItem("authToken");
-
-            if (!token) {
-                console.error("Autentikointitokenia ei löydy.");
-                alert("Ole hyvä ja kirjaudu sisään.");
-                return;
-            }
 
             const base64Payload = token.split('.')[1];
             const payload = atob(base64Payload);
@@ -223,9 +242,6 @@ document.addEventListener('DOMContentLoaded', function () {
             })
                 .then((response) => {
                     if (response.ok) {
-                        const kieli = document.getElementById('kieli');
-                        const selectedLanguage = kieli && kieli.value ? kieli.value : 'FI';
-
                         let targetPage = '';
                         switch (selectedLanguage) {
                             case 'EN':
@@ -245,15 +261,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         window.location.href = targetPage;
                     } else {
-                        alert("Virhe salasanan päivityksessä.");
+                        switch (selectedLanguage) {
+                            case 'EN':
+                                alert("Error updating password.");
+                                break;
+                            case 'SV':
+                                alert("Fel vid uppdatering av lösenord.");
+                                break;
+                            case 'FI':
+                            default:
+                                alert("Virhe salasanan päivityksessä.");
+                                break;
+                        }
                     }
                 })
                 .catch((error) => {
-                    console.error("Virhe salasanan päivityksessä:", error);
-                    alert("Jotain meni pieleen.");
+                    switch (selectedLanguage) {
+                        case 'EN':
+                            alert("Something went wrong.");
+                            break;
+                        case 'SV':
+                            alert("Något gick fel.");
+                            break;
+                        case 'FI':
+                        default:
+                            alert(catchError = "Jotain meni pieleen.");
+                            break;
+                    }
                 });
         });
-    } else {
-        console.error("Elementtiä 'changePasswordForm' ei löydy.");
     }
 });
