@@ -93,27 +93,6 @@
                 </div>
             </section>
         </main>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const links = document.querySelectorAll('a');
-
-                links.forEach(link => {
-                    if (link.href.endsWith('page5_sv.html')) {
-                        link.addEventListener('click', function (event) {
-                            event.preventPreventDefault();
-
-                            const authToken = localStorage.getItem('authToken');
-
-                            if (authToken) {
-                                window.location.href = 'käyttäjä_sv.html';
-                            } else {
-                                window.location.href = 'page5_sv.html';
-                            }
-                        });
-                    }
-                });
-            });
-        </script>
 
         <!--footer-->
 

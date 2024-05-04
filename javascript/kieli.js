@@ -10,3 +10,55 @@ document.getElementById("kieli").addEventListener("change", function () {
         window.location.href = "../sv/page1_sv.html";
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const links = document.querySelectorAll('a');
+
+    const loginEndings = ['page5_en.html', 'page5_sv.html', 'page5.html'];
+
+    links.forEach(link => {
+        const isLoginLink = loginEndings.some(ending => link.href.endsWith(ending));
+
+        if (isLoginLink) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const authToken = localStorage.getItem('authToken');
+
+                let redirectPage;
+
+                const kieli = document.getElementById('kieli');
+                const selectedLanguage = kieli && kieli.value ? kieli.value : 'FI';
+
+                if (authToken) {
+                    switch (selectedLanguage) {
+                        case 'EN':
+                            redirectPage = '../../html/en/käyttäjä_en.html';
+                            break;
+                        case 'SV':
+                            redirectPage = '../../html/sv/käyttäjä_sv.html';
+                            break;
+                        case 'FI':
+                        default:
+                            redirectPage = '../../html/fi/käyttäjä.html';
+                            break;
+                    }
+                } else {
+                    switch (selectedLanguage) {
+                        case 'EN':
+                            redirectPage = '../../html/en/page5_en.html';
+                            break;
+                        case 'SV':
+                            redirectPage = '../../html/sv/page5_sv.html';
+                            break;
+                        case 'FI':
+                        default:
+                            redirectPage = '../../html/fi/page5.html';
+                            break;
+                    }
+                }
+                window.location.href = redirectPage;
+            });
+        }
+    });
+});

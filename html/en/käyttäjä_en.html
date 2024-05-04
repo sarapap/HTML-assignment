@@ -57,57 +57,58 @@
 
     <main>
         <div class="kayttaja">
-            <section class="tiedot">
-                <h2>My Information</h2>
-                <h3>On this page, you can update your own information.</h3>
+            <section id="tiedot" class="tiedot">
             </section>
+
             <section class="profilesection">
                 <div class="profile">
-                    <form id="profile-form" enctype="multipart/form-data" method="post" action="/update-profile">
-
+                    <form id="profile-form">
                         <p class="inputP">✎ Update your profile picture</p>
                         <label for="picture" class="update-profile">
                             <img id="profile-picture" src="https://placehold.co/200x200" alt="Profiilikuvasi" />
                         </label>
+
                         <input type="file" id="picture" style="display:none" accept="image/*"
                             onchange="previewProfilePicture(event)" />
-                        <p class="inputP">✎ Change username</p>
-                        <label for="changename"><b>Username:</b></label>
-                        <input type="text" name="changename" id="changename" placeholder="Username" />
-                        <button type="submit"><b>Edit</b></button>
 
-                        <p class="inputP">✎ Change password</p>
-                        <label for="changepassword"><b>Password:</b></label>
-                        <input type="password" name="changepassword" id="changepassword" placeholder="Password" />
-                        <button type="submit"><b>Edit</b></button>
+                        <hr>
+                        <label class="inputP">✎ Change firstname:</label>
+                        <input type="text" name="name" id="name" placeholder="Firstname" class="changeInput" />
 
-                        <button class="save" type="submit"><b>Save Changes</b></button>
+                        <hr>
+                        <label class="inputP">✎ Change lastname:</label>
+                        <input type="text" name="lastname" id="lastname" placeholder="Lastname" class="changeInput" />
+
+                        <hr>
+                        <label class="inputP">✎ Change email:</label>
+                        <input type="email" name="email" id="email" placeholder="Email" class="changeInput" />
+
+                        <hr>
+                        <label class="inputP">✎ Change phonennumber:</label>
+                        <input type="tel" name="phone" id="phone" placeholder="Phonennumber" class="changeInput" />
+
+                        <hr>
+
+                        <label class="inputP">✎ Change username:</label>
+                        <input type="text" name="username" id="username" placeholder="Username" class="changeInput" />
+                        <hr>
+                        <button id="tallenna" class="save"><b>Save Changes</b></button>
+                    </form>
+                    <form id="changePasswordForm" class="changePasswordForm">
+                        <label class="inputP">✎ New password:</label>
+                        <input type="password" name="password" id="password" placeholder="Password"
+                            class="changeInput" />
+                        <hr>
+                        <label class="inputP">✎ Confirm new password: *</label>
+                        <input type="password" name="password" id="newPassword" placeholder="Password"
+                            class="changeInput" />
+                        <hr>
+                        <button id="tallennaSalasana" class="save"><b>Change Password</b></button>
                     </form>
                 </div>
             </section>
         </div>
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const links = document.querySelectorAll('a');
-
-            links.forEach(link => {
-                if (link.href.endsWith('page5_en.html')) {
-                    link.addEventListener('click', function (event) {
-                        event.preventPreventDefault();
-
-                        const authToken = localStorage.getItem('authToken');
-
-                        if (authToken) {
-                            window.location.href = 'käyttäjä_en.html';
-                        } else {
-                            window.location.href = 'page5_en.html';
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 
     <!--footer-->
 

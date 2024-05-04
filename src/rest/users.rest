@@ -6,9 +6,7 @@ POST http://localhost:3000/api/v1/kayttaja
 Content-Type: application/json
 
 {
-
-"name": "Sara", "lastname": "Pasila", "username": "kolmas", "password": "12345", "email": "iina@metropolia.fi", "phone": "1234567"
-
+"name": "Sara", "lastname": "Pappila", "username": "sarapap3", "password": "12345", "email": "sarapap@metropolia.fi", "phone": "0445423713"
 }
 
 ### uusi kirjautuminen
@@ -16,13 +14,25 @@ POST http://localhost:3000/api/v1/kayttaja/login
 Content-Type: application/json
 
 {
-"username": "iisin", "password": "12345"
+"username": "sarapap2", "password": "12345"
 }
 
-###update user 
-PUT http://localhost:3000/api/v1/asiakas/5 Content-Type: application/json
+### 
+GET http://localhost:3000/api/v1/kayttaja/info/58
+
+### update user password 
+PUT http://localhost:3000/api/v1/kayttaja/password/6
+Content-Type: application/json
 
 {
-"etunimi": "Lali", "sukunimi": "Viisku", "tunnus": "iisin", "salasana": "12345", "rooli": "admin", "email": "ghd@asccafe.fi", "puhelin": "1234567", "syntymapaiva": "2009-04-05", "ehdot_hyvaksytty": "true", "allennus_ryhma": ""
-
+"salasana": "123456"
 }
+
+### update user info 
+PUT http://localhost:3000/api/v1/kayttaja/info/56
+Content-Type: application/json
+
+{
+"etunimi": "Sarppa", "sukunimi": "Pappila", "tunnus": "kolmas", "email": "sara@metropolia.fi", "puhelin": "1234567"
+}
+

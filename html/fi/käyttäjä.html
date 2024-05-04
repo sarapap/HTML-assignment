@@ -57,61 +57,60 @@
 
     <main>
         <div class="kayttaja">
-            <section class="tiedot">
-                <h2>Omat tiedot</h2>
-                <h3>Tällä sivulla voit päivittää omia tietojasi.</h3>
+            <section id="tiedot" class="tiedot">
             </section>
 
             <section class="profilesection">
                 <div class="profile">
-                    <form id="profile-form" enctype="multipart/form-data" method="post">
+                    <form id="profile-form">
                         <p class="inputP">✎ Päivitä profiilikuvasi</p>
                         <label for="picture" class="update-profile">
                             <img id="profile-picture" src="https://placehold.co/200x200" alt="Profiilikuvasi" />
                         </label>
                         <input type="file" id="picture" style="display:none" accept="image/*"
                             onchange="previewProfilePicture(event)" />
+                        <hr>
 
-                        <p class="inputP">✎ Vaihda käyttäjätunnus</p>
-                        <input type="text" name="changename" id="changename" placeholder="Käyttäjätunnus" />
+                        <label class="inputP">✎ Vaihda etunimi:</label>
+                        <input type="text" name="name" id="name" placeholder="Etunimi" class="changeInput" />
 
-                        <p class="inputP">✎ Vaihda salasana</p>
-                        <input type="password" name="changepassword" placeholder="Salasana" />
+                        <hr>
+                        <label class="inputP">✎ Vaihda sukunimi:</label>
+                        <input type="text" name="lastname" id="lastname" placeholder="Sukunimi" class="changeInput" />
 
-                        <button class="save" type="button" onclick="saveChanges()"><b>Tallenna muutokset</b></button>
-                        <button class="logOut" type="button" onclick="logOut()"><b>Kirjaudu ulos</b></button>
+                        <hr>
+                        <label class="inputP">✎ Vaihda sähköposti:</label>
+                        <input type="email" name="email" id="email" placeholder="Sähköposti" class="changeInput" />
+
+                        <hr>
+                        <label class="inputP">✎ Vaihda puhelinnumero:</label>
+                        <input type="tel" name="phone" id="phone" placeholder="Puhelinnumero" class="changeInput" />
+
+                        <hr>
+                        <label class="inputP">✎ Vaihda käyttäjätunnus:</label>
+                        <input type="text" name="username" id="username" class="changeInput"
+                            placeholder="Käyttäjätunnus" />
+                        <hr>
+                        <button class="save" id="tallenna"><b>Tallenna muutokset</b></button>
+                        <hr>
+                    </form>
+
+                    <form id="changePasswordForm" class="changePasswordForm">
+                        <h3>Salasanan vaihto</h3>
+                        <label class="inputP">✎ Uusi salasana:</label>
+                        <input type="password" id="password" name="password" placeholder="Salasana"
+                            class="changeInput" />
+                        <hr>
+                        <label class="inputP">✎ Vahvista uusi salasana: *</label>
+                        <input type="password" id="newPassword" name="password" placeholder="Salasana"
+                            class="changeInput" />
+                        <hr>
+                        <button class="save" id="tallennaSalasana"><b>Vaihda salasana</b></button>
                     </form>
                 </div>
             </section>
         </div>
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const links = document.querySelectorAll('a');
-
-            links.forEach(link => {
-                if (link.href.endsWith('page5.html')) {
-                    link.addEventListener('click', function (event) {
-                        event.preventDefault();
-
-                        const authToken = localStorage.getItem('authToken');
-
-                        if (authToken) {
-                            window.location.href = 'käyttäjä.html';
-                        } else {
-                            window.location.href = 'page5.html';
-                        }
-                    });
-                }
-            });
-        });
-        function logOut() {
-            localStorage.removeItem('authToken');
-
-            window.location.href = 'page5.html';
-        }
-
-    </script>
 
     <!--footer-->
 

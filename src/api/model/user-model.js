@@ -78,7 +78,6 @@ const userLogin = async (user) => {
     }
 };
 
-
 const findUserByUsername = async (tunnus) => {
     try {
         const [rows] = await promisePool.execute(
@@ -95,30 +94,13 @@ const findUserByUsername = async (tunnus) => {
     }
 };
 
-const removeUser = async (id) => {
-    const connection = await promisePool.getConnection();
-    try {
-        const [rows] = await promisePool.execute(
-            'DELETE FROM kayttaja WHERE user_id = ?',
-            [id]
-        );
-
-        if (rows.affectedRows === 0) {
-            return false;
-        }
-
-        await connection.commit();
-
-        return {
-            message: 'User deleted',
-        };
-    } catch (error) {
-        await connection.rollback();
-        console.error('error', error.message);
-        return false;
-    } finally {
-        connection.release();
+const findUserByTunnus = async (tunnus) => {
+    const sql = 'SELECT * FROM kayttaja WHERE username = ?';
+    const [rows] = await promisePool.execute(sql, [tunnus]);
+    if (rows.length === 0) {
+        return null;
     }
+    return rows[0];
 };
 
 const updateUser = async (user, asiakas_id) => {
@@ -140,12 +122,32 @@ const updateUser = async (user, asiakas_id) => {
     }
 };
 
+const updateUserPassword = async (userId, hashedNewPassword) => {
+    const sql = 'UPDATE kayttaja SET password = ? WHERE user_id = ?';
+    const values = [hashedNewPassword, userId];
+
+    try {
+        const [result] = await promisePool.execute(sql, values);
+
+        if (result.affectedRows === 0) {
+            return false;
+        }
+
+        return true;
+
+    } catch (error) {
+        console.error("Virhe salasanan päivittämisessä:", error);
+        throw error;
+    }
+};
+
 export {
     listAllUsers,
     findUserById,
     addUser,
     findUserByUsername,
-    removeUser,
+    findUserByTunnus,
     updateUser,
-    userLogin
+    userLogin,
+    updateUserPassword
 };

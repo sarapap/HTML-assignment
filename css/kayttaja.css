@@ -103,7 +103,7 @@ li a:hover {
 /* main */
 
 form {
-    box-shadow: 0 5px 20px 0 rgba(111, 94, 94, 0.448);
+    box-shadow: 0 0 10px 0 rgba(161, 155, 155, 0.448);
     background-color: white;
     padding: 20px 50px 50px 50px;
     margin-top: 20px;
@@ -118,16 +118,36 @@ form {
     margin-left: 100px;
 }
 
-button {
+.save {
     font-family: 'Tahoma', sans-serif;
-    display: flex;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px;
+    width: 100%;
     cursor: pointer;
     border-radius: 0.75rem;
     border: none;
     background-color: rgb(74, 72, 72);
     color: white;
+}
+
+.save:hover {
+    background-color: rgb(0, 0, 0);
+}
+
+.logOut {
+    font-family: 'Tahoma', sans-serif;
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 0.75rem;
+    border: none;
+    background-color: rgba(164, 136, 136, 0.751);
+    color: white;
+}
+
+.logOut:hover {
+    background-color: rgba(187, 163, 163, 0.751);
 }
 
 .kayttaja {
@@ -141,9 +161,9 @@ button {
 }
 
 .tiedot {
-    box-shadow: 0 5px 20px 0 rgba(57, 54, 54, 0.448);
+    box-shadow: 0 0 10px 0 rgba(161, 155, 155, 0.448);
     background-color: rgba(221, 204, 204, 0.751);
-    margin: 45px 0px 250px 40px;
+    margin: 45px 0px 550px 40px;
 }
 
 h2,
@@ -151,12 +171,19 @@ h3 {
     text-align: center;
     padding-top: 40px;
     text-shadow: 0.5px 0.5px 0.5px gray;
+}
+
+p {
     color: rgb(74, 72, 72);
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .inputP {
     font-size: 16px;
-    color: #333;
+    color: #5f5f5f;
+    font-weight: bold;
 }
 
 #profile-picture {
@@ -168,6 +195,10 @@ h3 {
 
 .update-profile {
     cursor: pointer;
+}
+
+.changeInput {
+    border: none;
 }
 
 /* footer */
