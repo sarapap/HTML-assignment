@@ -1,27 +1,72 @@
 'use strict';
 
+// Funktion kielen vaihtoon
+function getSelectedLanguage() {
+    const kieli = document.getElementById('kieli');
+    return kieli && kieli.value ? kieli.value : 'FI';
+}
+
+const translations = {
+    EN: {
+        added: (name) => `Restaurant ${name} has been added to favorites!`,
+        alreadyFavorite: (name) => `Restaurant ${name} is already in favorites!`,
+        error: "Error handling favorites.",
+        noFavorites: "No favorites. Add some restaurants to your favorites!",
+        alertLogin: "Please log in to see your favorites.",
+        deleteButton: "Delete",
+        nameColumn: "Name",
+        addressColumn: "Address",
+        deleteColumn: "Remove from favorites"
+    },
+    SV: {
+        added: (name) => `Restaurangen ${name} har lagts till favoriter!`,
+        alreadyFavorite: (name) => `Restaurangen ${name} är redan bland favoriterna!`,
+        error: "Fel vid hantering av favoriter.",
+        noFavorites: "Inga favoriter. Lägg till några restauranger i dina favoriter!",
+        alertLogin: "Logga in för att se dina favoriter.",
+        deleteButton: "Radera",
+        nameColumn: "Namn",
+        addressColumn: "Adress",
+        deleteColumn: "Ta bort från favoriter"
+    },
+    FI: {
+        added: (name) => `Ravintola ${name} on lisätty suosikkeihin!`,
+        alreadyFavorite: (name) => `Ravintola ${name} on jo suosikeissa!`,
+        error: "Virhe suosikkien käsittelyssä.",
+        noFavorites: "Ei suosikkeja. Lisää ravintoloita suosikkeihin!",
+        alertLogin: "Ole hyvä ja kirjaudu sisään nähdäksesi suosikkisi.",
+        deleteButton: "Poista",
+        nameColumn: "Nimi",
+        addressColumn: "Osoite",
+        deleteColumn: "Poista suosikeista"
+    }
+};
+
 const addToFavorites = (restaurant) => {
-    console.log(`Ravintola ${restaurant.name} on lisätty suosikkeihin!`);
-    alert(`Ravintola ${restaurant.name} on lisätty suosikkeihin!`);
+    const selectedLanguage = getSelectedLanguage();
 
-    try {
-        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        const isFavorite = favorites.some((fav) => fav.name === restaurant.name);
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+        alert(translations[selectedLanguage].alertLogin);
+        return;
+    }
 
-        if (!isFavorite) {
-            favorites.push(restaurant);
-            localStorage.setItem("favorites", JSON.stringify(favorites));
+    const base64Payload = token.split('.')[1];
+    const payload = atob(base64Payload);
+    const parsedPayload = JSON.parse(payload);
 
-            console.log(`Ravintola ${restaurant.name} on lisätty suosikkeihin!`);
-            alert(`Ravintola ${restaurant.name} on lisätty suosikkeihin!`);
-        } else {
-            console.log(`Ravintola ${restaurant.name} on jo suosikeissa!`);
-            alert(`Ravintola ${restaurant.name} on jo suosikeissa!`);
-        }
+    const userId = parsedPayload.user_id;
 
+    const favoritesKey = `favorites_${userId}`;
+    const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
+    const isFavorite = favorites.some((fav) => fav.name === restaurant.name);
 
-    } catch (error) {
-        console.error("Virhe suosikkien käsittelyssä:", error);
+    if (!isFavorite) {
+        favorites.push(restaurant);
+        localStorage.setItem(favoritesKey, JSON.stringify(favorites));
+        alert(translations[selectedLanguage].added(restaurant.name));
+    } else {
+        alert(translations[selectedLanguage].alreadyFavorite(restaurant.name));
     }
 };
 

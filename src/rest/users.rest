@@ -6,7 +6,7 @@ POST http://localhost:3000/api/v1/kayttaja
 Content-Type: application/json
 
 {
-"name": "Sara", "lastname": "Pappila", "username": "sarapapp", "password": "12345", "email": "sarapap@metropolia.fi", "phone": "0445423713"
+"name": "Sara", "lastname": "Pappila", "username": "sarppa", "password": "12345", "email": "sarapap@metropolia.fi", "phone": "0445423713"
 }
 
 ### uusi kirjautuminen

@@ -6,6 +6,8 @@ function getSelectedLanguage() {
     return kieli && kieli.value ? kieli.value : 'FI';
 }
 
+/* kielen vaihto kun käyttäjä vaihtaa sivua */
+
 document.getElementById("kieli").addEventListener("change", function () {
     var selectedLanguage = this.value;
     if (selectedLanguage === 'FI') {
@@ -16,6 +18,8 @@ document.getElementById("kieli").addEventListener("change", function () {
         window.location.href = "../sv/page1_sv.html";
     }
 });
+
+/* käyttäjä pysyy kirjautuneena */
 
 document.addEventListener('DOMContentLoaded', function () {
     const links = document.querySelectorAll('a');

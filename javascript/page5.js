@@ -8,6 +8,7 @@ function getSelectedLanguage() {
 
 document.addEventListener('DOMContentLoaded', function () {
     const loginButton = document.getElementById('button1');
+    const selectedLanguage = getSelectedLanguage();
 
     if (loginButton) {
         loginButton.addEventListener('click', function (event) {
@@ -31,24 +32,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => {
                     if (response.ok) {
                         return response.json();
-                    } else {
-                        throw new Error('Kirjautuminen epäonnistui');
                     }
                 })
+
                 .then(data => {
                     const token = data.token;
 
                     if (token) {
                         localStorage.setItem('authToken', token);
+                        let targetPage = '';
                         switch (selectedLanguage) {
                             case 'EN':
+                                alert('Login successful.');
                                 targetPage = '../../html/en/käyttäjä_en.html';
                                 break;
                             case 'SV':
+                                alert('Inloggningen lyckades.');
                                 targetPage = '../../html/sv/käyttäjä_sv.html';
                                 break;
                             case 'FI':
                             default:
+                                alert('Kirjautuminen onnistui.');
                                 targetPage = '../../html/fi/käyttäjä.html';
                                 break;
                         }
@@ -56,13 +60,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else {
                         switch (selectedLanguage) {
                             case 'EN':
+                                alert('Login failed. Please check your username and password.');
                                 targetPage = '../../html/en/page5_en.html';
                                 break;
                             case 'SV':
+                                alert('Inloggningen misslyckades. Kontrollera användarnamn och lösenord.');
                                 targetPage = '../../html/sv/page5_sv.html';
                                 break;
                             case 'FI':
                             default:
+                                alert('Kirjautuminen epäonnistui. Tarkista käyttäjätunnus ja salasana.');
                                 targetPage = '../../html/fi/page5.html';
                                 break;
                         }
@@ -81,17 +88,43 @@ document.addEventListener('DOMContentLoaded', function () {
     links.forEach(link => {
         if (link.href.endsWith('page5.html')) {
             link.addEventListener('click', function (event) {
-                event.preventPreventDefault();
+                event.preventDefault();
 
                 const authToken = localStorage.getItem('authToken');
+                const selectedLanguage = getSelectedLanguage();
 
+                let targetPage = '';
                 if (authToken) {
-                    window.location.href = '../fi/käyttäjä.html';
+                    switch (selectedLanguage) {
+                        case 'EN':
+                            targetPage = '../en/käyttäjä_en.html';
+                            break;
+                        case 'SV':
+                            targetPage = '../sv/käyttäjä_sv.html';
+                            break;
+                        case 'FI':
+                        default:
+                            targetPage = '../fi/käyttäjä.html';
+                            break;
+                    }
                 } else {
-                    window.location.href = '../fi/page5.html';
+                    switch (selectedLanguage) {
+                        case 'EN':
+                            targetPage = '../en/page5_en.html';
+                            break;
+                        case 'SV':
+                            targetPage = '../sv/page5_sv.html';
+                            break;
+                        case 'FI':
+                        default:
+                            targetPage = '../fi/page5.html';
+                            break;
+                    }
                 }
+                window.location.href = targetPage;
             });
         }
     });
+
 });
 

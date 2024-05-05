@@ -102,88 +102,91 @@ li a:hover {
 
 /* main */
 
-form {
-    box-shadow: 0 0 10px 0 rgba(161, 155, 155, 0.448);
-    background-color: white;
-    padding: 20px 50px 50px 50px;
-    margin-top: 20px;
-}
-
-.profileform label {
-    margin: 10px;
-    margin-left: -2px;
-}
-
-.profileform {
-    margin-left: 100px;
-}
-
-.save {
-    font-family: 'Tahoma', sans-serif;
-    margin-top: 10px;
-    padding: 10px;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 0.75rem;
-    border: none;
-    background-color: rgb(74, 72, 72);
-    color: white;
-}
-
-.save:hover {
-    background-color: rgb(0, 0, 0);
-}
-
-.logOut {
-    font-family: 'Tahoma', sans-serif;
-    margin-top: 10px;
-    padding: 10px;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 0.75rem;
-    border: none;
-    background-color: rgba(164, 136, 136, 0.751);
-    color: white;
-}
-
-.logOut:hover {
-    background-color: rgba(187, 163, 163, 0.751);
+main {
+    padding: 20px;
 }
 
 .kayttaja {
     display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
 
-.profilesection,
 .tiedot {
     flex: 1;
-    padding: 20px 100px 0px 100px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    height: 100%;
 }
 
-.tiedot {
-    box-shadow: 0 0 10px 0 rgba(161, 155, 155, 0.448);
-    background-color: rgba(221, 204, 204, 0.751);
-    margin: 45px 0px 550px 40px;
+.profilesection {
+    flex: 1;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px 20px 20px 40px;
 }
 
-h2,
-h3 {
+.profile {
     text-align: center;
-    padding-top: 40px;
-    text-shadow: 0.5px 0.5px 0.5px gray;
 }
 
-p {
-    color: rgb(74, 72, 72);
-    padding: 5px;
+input {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
     font-size: 14px;
-    font-weight: bold;
+    width: 90%;
 }
 
-.inputP {
+label {
     font-size: 16px;
-    color: #5f5f5f;
-    font-weight: bold;
+    display: block;
+    margin: 10px 0;
+}
+
+.save {
+    padding: 12px;
+    border-radius: 0.75rem;
+    border: none;
+    background-color: #4a4848;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 50%;
+}
+
+.save:hover {
+    background-color: #000;
+}
+
+.logOut {
+    padding: 12px;
+    border-radius: 0.75rem;
+    border: none;
+    background-color: rgba(180, 150, 150, 0.751);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 50%;
+}
+
+.logOut:hover {
+    background-color: rgba(151, 127, 127, 0.751);
+}
+
+h3 {
+    font-size: 20px;
+    color: #4a4848;
+    text-align: center;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
 }
 
 #profile-picture {
@@ -195,10 +198,15 @@ p {
 
 .update-profile {
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
-.changeInput {
-    border: none;
+.update-profile:hover {
+    opacity: 0.8;
+}
+
+.changePasswordForm {
+    margin-top: 20px;
 }
 
 /* footer */
@@ -208,6 +216,24 @@ footer {
 }
 
 /* media */
+
+/* Responsiivisuus */
+@media (max-width: 768px) {
+
+    .profilesection,
+    .tiedot {
+        max-width: 100%;
+    }
+
+    .update-profile {
+        font-size: 14px;
+    }
+
+    #profile-picture {
+        width: 100px;
+        height: 100px;
+    }
+}
 
 @media only screen and (max-width: 2000px) {
     h1 {
