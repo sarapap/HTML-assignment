@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
             deleteButton.addEventListener("click", () => {
                 favorites.splice(index, 1);
                 localStorage.setItem(favoritesKey, JSON.stringify(favorites));
-                location.reload(); // Lataa sivu uudelleen muutoksen jälkeen
+                location.reload();
             });
 
             const actionCell = document.createElement("td");

@@ -2,24 +2,32 @@ body {
     font-family: 'Tahoma', sans-serif;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
 }
 
 /* header */
 
 h1 {
     margin-top: 25px;
+    margin-left: 20px;
     text-shadow: 2px 0.5px 0.5px gray;
 }
 
 header {
-    left: 890px;
-    padding: 5px;
-    height: 80px;
-    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .kieli {
-    margin: -50px 0px 0px 550px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
 }
 
 #kieli {
@@ -29,6 +37,8 @@ header {
     border-radius: 5px;
     padding: 5px;
     font-family: 'Tahoma', sans-serif;
+    min-width: 120px;
+    text-align: center;
 }
 
 /* nav */
@@ -57,6 +67,7 @@ li a {
 li a:hover {
     color: white;
 }
+
 
 .top-nav {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
@@ -105,37 +116,47 @@ li a:hover {
 form {
     box-shadow: 0 5px 20px 0 rgba(111, 94, 94, 0.448);
     background-color: white;
-    padding: 50px;
+    padding: 40px;
+    border-radius: 10px;
+    width: 50%;
 }
 
 .register {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 650px;
+    height: auto;
+    padding: 2rem;
 }
 
 .register-form {
     display: flex;
     flex-direction: column;
-    width: 500px;
-    height: 450px;
-    padding-bottom: 80px;
+    gap: 10px;
+}
+
+.register-form input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
 }
 
 .register-form label {
-    margin: 10px;
-    margin-left: -2px;
+    margin-bottom: 5px;
 }
 
 button {
-    margin-top: 20px;
-    padding: 5px;
+    margin-top: 10px;
+    padding: 10px;
     cursor: pointer;
-    border-radius: 0.75rem;
+    border-radius: 5px;
     border: none;
     background-color: rgb(74, 72, 72);
     color: white;
+}
+
+button:hover {
+    background-color: #505050;
 }
 
 /* footer */
@@ -146,68 +167,62 @@ footer {
 
 /* media */
 
-@media only screen and (max-width: 2000px) {
-    h1 {
-        margin-left: 20px;
-    }
-
+@media only screen and (max-width: 768px) {
     header {
-        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .leftLI {
-        margin-right: 100px;
-    }
-
-    .rightLI {
-        margin-left: 100px;
-    }
-
-    .heart {
-        margin-right: -350px;
-    }
-
-    .user {
-        margin-left: 50px;
-    }
-}
-
-
-@media only screen and (max-width: 540px) {
     h1 {
         margin-left: 10px;
     }
 
+    .kieli {
+        margin-top: 10px;
+    }
+
+    .register-form {
+        width: 100%;
+        /* Lomake vie koko leveyden */
+        padding: 20px;
+        /* Lisää pehmustetta */
+    }
+
+    form {
+        padding: 30px;
+        /* Vähennä pehmustetta */
+    }
+}
+
+@media only screen and (max-width: 450px) {
+
     header {
-        width: 100%;
+        flex-direction: column;
     }
 
-    nav {
-        width: 150%;
+    h1 {
+        font-size: 1.5rem;
     }
 
-    .leftLI {
-        margin-right: 5px;
-    }
-
-    .rightLI {
-        margin-left: 5px;
-    }
-
-    .heart {
-        margin-right: 5px;
-    }
-
+    .heart,
     .user {
-        margin-left: 5px;
+        width: 20px;
+        height: 20px;
+        margin: 5px;
     }
 
-    main {
+    .register {
+        flex-direction: column;
+        /* Muuta asettelu pystysuoraksi */
+    }
+
+    form {
+        padding: 20px;
+        /* Vähennä pehmustetta */
+    }
+
+    .register-form {
         width: 100%;
-        height: 100vh;
-    }
-
-    nav {
-        width: 150%;
+        /* Joustavuus pienillä näytöillä */
     }
 }

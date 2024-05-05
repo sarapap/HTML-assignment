@@ -57,20 +57,24 @@
 
     <main>
         <div class="kayttaja">
-            <section id="tiedot" class="tiedot">
-            </section>
+            <div class="left-section">
+                <section id="tiedot" class="tiedot">
+                </section>
+
+                <section id="profiilikuva" class="profiilikuvasection">
+                    <p class="inputP">✎ Update your profile picture</p>
+                    <label for="picture" class="update-profile">
+                        <img id="profile-picture" src="https://placehold.co/200x200" alt="Profiilikuvasi" />
+                    </label>
+
+                    <input type="file" id="picture" style="display:none" accept="image/*" />
+                    <button type="button" id="uploadButton" class="save2"><b>Update profilepicture</b></button>
+                </section>
+            </div>
 
             <section class="profilesection">
                 <div class="profile">
                     <form id="profile-form">
-                        <p class="inputP">✎ Update your profile picture</p>
-                        <label for="picture" class="update-profile">
-                            <img id="profile-picture" src="https://placehold.co/200x200" alt="Profiilikuvasi" />
-                        </label>
-
-                        <input type="file" id="picture" style="display:none" accept="image/*"
-                            onchange="previewProfilePicture(event)" />
-
                         <label class="inputP">✎ Change firstname:</label>
                         <input type="text" name="name" id="name" placeholder="Firstname" class="changeInput" />
 

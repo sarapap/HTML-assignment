@@ -1,48 +1,39 @@
 'use strict';
 
+import {
+    restaurantModal,
+    dailyModal as dailyModalFI,
+    weeklyModal as weeklyModalFI,
+    restaurantRow,
+    dailyModal_en as dailyModalEN,
+    weeklyModal_en as weeklyModalEN
+} from "./components.js";
+import {
+    fetchAPI,
+    fetchDailyMenu as fetchDailyMenuFI,
+    fetchWeeklyMenu as fetchWeeklyMenuFI,
+    fetchCitiesFromAPI,
+    fetchDailyMenuEN as fetchDailyMenuEN,
+    fetchWeeklyMenuEN as fetchWeeklyMenuEN
+} from "./utils.js";
+
 /*funktio kielen vaihtoon */
 function getSelectedLanguage() {
     const kieli = document.getElementById('kieli');
     return kieli && kieli.value ? kieli.value : 'FI';
 }
 
-// Komponentit
-import {
-    restaurantModal,
-    dailyModal as dailyModalFI,
-    weeklyModal as weeklyModalFI,
-    restaurantRow,
-    dailyModal as dailyModalEN,
-    weeklyModal as weeklyModalEN
-} from "./components.js";
-
-
-// Apufunktiot
-import {
-    fetchAPI,
-    fetchDailyMenu as fetchDailyMenuFI,
-    fetchWeeklyMenu as fetchWeeklyMenuFI,
-    fetchCitiesFromAPI,
-    fetchDailyMenu as fetchDailyMenuEN,
-    fetchWeeklyMenu as fetchWeeklyMenuEN
-} from "./utils.js";
-
-
-
-// Määritetään kartan attribuutit
+// kartta
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
 const selectedLanguage = getSelectedLanguage();
-// Määritetään muuttujat, jotka vaihtelevat kielen mukaan
+
 const dailyModal = selectedLanguage === 'FI' ? dailyModalFI : dailyModalEN;
 const weeklyModal = selectedLanguage === 'FI' ? weeklyModalFI : weeklyModalEN;
-const fetchDailyMenu = selectedLanguage === 'FI' ? fetchDailyMenuFI : fetchDailyMenuEN;
-const fetchWeeklyMenu = selectedLanguage === 'FI' ? fetchWeeklyMenuFI : fetchWeeklyMenuEN;
 
-// API-tietojen haku
 let ravintolat;
 
 const getAPI = async () => {
@@ -58,14 +49,26 @@ const getAPI = async () => {
     }
 };
 
-// Kartan ja ravintoloiden näyttäminen
+// kartassa etäisyyden laskeminen
+function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+// näytä ravintolat
 function displayRestaurants(restaurants) {
     restaurants.sort((a, b) => a.name.localeCompare(b.name));
 
     const table = document.querySelector('table');
     table.innerHTML = '';
 
-    // Näytetään ravintolat ja käyttäjän sijainti kartalla
     navigator.geolocation.getCurrentPosition(
         (position) => {
             const userLat = position.coords.latitude;
@@ -122,11 +125,10 @@ function displayRestaurants(restaurants) {
             });
         },
         (error) => {
-            console.error('Error getting location:', error);
         }
     );
 
-    // Näytetään ravintolalista
+    // näytetään ravintolalista
     restaurants.forEach((restaurant) => {
         const row = restaurantRow(restaurant);
 
@@ -146,10 +148,11 @@ function displayRestaurants(restaurants) {
     });
 }
 
-// Modalin avaaminen
+// modaalin avaaminen
 const openModal = async (restaurant) => {
     const modal = document.createElement('dialog');
     const restaurantContent = restaurantModal(restaurant);
+    const selectedLanguage = getSelectedLanguage();
 
     modal.appendChild(restaurantContent);
 
@@ -157,70 +160,96 @@ const openModal = async (restaurant) => {
     selectMenu.id = 'menuType';
 
     const defaultOption = document.createElement('option');
+    defaultOption.className = 'default-option';
     defaultOption.value = '';
     defaultOption.textContent = selectedLanguage === 'FI' ? 'Valitse menu' : 'Choose menu';
     selectMenu.appendChild(defaultOption);
 
     const dailyOption = document.createElement('option');
+    defaultOption.className = 'default-option';
     dailyOption.value = 'daily';
-    dailyOption.textContent = selectedLanguage === 'FI' ? 'Päivittäinen' : 'Daily';
+    dailyOption.textContent = selectedLanguage === 'FI' ? 'Päivän Menu' : 'Daily Menu';
     selectMenu.appendChild(dailyOption);
 
-    const weeklyOption = document.createelement('option');
+    const weeklyOption = document.createElement('option');
+    defaultOption.className = 'default-option';
     weeklyOption.value = 'weekly';
-    weeklyOption.textContent = selectedLanguage === 'FI' ? 'Viikkokohtainen' : 'Weekly';
+    weeklyOption.textContent = selectedLanguage === 'FI' ? 'Viikon Menu' : 'Weekly Menu';
     selectMenu.appendChild(weeklyOption);
 
     modal.appendChild(selectMenu);
-    modal.showModal();
+
+    document.body.appendChild(modal);
+
+    try {
+        modal.showModal();
+    } catch (error) {
+        handleError(error);
+    }
+
+    const translations = {
+        FI: {
+            close: 'Sulje',
+            invalidMenuType: "Virheellinen menu-tyyppi",
+        },
+        EN: {
+            close: 'Close',
+            invalidMenuType: "Invalid menu type",
+        },
+        SV: {
+            close: 'Stäng',
+            invalidMenuType: "Ogiltig menutyp",
+        }
+    };
 
     selectMenu.addEventListener('change', async () => {
         const menuType = selectMenu.value;
         try {
             let menuContent;
 
+            //ruotsi tai englanti sivu valittu
+            const SVEN = selectedLanguage === 'SV' || selectedLanguage === 'EN';
+
             if (menuType === 'daily') {
-                const menu = await fetchDailyMenu(restaurant._id);
-                menuContent = dailyModal(menu);
+                const menu = await (SVEN ? fetchDailyMenuEN : fetchDailyMenuFI)(restaurant._id);
+                menuContent = SVEN ? dailyModalEN(menu) : dailyModal(menu);
             } else if (menuType === 'weekly') {
-                const menu = await fetchWeeklyMenu(restaurant._id);
-                menuContent = weeklyModal(menu);
+                const menu = await (SVEN ? fetchWeeklyMenuEN : fetchWeeklyMenuFI)(restaurant._id);
+                menuContent = SVEN ? weeklyModalEN(menu) : weeklyModal(menu);
             } else {
-                throw new Error('Invalid menu type');
+                const translation = translations[selectedLanguage].invalidMenuType;
+                throw new Error(translation);
             }
 
             modal.innerHTML = menuContent;
 
             const closeButton = document.createElement('button');
+            closeButton.className = 'close-button';
             closeButton.textContent = selectedLanguage === 'FI' ? 'Sulje' : 'Close';
-            closeButton.addEventListener('click', () => {
-                modal.close();
-            });
+            closeButton.addEventListener('click', () => modal.close());
 
             modal.appendChild(closeButton);
         } catch (error) {
-            console.error('Error:', error);
+            handleError(error);
         }
     });
 
     const closeButton = document.createElement('button');
     closeButton.id = 'closeButton';
-    closeButton.textContent = selectedLanguage === 'FI' ? 'Sulje' : 'Close';
-    closeButton.addEventListener('click', () => {
-        modal.close();
-    });
+    closeButton.textContent = translations[selectedLanguage].close;
+    closeButton.addEventListener('click', () => modal.close());
 
     modal.appendChild(closeButton);
 };
 
-// Virheiden käsittely
+
+// käsittele virheet
 const handleError = (error) => {
-    console.log("error " + error);
     const errorMessage = selectedLanguage === 'FI' ? 'Tietojen hakeminen epäonnistui. Yritä uudelleen.' : 'Failed to fetch data. Please try again later.';
     alert(errorMessage);
 };
 
-// Suodatuksen käsittely
+// suodata ravintolat
 const handleFilterChange = (restaurants) => {
     const selectedCity = document.getElementById('filterCity').value;
     const selectedCompany = document.getElementById('filterCompany').value;
@@ -234,7 +263,7 @@ const handleFilterChange = (restaurants) => {
     displayRestaurants(filteredRestaurants);
 };
 
-// Kaupunkien täyttö
+// näytä kaupungit valikossa
 const populateCities = async () => {
     const select = document.getElementById('filterCity');
     const cities = await fetchCitiesFromAPI();
@@ -246,5 +275,21 @@ const populateCities = async () => {
         select.appendChild(option);
     });
 };
+
+// search ravintolat
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.querySelector('input[type="search"]');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredRestaurants = ravintolat.filter((restaurant) =>
+                restaurant.name.toLowerCase().includes(searchTerm)
+            );
+            displayRestaurants(filteredRestaurants);
+        });
+    }
+});
+
 
 getAPI();

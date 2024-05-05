@@ -2,24 +2,32 @@ body {
     font-family: 'Tahoma', sans-serif;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
 }
 
 /* header */
 
 h1 {
     margin-top: 25px;
+    margin-left: 20px;
     text-shadow: 2px 0.5px 0.5px gray;
 }
 
 header {
-    left: 890px;
-    padding: 5px;
-    height: 80px;
-    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .kieli {
-    margin: -50px 0px 0px 550px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
 }
 
 #kieli {
@@ -29,6 +37,8 @@ header {
     border-radius: 5px;
     padding: 5px;
     font-family: 'Tahoma', sans-serif;
+    min-width: 120px;
+    text-align: center;
 }
 
 /* nav */
@@ -57,6 +67,7 @@ li a {
 li a:hover {
     color: white;
 }
+
 
 .top-nav {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
@@ -104,30 +115,39 @@ li a:hover {
 
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
-h2 {
-    text-shadow: 1px 1px 1px gray;
+.main {
+    padding: 2rem;
+    background-color: white;
+    box-sizing: border-box;
 }
 
 table {
     width: 100%;
+    border-collapse: collapse;
 }
 
 th,
 td {
-    border: 1px solid black;
     padding: 8px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
     cursor: pointer;
 }
 
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
 
 .kartta-container {
     height: 400px;
-    position: relative;
 }
 
 #map {
@@ -135,29 +155,18 @@ td {
     padding: 8px;
 }
 
-#kartta {
-    padding-top: 112px;
-}
-
-p {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
 input[type="search"] {
-    width: 300px;
-    height: 40px;
-    margin-left: 10px;
+    width: 100%;
+    height: auto;
     border-radius: 5px;
     border: 2px solid black;
     padding-left: 10px;
     font-family: 'Tahoma', sans-serif;
 }
 
-.highlight {
-    background-color: rgba(221, 204, 204, 0.751);
-    font-weight: bold;
-    color: black;
+.imgSearch {
+    width: 15px;
+    height: 15px;
 }
 
 .filter {
@@ -167,35 +176,25 @@ input[type="search"] {
     font-family: 'Tahoma', sans-serif;
 }
 
-.buttonMenu {
-    padding: 15px;
-    font-family: 'Tahoma', sans-serif;
-    background-color: rgb(218, 200, 200);
-    cursor: pointer;
-    margin: 0px 0px 10px 10px;
-}
-
 dialog {
-    width: 500px;
+    width: 70%;
 }
 
 .menu-list {
     display: flex;
     flex-direction: column;
     padding-left: 0;
+    color: rgb(81, 81, 81);
+    margin: 10px;
 }
 
 .menu-item {
-    margin-bottom: 10px;
-}
-
-.menu-day {
-    margin-left: 20px;
+    padding: 10px;
 }
 
 #menuType {
     text-align: center;
-    width: 80px;
+    width: 130px;
     height: 35px;
     border-radius: 5px;
     border: 2px solid black;
@@ -204,11 +203,25 @@ dialog {
     font-family: 'Tahoma', sans-serif;
 }
 
+button {
+    cursor: pointer;
+    background-color: rgb(230, 228, 228);
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Tahoma', sans-serif;
+}
+
+button:hover {
+    background-color: #bcbcbc;
+    color: white;
+}
+
 #menuType:hover {
     background-color: rgb(230, 228, 228);
 }
 
-#closeButton {
+#closeButton,
+.close-button {
     cursor: pointer;
     background-color: rgb(230, 228, 228);
     border: 1px solid white;
@@ -224,15 +237,15 @@ dialog {
 
 #favoriteButton {
     cursor: pointer;
-    background-color: white;
-    border: 1px solid white;
+    background-color: #f2f2f2;
+    border: none;
     border-radius: 5px;
     padding: 5px;
     font-family: 'Tahoma', sans-serif;
 }
 
 #favoriteButton:hover {
-    background-color: rgb(191, 191, 191);
+    background-color: #ddd;
 }
 
 /* footer */
@@ -243,68 +256,77 @@ footer {
 
 /* media */
 
-@media only screen and (max-width: 2000px) {
-    h1 {
-        margin-left: 20px;
-    }
-
+@media only screen and (max-width: 768px) {
     header {
-        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .leftLI {
-        margin-right: 100px;
-    }
-
-    .rightLI {
-        margin-left: 100px;
-    }
-
-    .heart {
-        margin-right: -350px;
-    }
-
-    .user {
-        margin-left: 50px;
-    }
-}
-
-
-@media only screen and (max-width: 450px) {
     h1 {
         margin-left: 10px;
-
     }
 
-    header {
-        width: 100%;
+    .kieli {
+        margin-top: 10px;
     }
 
-    nav {
-        width: 150%;
-    }
-
-    .leftLI {
-        margin-right: 5px;
-    }
-
-    .rightLI {
-        margin-left: 5px;
-    }
-
-    .heart {
-        margin-right: 5px;
-    }
-
-    .user {
-        margin-left: 5px;
+    .container {
+        grid-template-columns: 1fr;
+        padding: 10px;
     }
 
     main {
-        width: 190%;
+        padding: 1rem;
     }
 
-    .filter {
-        margin-left: 10px;
+    dialog {
+        width: 80%;
+    }
+
+    table {
+        padding: 5px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    header {
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .heart,
+    .user {
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+    }
+
+    main {
+        padding: 0.5rem;
+    }
+
+    h2,
+    h3 {
+        padding-left: 5px;
+        font-size: 1rem;
+    }
+
+    dialog {
+        width: 100%;
+        padding: 10px;
+    }
+
+    table {
+        padding: 5px;
+        font-size: 0.9rem;
+        overflow-x: auto;
+    }
+
+    th,
+    td {
+        padding: 5px;
     }
 }

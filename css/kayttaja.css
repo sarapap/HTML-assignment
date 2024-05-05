@@ -2,24 +2,32 @@ body {
     font-family: 'Tahoma', sans-serif;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
 }
 
 /* header */
 
 h1 {
     margin-top: 25px;
+    margin-left: 20px;
     text-shadow: 2px 0.5px 0.5px gray;
 }
 
 header {
-    left: 890px;
-    padding: 5px;
-    height: 80px;
-    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .kieli {
-    margin: -50px 0px 0px 550px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
 }
 
 #kieli {
@@ -29,6 +37,8 @@ header {
     border-radius: 5px;
     padding: 5px;
     font-family: 'Tahoma', sans-serif;
+    min-width: 120px;
+    text-align: center;
 }
 
 /* nav */
@@ -57,6 +67,7 @@ li a {
 li a:hover {
     color: white;
 }
+
 
 .top-nav {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
@@ -112,13 +123,19 @@ main {
     gap: 20px;
 }
 
-.tiedot {
+.left-section {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tiedot,
+.profiilikuvasection {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     background-color: white;
     border-radius: 8px;
     padding: 20px;
-    height: 100%;
+    margin-bottom: 20px;
 }
 
 .profilesection {
@@ -127,6 +144,7 @@ main {
     background-color: white;
     border-radius: 8px;
     padding: 20px 20px 20px 40px;
+    height: 717px;
 }
 
 .profile {
@@ -141,10 +159,13 @@ input {
     width: 90%;
 }
 
-label {
-    font-size: 16px;
-    display: block;
-    margin: 10px 0;
+.update-profile {
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.update-profile:hover {
+    opacity: 0.8;
 }
 
 .save {
@@ -154,8 +175,24 @@ label {
     background-color: #4a4848;
     color: white;
     cursor: pointer;
+    width: 100%;
     transition: background-color 0.3s;
-    width: 50%;
+    margin-top: 18px;
+}
+
+.save2 {
+    padding: 12px;
+    border-radius: 0.75rem;
+    border: none;
+    background-color: rgba(180, 150, 150, 0.751);
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.save2:hover {
+    background-color: rgba(151, 127, 127, 0.751);
 }
 
 .save:hover {
@@ -169,24 +206,11 @@ label {
     background-color: rgba(180, 150, 150, 0.751);
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
-    width: 50%;
+    width: 100%;
 }
 
 .logOut:hover {
     background-color: rgba(151, 127, 127, 0.751);
-}
-
-h3 {
-    font-size: 20px;
-    color: #4a4848;
-    text-align: center;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 20px 0;
 }
 
 #profile-picture {
@@ -194,19 +218,8 @@ hr {
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
-}
-
-.update-profile {
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.update-profile:hover {
-    opacity: 0.8;
-}
-
-.changePasswordForm {
-    margin-top: 20px;
+    display: block;
+    margin: 40px auto;
 }
 
 /* footer */
@@ -217,90 +230,54 @@ footer {
 
 /* media */
 
-/* Responsiivisuus */
-@media (max-width: 768px) {
-
-    .profilesection,
-    .tiedot {
-        max-width: 100%;
+@media only screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .update-profile {
-        font-size: 14px;
+    h1 {
+        margin-left: 10px;
+    }
+
+    .kieli {
+        margin-top: 10px;
+    }
+
+    .kayttaja {
+        flex-direction: column;
+    }
+
+    #profile-picture {
+        width: 150px;
+        height: 150px;
+    }
+
+    .tiedot,
+    .profiilikuvasection {
+        padding: 15px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+
+    header {
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .heart,
+    .user {
+        width: 20px;
+        height: 20px;
+        margin: 5px;
     }
 
     #profile-picture {
         width: 100px;
         height: 100px;
-    }
-}
-
-@media only screen and (max-width: 2000px) {
-    h1 {
-        margin-left: 20px;
-    }
-
-    header {
-        width: 100%;
-    }
-
-    .leftLI {
-        margin-right: 100px;
-    }
-
-    .rightLI {
-        margin-left: 100px;
-    }
-
-    .heart {
-        margin-right: -350px;
-    }
-
-    .user {
-        margin-left: 50px;
-    }
-
-    .profilesection {
-        width: 100%;
-    }
-}
-
-
-@media only screen and (max-width: 540px) {
-    h1 {
-        margin-left: 10px;
-
-    }
-
-    header {
-        width: 100%;
-    }
-
-    nav {
-        width: 200%;
-    }
-
-    .leftLI {
-        margin-right: 5px;
-    }
-
-    .rightLI {
-        margin-left: 5px;
-    }
-
-    .heart {
-        margin-right: 5px;
-    }
-
-    .user {
-        margin-left: 5px;
-    }
-
-    main {
-        width: 150%;
-    }
-
-    .profilesection {
-        width: 50%;
     }
 }

@@ -5,12 +5,13 @@ import {
     findUserByTunnus,
     addUser,
     updateUser,
-    updateUserPassword
+    updateUserPassword,
 } from '../model/user-model.js';
 import bcrypt from 'bcrypt';
 import { checkPassword } from '../../utils/salasana.js';
 import jwt from 'jsonwebtoken';
 import config from '../../config/config.js';
+const SECRET_KEY = config.SECRET_KEY;
 
 const getUser = async (req, res) => {
     const users = await listAllUsers();
@@ -38,8 +39,6 @@ const getUserById = async (req, res) => {
         res.sendStatus(404);
     }
 };
-
-const SECRET_KEY = config.SECRET_KEY;
 
 const postUser = async (req, res) => {
     try {

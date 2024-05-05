@@ -2,24 +2,32 @@ body {
     font-family: 'Tahoma', sans-serif;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
 }
 
 /* header */
 
 h1 {
     margin-top: 25px;
+    margin-left: 20px;
     text-shadow: 2px 0.5px 0.5px gray;
 }
 
 header {
-    left: 890px;
-    padding: 5px;
-    height: 80px;
-    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .kieli {
-    margin: -50px 0px 0px 550px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
 }
 
 #kieli {
@@ -29,6 +37,8 @@ header {
     border-radius: 5px;
     padding: 5px;
     font-family: 'Tahoma', sans-serif;
+    min-width: 120px;
+    text-align: center;
 }
 
 /* nav */
@@ -57,6 +67,7 @@ li a {
 li a:hover {
     color: white;
 }
+
 
 .top-nav {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
@@ -123,80 +134,48 @@ footer {
 
 /* media */
 
-@media only screen and (max-width: 2000px) {
-    h1 {
-        margin-left: 20px;
-    }
-
+@media only screen and (max-width: 768px) {
     header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    h1 {
+        margin-left: 10px;
+    }
+
+    .kieli {
+        margin-top: 10px;
+    }
+
+    img {
         width: 100%;
-    }
-
-    .leftLI {
-        margin-right: 100px;
-    }
-
-    .rightLI {
-        margin-left: 100px;
-    }
-
-    .heart {
-        margin-right: -350px;
-    }
-
-    .user {
-        margin-left: 50px;
-    }
-
-    p {
-        padding-left: 20px;
-    }
-
-    h2 {
-        padding-left: 10px;
+        height: auto;
     }
 }
 
-
-@media only screen and (max-width: 700px) {
-    h1 {
-        margin-left: 10px;
-
-    }
+@media only screen and (max-width: 450px) {
 
     header {
-        width: 100%;
+        flex-direction: column;
     }
 
-    nav {
-        width: 150%;
+    h1 {
+        font-size: 1.5rem;
     }
 
-    .leftLI {
-        margin-right: 5px;
-    }
-
-    .rightLI {
-        margin-left: 5px;
-    }
-
-    .heart {
-        margin-right: 5px;
-    }
-
+    .heart,
     .user {
-        margin-left: 5px;
+        width: 20px;
+        height: 20px;
+        margin: 5px;
     }
 
     main {
-        width: 150%;
+        padding: 10px;
     }
 
     p {
-        padding-left: 20px;
-    }
-
-    h2 {
         padding-left: 10px;
     }
 }

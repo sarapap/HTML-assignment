@@ -141,6 +141,7 @@ const updateUserPassword = async (userId, hashedNewPassword) => {
     }
 };
 
+
 export {
     listAllUsers,
     findUserById,
@@ -149,5 +150,5 @@ export {
     findUserByTunnus,
     updateUser,
     userLogin,
-    updateUserPassword
+    updateUserPassword,
 };

@@ -79,7 +79,7 @@ const restaurantRow = (restaurant) => {
 
     const favoriteButton = document.createElement('button');
     favoriteButton.id = 'favoriteButton';
-    favoriteButton.textContent = '🖤';
+    favoriteButton.textContent = '♥︎';
     favoriteButton.addEventListener('click', (event) => {
         event.stopPropagation();
         addToFavorites(restaurant);
@@ -107,7 +107,10 @@ const dailyModal = (menuDaily) => {
     let menuHTML;
     const { courses } = menuDaily;
     const dailyMenuHTML = courses.map(course => {
-        return `<li class="menu-item">${course.name}: ${course.price} ${course.diets}</li>`;
+        const name = course.name !== undefined ? course.name : "Ei nimeä";
+        const price = course.price !== undefined ? course.price : "-";
+        const diets = course.diets !== undefined ? course.diets : "-";
+        return `<li class="menu-item">${name}: ${price} ${diets}</li>`;
     }).join('');
     menuHTML = `<h4>Päivän Menu</h4><ul class="menu-list">${dailyMenuHTML}</ul>`;
 
@@ -118,7 +121,10 @@ const dailyModal_en = (menuDaily) => {
     let menuHTML;
     const { courses } = menuDaily;
     const dailyMenuHTML = courses.map(course => {
-        return `<li class="menu-item">${course.name}: ${course.price} ${course.diets}</li>`;
+        const name = course.name !== undefined ? course.name : "No name";
+        const price = course.price !== undefined ? course.price : "-";
+        const diets = course.diets !== undefined ? course.diets : "-";
+        return `<li class="menu-item">${name}: ${price} ${diets}</li>`;
     }).join('');
     menuHTML = `<h4>Daily Menu</h4><ul class="menu-list">${dailyMenuHTML}</ul>`;
 
@@ -131,7 +137,10 @@ const weeklyModal = (menuWeekly) => {
     const { days } = menuWeekly;
     const weeklyMenuHTML = days.map(day => {
         const coursesHTML = day.courses.map(course => {
-            return `<li class="menu-item">${course.name}: ${course.price} ${course.diets}</li>`;
+            const name = course.name !== undefined ? course.name : "Ei nimeä";
+            const price = course.price !== undefined ? course.price : "-";
+            const diets = course.diets !== undefined ? course.diets : "-";
+            return `<li class="menu-item">${name}: ${price} ${diets}</li>`;
         }).join('');
         return `<li class="menu-day">${day.date}: <ul class="menu-list">${coursesHTML}</ul></li>`;
     }).join('');
@@ -146,7 +155,10 @@ const weeklyModal_en = (menuWeekly) => {
     const { days } = menuWeekly;
     const weeklyMenuHTML = days.map(day => {
         const coursesHTML = day.courses.map(course => {
-            return `<li class="menu-item">${course.name}: ${course.price} ${course.diets}</li>`;
+            const name = course.name !== undefined ? course.name : "No name";
+            const price = course.price !== undefined ? course.price : "-";
+            const diets = course.diets !== undefined ? course.diets : "-";
+            return `<li class="menu-item">${name}: ${price} ${diets}</li>`;
         }).join('');
         return `<li class="menu-day">${day.date}: <ul class="menu-list">${coursesHTML}</ul></li>`;
     }).join('');

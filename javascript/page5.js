@@ -43,16 +43,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         let targetPage = '';
                         switch (selectedLanguage) {
                             case 'EN':
-                                alert('Login successful.');
                                 targetPage = '../../html/en/käyttäjä_en.html';
                                 break;
                             case 'SV':
-                                alert('Inloggningen lyckades.');
                                 targetPage = '../../html/sv/käyttäjä_sv.html';
                                 break;
                             case 'FI':
                             default:
-                                alert('Kirjautuminen onnistui.');
                                 targetPage = '../../html/fi/käyttäjä.html';
                                 break;
                         }

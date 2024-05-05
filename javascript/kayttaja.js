@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             <p>${t.username}: ${userUsername}</p>
             <p>${t.email}: ${userEmail}</p>
             <p>${t.phone}: ${userPhone}</p>
-            <p><button class="logOut" onclick="logOut()">${t.logOut}</button></p>
+            <p><button class="logOut" onclick="logOut()"><b>${t.logOut}</b></button></p>
         `;
 
     } catch (error) {
@@ -292,3 +292,91 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+/* profiilikuva */
+//localStorage.removeItem('profilePictureURL');
+
+document.addEventListener('DOMContentLoaded', async function () {
+    const profilePictureInput = document.getElementById('picture');
+    const profilePicture = document.getElementById('profile-picture');
+    const uploadButton = document.getElementById('uploadButton');
+
+    // Käyttäjän tunnistaminen
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+        console.error("Käyttäjää ei tunnistettu. Token puuttuu.");
+        return;
+    }
+
+    const base64Payload = token.split('.')[1];
+    const payload = atob(base64Payload);
+    const parsedPayload = JSON.parse(payload);
+
+    const userID = parsedPayload.user_id;
+
+    // Käyttäjän profiilikuvan nouto
+    try {
+        const response = await fetch(`http://localhost:3000/api/v1/kayttajaKuva/profiilikuva/${userID}`);
+        if (response.ok) {
+            const userData = await response.json();
+
+            if (userData && userData.profilePictureURL) {
+                profilePicture.src = userData.profilePictureURL; // Aseta profiilikuva
+            }
+        } else {
+            console.error("Profiilikuvan nouto epäonnistui:", response.status);
+        }
+    } catch (error) {
+        console.error("Virhe käyttäjän profiilikuvan noutamisessa:", error);
+    }
+
+    // Näytä esikatselu
+    function previewProfilePicture(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profilePicture.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Kuvan lataaminen palvelimelle
+    uploadButton.addEventListener('click', async function () {
+        const file = profilePictureInput.files[0];
+        if (!file) {
+            alert("Valitse profiilikuva.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("kuva", file);
+
+        try {
+            const response = await fetch(`http://localhost:3000/api/v1/kayttajaKuva/profiilikuva/${userID}`, {
+                method: "POST",
+                body: formData,
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                const profilePictureURL = result.profilePictureURL;
+                profilePicture.src = profilePictureURL;
+                alert("Profiilikuva lisätty onnistuneesti.");
+            } else {
+                alert("Kuvan lisääminen epäonnistui.");
+            }
+        } catch (error) {
+            console.error("Virhe kuvan lisäämisessä:", error);
+            alert("Jotain meni pieleen. Yritä uudelleen.");
+        }
+    });
+
+    profilePictureInput.addEventListener("change", previewProfilePicture);
+});
+
+
+
+
+
