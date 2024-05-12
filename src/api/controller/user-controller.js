@@ -6,6 +6,7 @@ import {
     addUser,
     updateUser,
     updateUserPassword,
+    findUserPic
 } from '../model/user-model.js';
 import bcrypt from 'bcrypt';
 import { checkPassword } from '../../utils/salasana.js';
@@ -114,7 +115,6 @@ const userLoginPost = async (req, res) => {
         res.status(200).json({ success: true, message: 'Kirjautuminen onnistui', token, user_id: user.user_id });
 
     } catch (error) {
-        console.error('Virhe kirjautumisessa:', error.message);
         res.status(400).json({ error: error.message });
     }
 
@@ -147,7 +147,6 @@ const putUser = async (req, res) => {
 
         res.json(result);
     } catch (error) {
-        console.error('Virhe päivittäessä käyttäjää:', error);
         res.status(500).send('Sisäinen palvelinvirhe');
     }
 };
@@ -169,7 +168,6 @@ const getUserInfo = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Virhe getUserInfo-funktiossa:", error.message);
         res.status(500).json({ error: "Virhe palvelimella." });
     }
 };
@@ -196,13 +194,61 @@ const updatePasswordController = async (req, res) => {
             return res.status(400).send("Salasanan päivitys epäonnistui.");
         }
 
-        return res.status(200).send("Salasana päivitetty onnistuneesti.");
+        return res.status(200).send("Salasana päivitetty.");
 
     } catch (error) {
-        console.error("Virhe salasanan päivityksessä:", error);
-        return res.status(500).send("Sisäinen palvelinvirhe.");
+        return res.status(500).send("palvelinvirhe.");
     }
 };
+
+const putUserPic = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+
+        console.log('user', user_id)
+        console.log('req.file:', req.file)
+        if (!req.file) {
+            return res.status(400).send('Kuvaa ei lähetetty.');
+        }
+
+        const updatedFields = {
+            kayttaja_kuva: req.file.filename,
+        };
+
+        const result = await updateUser(updatedFields, user_id);
+
+        if (!result) {
+            return res.status(400).send('Profiilikuvan päivitys epäonnistui.');
+        }
+
+        return res.json(result);
+    } catch (error) {
+        console.error('Virhe profiilikuvan päivittämisessä:', error);
+        return res.status(500).send('Sisäinen palvelinvirhe');
+    }
+};
+
+const getUserPic = async (req, res) => {
+    try {
+        const userID = req.params.id;
+
+        console.log('userID:', userID);
+        const userPic = await findUserPic(userID);
+
+        console.log('userPic:', userPic)
+        // Jos käyttäjää ei löydy tai käyttäjällä ei ole profiilikuvaa, palautetaan virhe
+        if (!userPic) {
+            return res.status(404).json({ error: "Käyttäjän profiilikuvaa ei löytynyt." });
+        }
+
+        // Palautetaan käyttäjän profiilikuva
+        return res.json({ userPic: userPic });
+    } catch (error) {
+        console.error('Virhe getUserPicControllerissa:', error.message);
+        return res.status(500).json({ error: "Sisäinen palvelinvirhe." });
+    }
+};
+
 
 export {
     userLoginPost,
@@ -213,4 +259,6 @@ export {
     putUser,
     getUserInfo,
     updatePasswordController,
+    putUserPic,
+    getUserPic
 };

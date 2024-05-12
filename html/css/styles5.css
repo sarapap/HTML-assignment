@@ -23,7 +23,7 @@ header {
 }
 
 .kieli {
-    margin: 0;
+    margin-right: 20px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -118,38 +118,33 @@ form {
     background-color: white;
     padding: 40px;
     border-radius: 10px;
-    width: 50%;
 }
 
-.register {
+.login {
     display: flex;
     justify-content: center;
     align-items: center;
     height: auto;
-    padding: 2rem;
+    padding: 20px;
 }
 
-.register-form {
+.login-form {
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 40%;
 }
 
-.register-form input {
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    padding: 10px;
-}
-
-.register-form label {
+.login-form label {
     margin-bottom: 5px;
 }
 
 button {
-    margin-top: 10px;
-    padding: 10px;
-    cursor: pointer;
+    font-family: 'Tahoma', sans-serif;
+    padding: 7px;
     border-radius: 5px;
+    cursor: pointer;
     border: none;
     background-color: rgb(74, 72, 72);
     color: white;
@@ -159,70 +154,114 @@ button:hover {
     background-color: #505050;
 }
 
+#button2 {
+    margin-top: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 14px;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(74, 72, 72);
+    color: white;
+}
+
+#button2:hover {
+    background-color: #505050;
+}
+
+.kayttajaP {
+    font-size: 13px;
+    margin-top: 10px;
+    margin-bottom: -5px;
+}
+
 /* footer */
 
 footer {
-    padding-top: 10px;
+    padding: 20px;
+    margin-top: 30px;
 }
 
 /* media */
 
-@media only screen and (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
+@media only screen and (min-width: 1024px) {
     h1 {
-        margin-left: 10px;
+        margin-left: 15px;
+        margin-bottom: 15px;
     }
 
     .kieli {
         margin-top: 10px;
     }
 
-    .register-form {
-        width: 100%;
-        /* Lomake vie koko leveyden */
-        padding: 20px;
-        /* Lisää pehmustetta */
+    .login {
+        flex-direction: column;
+        padding: 10px;
     }
 
     form {
         padding: 30px;
-        /* Vähennä pehmustetta */
     }
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 600px) {
+
+    .kieli {
+        flex-direction: column;
+        padding: 10px;
+        margin-left: 10px;
+    }
 
     header {
+        margin-right: 10px;
+        display: inline-block;
+    }
+
+    img {
+        margin: 10px 15px 0px 20px;
+    }
+
+    ul {
         flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    li {
+        margin-left: -20px;
     }
 
     h1 {
         font-size: 1.5rem;
     }
 
+    footer {
+        font-size: 13px;
+        margin-top: 20px;
+    }
+
     .heart,
     .user {
-        width: 20px;
-        height: 20px;
         margin: 5px;
     }
 
-    .register {
+    .login {
         flex-direction: column;
-        /* Muuta asettelu pystysuoraksi */
     }
 
     form {
         padding: 20px;
-        /* Vähennä pehmustetta */
     }
 
-    .register-form {
-        width: 100%;
-        /* Joustavuus pienillä näytöillä */
+    #button1,
+    #button2 {
+        font-size: 13px;
+        padding: 10px;
     }
 }

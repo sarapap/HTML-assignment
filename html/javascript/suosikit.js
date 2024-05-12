@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         SV: {
             noFavorites: "Inga favoriter. Lägg till några restauranger i dina favoriter!",
             alertLogin: "Logga in för att se dina favoriter.",
-            deleteButton: "Radera",
+            deleteButton: "Ta bort",
             nameColumn: "Namn",
             addressColumn: "Adress",
             deleteColumn: "Ta bort från favoriter"
@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
 
     const dialog = document.querySelector("dialog");
-    dialog.style.display = "flex";
 
     if (favorites.length === 0) {
         dialog.innerHTML = `<p>${translations[selectedLanguage].noFavorites}</p>`;

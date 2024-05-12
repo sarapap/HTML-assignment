@@ -23,7 +23,7 @@ header {
 }
 
 .kieli {
-    margin: 0;
+    margin-right: 20px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -113,140 +113,133 @@ li a:hover {
 
 /* main */
 
-.socials p,
-.socials a {
-    display: inline-block;
-    vertical-align: middle;
-    padding: 10px;
-}
-
-main {
+form {
     box-shadow: 0 5px 20px 0 rgba(111, 94, 94, 0.448);
     background-color: white;
-    padding: 0px 100px 0px 100px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: auto;
-    margin: 50px 20px 20px 20px;
-    box-sizing: border-box;
+    padding: 40px;
+    border-radius: 10px;
+    width: 50%;
 }
 
-.contact-info {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-}
-
-.socials {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-}
-
-.instagram,
-.facebook,
-.twitter {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background-size: cover;
-    margin-right: 50px;
-}
-
-h3 {
-    text-shadow: 1px 1px 1px gray;
-}
-
-main {
-    box-shadow: 0 5px 20px 0 rgba(111, 94, 94, 0.448);
-    background-color: white;
-    padding: 0px 100px 0px 100px;
+.register {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 400px;
-    margin: 50px 20px 20px 20px;
+    height: auto;
+    padding: 2rem;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.register-form input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.register-form label {
+    margin-bottom: 5px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(74, 72, 72);
+    color: white;
+}
+
+button:hover {
+    background-color: #505050;
 }
 
 /* footer */
 
 footer {
     padding-top: 10px;
-    margin-left: 10px;
 }
 
 /* media */
 
-@media only screen and (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
+@media only screen and (max-width: 2000px) {
     h1 {
-        margin-left: 10px;
+        margin-left: 15px;
+        margin-bottom: 15px;
     }
 
     .kieli {
         margin-top: 10px;
     }
 
-    main {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-    }
-
-    .contact-info,
-    .socials {
+    .register-form {
+        width: 50%;
         padding: 20px;
-        text-align: left;
     }
 
-    .socials {
-        margin-top: 20px;
-    }
-
-    .instagram,
-    .facebook,
-    .twitter {
-        margin-right: 10px;
-        width: 20px;
-        height: 20px;
+    form {
+        padding: 30px;
     }
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 600px) {
+
+    .kieli {
+        flex-direction: column;
+        padding: 10px;
+        margin-left: 10px;
+    }
 
     header {
+        margin-right: 10px;
+        display: inline-block;
+    }
+
+    img {
+        margin: 10px 15px 0px 20px;
+    }
+
+    ul {
         flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    li {
+        margin-left: -20px;
     }
 
     h1 {
         font-size: 1.5rem;
     }
 
+    footer {
+        font-size: 13px;
+        margin-top: 20px;
+    }
+
     .heart,
     .user {
-        width: 20px;
-        height: 20px;
         margin: 5px;
     }
 
-    main {
-        padding: 10px;
+    .register {
         flex-direction: column;
     }
 
-    .socials {
-        padding: 15px;
-        text-align: center;
+    form {
+        padding: 20px;
     }
 
-    .contact-info {
-        text-align: left;
+    .register-form {
+        width: 100%;
     }
+
 }

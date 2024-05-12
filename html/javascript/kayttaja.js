@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         userId = parsedPayload.user_id;
 
-        const response = await fetch(`http://localhost:3000/api/v1/kayttaja/info/${userId}`, {
+        const response = await fetch(`http://localhost:3000/api/v1/users/info/${userId}`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -137,7 +137,7 @@ async function submitForm(event) {
     const selectedLanguage = getSelectedLanguage();
 
     try {
-        const response = await fetch(`http://localhost:3000/api/v1/kayttaja/info/${userId}`, {
+        const response = await fetch(`http://localhost:3000/api/v1/users/info/${userId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            fetch(`http://localhost:3000/api/v1/kayttaja/password/${userID}`, {
+            fetch(`http://localhost:3000/api/v1/users/password/${userID}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -294,14 +294,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* profiilikuva */
-//localStorage.removeItem('profilePictureURL');
+
+
+/* profiilikuva */
 
 document.addEventListener('DOMContentLoaded', async function () {
     const profilePictureInput = document.getElementById('picture');
     const profilePicture = document.getElementById('profile-picture');
     const uploadButton = document.getElementById('uploadButton');
 
-    // Käyttäjän tunnistaminen
     const token = localStorage.getItem("authToken");
     if (!token) {
         console.error("Käyttäjää ei tunnistettu. Token puuttuu.");
@@ -314,23 +315,26 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const userID = parsedPayload.user_id;
 
-    // Käyttäjän profiilikuvan nouto
-    try {
-        const response = await fetch(`http://localhost:3000/api/v1/kayttajaKuva/profiilikuva/${userID}`);
-        if (response.ok) {
-            const userData = await response.json();
-
-            if (userData && userData.profilePictureURL) {
-                profilePicture.src = userData.profilePictureURL; // Aseta profiilikuva
+    const storedProfilePictureURL = localStorage.getItem('profilePictureURL');
+    if (storedProfilePictureURL) {
+        profilePicture.src = storedProfilePictureURL;
+    } else {
+        try {
+            const response = await fetch(`http://localhost:3000/api/v1/users/avatar/${userID}`);
+            if (response.ok) {
+                const userData = await response.json();
+                console.log('userdata', userData)
+                const profilePictureURL = userData.kayttaja_kuva;
+                profilePicture.src = profilePictureURL;
+                localStorage.setItem('profilePictureURL', profilePictureURL);
+            } else {
+                console.error("Profiilikuvan nouto epäonnistui:", response.status);
             }
-        } else {
-            console.error("Profiilikuvan nouto epäonnistui:", response.status);
+        } catch (error) {
+            console.error("Virhe käyttäjän profiilikuvan noutamisessa:", error);
         }
-    } catch (error) {
-        console.error("Virhe käyttäjän profiilikuvan noutamisessa:", error);
     }
 
-    // Näytä esikatselu
     function previewProfilePicture(event) {
         const file = event.target.files[0];
         if (file) {
@@ -342,7 +346,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-    // Kuvan lataaminen palvelimelle
     uploadButton.addEventListener('click', async function () {
         const file = profilePictureInput.files[0];
         if (!file) {
@@ -354,15 +357,16 @@ document.addEventListener('DOMContentLoaded', async function () {
         formData.append("kuva", file);
 
         try {
-            const response = await fetch(`http://localhost:3000/api/v1/kayttajaKuva/profiilikuva/${userID}`, {
-                method: "POST",
+            const response = await fetch(`http://localhost:3000/api/v1/users/avatar/${userID}`, {
+                method: "PUT",
                 body: formData,
             });
 
             if (response.ok) {
                 const result = await response.json();
-                const profilePictureURL = result.profilePictureURL;
+                const profilePictureURL = result.kayttaja_kuva;
                 profilePicture.src = profilePictureURL;
+                localStorage.setItem('profilePictureURL', profilePictureURL);
                 alert("Profiilikuva lisätty onnistuneesti.");
             } else {
                 alert("Kuvan lisääminen epäonnistui.");
@@ -375,6 +379,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     profilePictureInput.addEventListener("change", previewProfilePicture);
 });
+
+
+
+
+
 
 
 

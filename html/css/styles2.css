@@ -1,0 +1,402 @@
+body {
+    font-family: 'Tahoma', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+}
+
+/* header */
+
+h1 {
+    margin-top: 25px;
+    margin-left: 20px;
+    text-shadow: 2px 0.5px 0.5px gray;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.kieli {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+#kieli {
+    background-color: rgba(211, 179, 179, 0.751);
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: 'Tahoma', sans-serif;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* nav */
+
+li {
+    font-size: medium;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    list-style: none;
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    background-color: rgba(221, 204, 204, 0.751);
+}
+
+li a {
+    color: black;
+    line-height: 4rem;
+    text-decoration: none;
+}
+
+li a:hover {
+    color: white;
+}
+
+
+.top-nav {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+.mainNav {
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.2);
+}
+
+.leftLI {
+    order: 1;
+    display: grid;
+    font-size: 14px;
+}
+
+.rightLI {
+    order: 2;
+    font-size: 14px;
+}
+
+.loginLI {
+    font-size: medium;
+    order: 2;
+    font-size: 14px;
+}
+
+.heart {
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+    background-image: url('kuvat/heart.png');
+    background-size: cover;
+    margin-left: 220px;
+}
+
+.user {
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    background-image: url('kuvat/usericon.png');
+    background-size: cover;
+}
+
+/* main */
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.main {
+    padding: 2rem;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.kartta-container {
+    height: 60vh;
+}
+
+#map {
+    box-shadow: 0 5px 20px 0 rgba(111, 94, 94, 0.448);
+    padding: 8px;
+}
+
+input[type="search"] {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid black;
+    padding-left: 10px;
+    font-family: 'Tahoma', sans-serif;
+}
+
+.imgSearch {
+    width: 15px;
+    height: 15px;
+}
+
+.filter {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid black;
+    font-family: 'Tahoma', sans-serif;
+}
+
+dialog {
+    width: 70%;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    color: rgb(81, 81, 81);
+    margin: 10px;
+}
+
+.menu-item {
+    padding: 10px;
+}
+
+#menuType {
+    text-align: center;
+    width: 130px;
+    height: 35px;
+    border-radius: 5px;
+    border: 2px solid black;
+    padding-left: 10px;
+    cursor: pointer;
+    font-family: 'Tahoma', sans-serif;
+}
+
+button {
+    cursor: pointer;
+    background-color: rgb(230, 228, 228);
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Tahoma', sans-serif;
+}
+
+button:hover {
+    background-color: #bcbcbc;
+    color: white;
+}
+
+#menuType:hover {
+    background-color: rgb(230, 228, 228);
+}
+
+#closeButton,
+.close-button {
+    cursor: pointer;
+    background-color: rgb(230, 228, 228);
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    font-family: 'Tahoma', sans-serif;
+}
+
+#closeButton:hover {
+    background-color: rgb(191, 191, 191);
+}
+
+#favoriteButton {
+    cursor: pointer;
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: 'Tahoma', sans-serif;
+}
+
+#favoriteButton:hover {
+    background-color: #ddd;
+}
+
+/* footer */
+
+footer {
+    padding-top: 10px;
+}
+
+/* media */
+
+@media only screen and (max-width: 1024px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    h1 {
+        margin-left: 10px;
+    }
+
+    .kieli {
+        margin-top: 10px;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    dialog {
+        width: 80%;
+    }
+
+    table {
+        padding: 5px;
+    }
+
+    footer {
+        margin-top: 500px;
+    }
+
+    .kartta-container {
+        height: 30vh;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    h1 {
+        margin-left: 10px;
+    }
+
+    .kieli {
+        margin-top: 10px;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    dialog {
+        width: 80%;
+    }
+
+    .kartta-container {
+        height: 30vh;
+    }
+
+    table {
+        padding: 5px;
+    }
+
+    footer {
+        margin-top: 500px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+
+    .kieli {
+        flex-direction: column;
+        padding: 10px;
+        margin-left: 10px;
+    }
+
+    header {
+        margin-right: 10px;
+        display: inline-block;
+    }
+
+    img {
+        margin: 10px 15px 0px 20px;
+    }
+
+    ul {
+        flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    li {
+        margin-left: -20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    footer {
+        font-size: 13px;
+        margin-top: 200px;
+    }
+
+    .kartta-container {
+        height: 20vh;
+    }
+
+    .heart,
+    .user {
+        margin: 5px;
+    }
+
+    dialog {
+        width: 100%;
+        padding: 10px;
+    }
+
+    table {
+        padding: 5px;
+        font-size: 0.9rem;
+        overflow-x: auto;
+    }
+
+    th,
+    td {
+        padding: 5px;
+    }
+
+}

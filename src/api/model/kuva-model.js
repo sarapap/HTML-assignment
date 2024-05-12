@@ -1,27 +1,27 @@
 import promisePool from '../../utils/database.js';
 
 const addKuva = async (kayttajaKuva, file) => {
-    const kuva_nimi = kayttajaKuva?.kuva_nimi ?? "Ei nimeä";
-    const kuva = file?.path ?? null;
+    const kuvaPolku = file?.path ?? null;
 
-    if (!kuva) {
-        console.error("No file path.");
+    if (!kuvaPolku) {
+        console.error("Tiedoston polkua ei löydy.");
         return false;
     }
 
-    const sql = `INSERT INTO kayttajaKuva (kuva_nimi, kuva) VALUES (?, ?)`;
+    const sql = `INSERT INTO kayttaja (kayttaja_kuva) VALUES (?)`;
 
     try {
-        const [rows] = await promisePool.execute(sql, [kuva_nimi, kuva]);
+        const [rows] = await promisePool.execute(sql, [kuvaPolku]);
         if (rows.affectedRows === 0) {
             return false;
         }
         return { kuva_id: rows.insertId };
     } catch (error) {
-        console.error("SQL error:", error);
+        console.error("SQL-virhe:", error);
         return false;
     }
 };
+
 
 const listKuvat = async () => {
     const [rows] = await promisePool.query('SELECT * FROM kayttajaKuva');

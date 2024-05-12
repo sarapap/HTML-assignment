@@ -31,15 +31,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const translations = {
                 EN: {
                     emptyFields: 'All required fields must be filled.',
-                    failed: "Registration failed. Please try again.",
+                    faile: "Username is already taken. Please choose another username."
                 },
                 SV: {
                     emptyFields: 'Alla obligatoriska fält måste fyllas i.',
-                    failed: "Registreringen misslyckades. Försök igen.",
+                    failed: "Användarnamnet är upptaget. Välj ett annat användarnamn."
                 },
                 FI: {
                     emptyFields: 'Kaikki pakolliset kentät on täytettävä.',
-                    failed: "Rekisteröinti epäonnistui. Yritä uudelleen.",
+                    failed: "Käyttäjätunnus on varattuna. Valitse toinen käyttäjätunnus.",
                 }
             };
 
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
 
-            fetch('http://localhost:3000/api/v1/kayttaja', {
+            fetch('http://localhost:3000/api/v1/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -98,3 +98,4 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+

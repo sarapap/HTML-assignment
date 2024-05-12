@@ -23,7 +23,7 @@ header {
 }
 
 .kieli {
-    margin: 0;
+    margin-right: 20px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -113,66 +113,68 @@ li a:hover {
 
 /* main */
 
+.socials p,
+.socials a {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px;
+}
+
 main {
-    padding: 2rem;
-    min-height: 400px;
+    box-shadow: 0 5px 20px 0 rgba(111, 94, 94, 0.448);
     background-color: white;
+    padding: 0px 100px 0px 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    margin: 50px 20px 20px 20px;
     box-sizing: border-box;
 }
 
-h2,
-h3 {
-    text-shadow: 1px 0px 0px gray;
-    padding-left: 20px;
-}
-
-dialog {
-    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.2);
-    border: none;
-    margin: 20px;
-    width: 90%;
-    max-width: 1500px;
-}
-
-table {
-    width: 200%;
-    border-collapse: collapse;
-    overflow-x: auto;
-}
-
-th,
-td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:hover {
-    background-color: #ddd;
-}
-
-button {
-    cursor: pointer;
-    background-color: rgb(230, 228, 228);
-    border-radius: 5px;
+.contact-info {
+    flex: 1;
+    text-align: center;
     padding: 10px;
-    font-family: 'Tahoma', sans-serif;
-    border: none;
 }
 
-button:hover {
-    background-color: #bcbcbc;
-    color: white;
+.socials {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+}
+
+.instagram,
+.facebook,
+.twitter {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    margin-right: 50px;
+}
+
+h3 {
+    text-shadow: 1px 1px 1px rgb(168, 168, 168);
+}
+
+main {
+    box-shadow: 0 5px 20px 0 rgba(111, 94, 94, 0.448);
+    background-color: white;
+    padding: 0px 100px 0px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    margin: 50px 20px 20px 20px;
 }
 
 /* footer */
 
 footer {
     padding-top: 10px;
+    margin-left: 10px;
 }
 
 /* media */
@@ -192,63 +194,90 @@ footer {
     }
 
     main {
-        padding: 1rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
     }
 
-    h2,
-    h3 {
-        padding-left: 10px;
+    .contact-info,
+    .socials {
+        padding: 20px;
+        text-align: left;
     }
 
-    dialog {
-        width: 80%;
+    .socials {
+        margin-top: 20px;
     }
 
-    table {
-        padding: 5px;
+    .instagram,
+    .facebook,
+    .twitter {
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
     }
 }
 
-@media only screen and (max-width: 450px) {
-    header {
+@media only screen and (max-width: 600px) {
+
+    .kieli {
         flex-direction: column;
+        padding: 10px;
+        margin-left: 10px;
+    }
+
+    header {
+        margin-right: 10px;
+        display: inline-block;
+    }
+
+    img {
+        margin: 10px 15px 0px 20px;
+    }
+
+    ul {
+        flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    li {
+        margin-left: -20px;
     }
 
     h1 {
         font-size: 1.5rem;
     }
 
+    footer {
+        font-size: 13px;
+        margin-top: 20px;
+    }
+
     .heart,
     .user {
-        width: 20px;
-        height: 20px;
         margin: 5px;
     }
 
     main {
-        padding: 0.5rem;
+        width: 90%;
+        height: auto;
     }
 
-    h2,
-    h3 {
-        padding-left: 5px;
-        font-size: 1rem;
+
+    p {
+        font-size: 13px;
     }
 
-    dialog {
-        width: 100%;
-        max-width: 90%;
-        padding: 10px;
+    .socials {
+        padding: 15px;
+        text-align: center;
     }
 
-    table {
-        padding: 5px;
-        font-size: 0.9rem;
-        overflow-x: auto;
-    }
-
-    th,
-    td {
-        padding: 5px;
+    .contact-info {
+        text-align: left;
     }
 }

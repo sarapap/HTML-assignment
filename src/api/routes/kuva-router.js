@@ -15,22 +15,21 @@ const upload = multer({ storage });
 
 const kuvaRouter = express.Router();
 
-kuvaRouter.route('/profiilikuva/:id').post(upload.single('kuva'), (req, res, next) => {
+kuvaRouter.route('/avatar/:id').post(upload.single('kuva'), (req, res, next) => {
     if (!req.file) {
         return res.status(400).json({ error: "Tiedostoa ei löydy." });
     }
     postKuva(req, res, next);
 });
 
-kuvaRouter.route('/profiilikuva').get(getKuva);
-kuvaRouter.route('/profiilikuva/nimi/:nimi').get(getKuvaByName);
-kuvaRouter.route('/profiilikuva/:id').put(upload.single('kuva'), (req, res, next) => {
+kuvaRouter.route('/avatar').get(getKuva);
+kuvaRouter.route('/avatar/:id').put(upload.single('kuva'), (req, res, next) => {
     if (!req.file) {
         return res.status(400).json({ error: "Tiedostoa ei löydy." });
     }
     putKuva(req, res, next);
 });
-kuvaRouter.route('/profiilikuva/:id').delete(deleteKuva).get(getKuvaById);
+kuvaRouter.route('/avatar/:id').delete(deleteKuva).get(getKuvaById);
 
 
 export default kuvaRouter;

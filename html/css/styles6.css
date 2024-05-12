@@ -23,7 +23,7 @@ header {
 }
 
 .kieli {
-    margin: 0;
+    margin-right: 20px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -154,28 +154,45 @@ footer {
     }
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 600px) {
+
+    .kieli {
+        flex-direction: column;
+        padding: 10px;
+        margin-left: 10px;
+    }
+
+    .heart,
+    .user {
+        margin: 5px;
+    }
 
     header {
+        margin-right: 10px;
+        display: inline-block;
+    }
+
+    img {
+        margin: 10px 15px 0px 20px;
+    }
+
+    ul {
         flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    li {
+        margin-left: -20px;
     }
 
     h1 {
         font-size: 1.5rem;
     }
 
-    .heart,
-    .user {
-        width: 20px;
-        height: 20px;
-        margin: 5px;
-    }
-
-    main {
-        padding: 10px;
-    }
-
-    p {
-        padding-left: 10px;
+    footer {
+        font-size: 13px;
     }
 }

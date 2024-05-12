@@ -27,7 +27,7 @@ const addUser = async (user) => {
     } = user;
 
 
-    const sql = `INSERT INTO kayttaja (name, lastname, username, password,
+    const sql = `INSERT INTO users (name, lastname, username, password,
       email, phone)
       VALUES (?, ?, ?, ?, ?, ?)`;
 
@@ -141,6 +141,41 @@ const updateUserPassword = async (userId, hashedNewPassword) => {
     }
 };
 
+const updateUserPic = async (file, asiakas_id) => {
+    const sql = promisePool.format(`UPDATE kayttaja SET kayttaja_kuva = ? WHERE user_id = ?`, [
+        file,
+        asiakas_id,
+    ]);
+
+    try {
+        const [rows] = await promisePool.execute(sql);
+        console.log('updateUser', rows);
+        if (rows.affectedRows === 0) {
+            return false;
+        }
+        return { message: 'success' };
+    } catch (error) {
+        console.error('Virhe updateUserPic:ssä:', error.message);
+        return false;
+    }
+};
+
+const findUserPic = async (userID) => {
+    try {
+        const sql = "SELECT kayttaja_kuva FROM kayttaja WHERE user_id = ?";
+        const [rows] = await promisePool.execute(sql, [userID]);
+
+        if (rows.length === 0) {
+            return null;
+        }
+
+        return rows[0].kayttaja_kuva;
+    } catch (error) {
+        console.error('Virhe getUserPic:ssä:', error.message);
+        return null;
+    }
+};
+
 
 export {
     listAllUsers,
@@ -151,4 +186,6 @@ export {
     updateUser,
     userLogin,
     updateUserPassword,
+    updateUserPic,
+    findUserPic
 };

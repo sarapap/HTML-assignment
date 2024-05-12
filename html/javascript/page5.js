@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 password: password,
             };
 
-            fetch('http://localhost:3000/api/v1/kayttaja/login', {
+            fetch('http://localhost:3000/api/v1/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +75,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 })
                 .catch(error => {
-                    alert('Kirjautuminen epäonnistui. Tarkista käyttäjätunnus ja salasana.');
+                    switch (selectedLanguage) {
+                        case 'EN':
+                            alert('Login failed.');
+                            break;
+                        case 'SV':
+                            alert('Inloggningen misslyckades.');
+                            break;
+                        case 'FI':
+                        default:
+                            alert('Kirjautuminen epäonnistui.');
+                            break;
+                    }
                 });
         });
     }
