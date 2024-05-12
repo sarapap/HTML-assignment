@@ -24,11 +24,11 @@ Jos käyttäjä ei ole kirjautunut, tästä ilmoitetaan käyttäjälle.
 
 
 
-Asennusohjeet:
+** Asennusohjeet: **
 
 
 
-Terminaaliin:
+** Terminaaliin: **
 
 
 git clone https://github.com/sarapap/HTML-assignment.git

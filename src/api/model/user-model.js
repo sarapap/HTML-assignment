@@ -1,9 +1,11 @@
 import promisePool from '../../utils/database.js';
 
+
 const listAllUsers = async () => {
     const [rows] = await promisePool.query('SELECT * FROM kayttaja');
     return rows;
 };
+
 
 const findUserById = async (id) => {
     const [rows] = await promisePool.execute(
@@ -16,6 +18,7 @@ const findUserById = async (id) => {
     return rows[0];
 };
 
+
 const addUser = async (user) => {
     const {
         name,
@@ -27,7 +30,7 @@ const addUser = async (user) => {
     } = user;
 
 
-    const sql = `INSERT INTO users (name, lastname, username, password,
+    const sql = `INSERT INTO kayttaja (name, lastname, username, password,
       email, phone)
       VALUES (?, ?, ?, ?, ?, ?)`;
 
@@ -51,6 +54,7 @@ const addUser = async (user) => {
         return false;
     }
 };
+
 
 const userLogin = async (user) => {
     const {
@@ -78,6 +82,7 @@ const userLogin = async (user) => {
     }
 };
 
+
 const findUserByUsername = async (tunnus) => {
     try {
         const [rows] = await promisePool.execute(
@@ -94,6 +99,7 @@ const findUserByUsername = async (tunnus) => {
     }
 };
 
+
 const findUserByTunnus = async (tunnus) => {
     const sql = 'SELECT * FROM kayttaja WHERE username = ?';
     const [rows] = await promisePool.execute(sql, [tunnus]);
@@ -102,6 +108,7 @@ const findUserByTunnus = async (tunnus) => {
     }
     return rows[0];
 };
+
 
 const updateUser = async (user, asiakas_id) => {
     const sql = promisePool.format(`UPDATE kayttaja SET ? WHERE user_id = ?`, [
@@ -122,6 +129,7 @@ const updateUser = async (user, asiakas_id) => {
     }
 };
 
+
 const updateUserPassword = async (userId, hashedNewPassword) => {
     const sql = 'UPDATE kayttaja SET password = ? WHERE user_id = ?';
     const values = [hashedNewPassword, userId];
@@ -141,6 +149,7 @@ const updateUserPassword = async (userId, hashedNewPassword) => {
     }
 };
 
+
 const updateUserPic = async (file, asiakas_id) => {
     const sql = promisePool.format(`UPDATE kayttaja SET kayttaja_kuva = ? WHERE user_id = ?`, [
         file,
@@ -159,6 +168,7 @@ const updateUserPic = async (file, asiakas_id) => {
         return false;
     }
 };
+
 
 const findUserPic = async (userID) => {
     try {

@@ -1,5 +1,6 @@
-### kaikki käyttäjät
+### get kaikki käyttäjät
 GET http://localhost:3000/api/v1/users
+
 
 ### uusi rekisteröityminen
 POST http://localhost:3000/api/v1/users
@@ -9,6 +10,7 @@ Content-Type: application/json
 "name": "Sara", "lastname": "Pappila", "username": "sarapap3", "password": "12345", "email": "sarapap@metropolia.fi", "phone": "0445423713"
 }
 
+
 ### uusi kirjautuminen
 POST http://localhost:3000/api/v1/users/login
 Content-Type: application/json
@@ -17,8 +19,10 @@ Content-Type: application/json
 "username": "sarapap2", "password": "12345"
 }
 
+
 ### get user info
 GET http://localhost:3000/api/v1/users/info/58
+
 
 ### update user password 
 PUT http://localhost:3000/api/v1/users/password/6
@@ -28,6 +32,7 @@ Content-Type: application/json
 "salasana": "123456"
 }
 
+
 ### update user info 
 PUT http://localhost:3000/api/v1/users/info/56
 Content-Type: application/json
@@ -36,10 +41,12 @@ Content-Type: application/json
 "etunimi": "Sarppa", "sukunimi": "Pappila", "tunnus": "kolmas", "email": "sara@metropolia.fi", "puhelin": "1234567"
 }
 
+
 ### get profiilikuva
 GET http://localhost:3000/api/v1/users/avatar/60
 
-### put profiilikuva
+
+### update profiilikuva
 PUT http://localhost:3000/api/v1/users/avatar/60
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 

@@ -14,6 +14,7 @@ import jwt from 'jsonwebtoken';
 import config from '../../config/config.js';
 const SECRET_KEY = config.SECRET_KEY;
 
+
 const getUser = async (req, res) => {
     const users = await listAllUsers();
     if (!users) {
@@ -22,6 +23,7 @@ const getUser = async (req, res) => {
     } res
     res.json(users);
 };
+
 
 const getUserByUsername = async (req, res) => {
     const user = await findUserByUsername(req.params.tunnus);
@@ -32,6 +34,7 @@ const getUserByUsername = async (req, res) => {
     }
 }
 
+
 const getUserById = async (req, res) => {
     const user = await findUserById(req.params.id);
     if (user) {
@@ -40,6 +43,7 @@ const getUserById = async (req, res) => {
         res.sendStatus(404);
     }
 };
+
 
 const postUser = async (req, res) => {
     try {
@@ -85,6 +89,7 @@ const postUser = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
 
 const userLoginPost = async (req, res) => {
     try {
@@ -151,6 +156,7 @@ const putUser = async (req, res) => {
     }
 };
 
+
 const getUserInfo = async (req, res) => {
     try {
         const userId = req.params.id;
@@ -171,6 +177,7 @@ const getUserInfo = async (req, res) => {
         res.status(500).json({ error: "Virhe palvelimella." });
     }
 };
+
 
 const updatePasswordController = async (req, res) => {
     try {
@@ -201,6 +208,7 @@ const updatePasswordController = async (req, res) => {
     }
 };
 
+
 const putUserPic = async (req, res) => {
     try {
         const user_id = req.params.id;
@@ -228,6 +236,7 @@ const putUserPic = async (req, res) => {
     }
 };
 
+
 const getUserPic = async (req, res) => {
     try {
         const userID = req.params.id;
@@ -236,12 +245,10 @@ const getUserPic = async (req, res) => {
         const userPic = await findUserPic(userID);
 
         console.log('userPic:', userPic)
-        // Jos käyttäjää ei löydy tai käyttäjällä ei ole profiilikuvaa, palautetaan virhe
         if (!userPic) {
             return res.status(404).json({ error: "Käyttäjän profiilikuvaa ei löytynyt." });
         }
 
-        // Palautetaan käyttäjän profiilikuva
         return res.json({ userPic: userPic });
     } catch (error) {
         console.error('Virhe getUserPicControllerissa:', error.message);

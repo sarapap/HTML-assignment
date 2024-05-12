@@ -295,19 +295,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* profiilikuva */
 
-
-/* profiilikuva */
-
+localStorage.removeItem('profilePictureURL');
 document.addEventListener('DOMContentLoaded', async function () {
     const profilePictureInput = document.getElementById('picture');
     const profilePicture = document.getElementById('profile-picture');
     const uploadButton = document.getElementById('uploadButton');
 
     const token = localStorage.getItem("authToken");
-    if (!token) {
-        console.error("Käyttäjää ei tunnistettu. Token puuttuu.");
-        return;
-    }
 
     const base64Payload = token.split('.')[1];
     const payload = atob(base64Payload);
@@ -323,15 +317,29 @@ document.addEventListener('DOMContentLoaded', async function () {
             const response = await fetch(`http://localhost:3000/api/v1/users/avatar/${userID}`);
             if (response.ok) {
                 const userData = await response.json();
-                console.log('userdata', userData)
-                const profilePictureURL = userData.kayttaja_kuva;
+                console.log(userData);
+
+                const profilePictureURL = userData.userPic;
+                console.log(profilePictureURL)
                 profilePicture.src = profilePictureURL;
+                console.log(profilePictureURL)
                 localStorage.setItem('profilePictureURL', profilePictureURL);
             } else {
                 console.error("Profiilikuvan nouto epäonnistui:", response.status);
             }
         } catch (error) {
-            console.error("Virhe käyttäjän profiilikuvan noutamisessa:", error);
+            switch (selectedLanguage) {
+                case 'EN':
+                    alert("An error occurred: " + error.message);
+                    break;
+                case 'SV':
+                    alert("Ett fel inträffade: " + error.message);
+                    break;
+                case 'FI':
+                default:
+                    alert("Tapahtui virhe: " + error.message);
+                    break;
+            }
         }
     }
 
@@ -348,8 +356,20 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     uploadButton.addEventListener('click', async function () {
         const file = profilePictureInput.files[0];
+        const selectedLanguage = getSelectedLanguage();
         if (!file) {
-            alert("Valitse profiilikuva.");
+            switch (selectedLanguage) {
+                case 'EN':
+                    alert("Select a profile picture.");
+                    break;
+                case 'SV':
+                    alert("Välj en profilbild.");
+                    break;
+                case 'FI':
+                default:
+                    alert("Valitse profiilikuva.");
+                    break;
+            }
             return;
         }
 
@@ -364,16 +384,48 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             if (response.ok) {
                 const result = await response.json();
-                const profilePictureURL = result.kayttaja_kuva;
+                const profilePictureURL = result.userPic;
                 profilePicture.src = profilePictureURL;
                 localStorage.setItem('profilePictureURL', profilePictureURL);
-                alert("Profiilikuva lisätty onnistuneesti.");
+                switch (selectedLanguage) {
+                    case 'EN':
+                        alert("Profile picture added successfully.");
+                        break;
+                    case 'SV':
+                        alert("Profilbilden har lagts till.");
+                        break;
+                    case 'FI':
+                    default:
+                        alert("Profiilikuva lisätty onnistuneesti.");
+                        break;
+                }
             } else {
-                alert("Kuvan lisääminen epäonnistui.");
+                switch (selectedLanguage) {
+                    case 'EN':
+                        alert("Failed to add picture.");
+                        break;
+                    case 'SV':
+                        alert("Det gick inte att lägga till bilden.");
+                        break;
+                    case 'FI':
+                    default:
+                        alert("Kuvan lisääminen epäonnistui.");
+                        break;
+                }
             }
         } catch (error) {
-            console.error("Virhe kuvan lisäämisessä:", error);
-            alert("Jotain meni pieleen. Yritä uudelleen.");
+            switch (selectedLanguage) {
+                case 'EN':
+                    alert("Something went wrong. Try again.");
+                    break;
+                case 'SV':
+                    alert("Något gick fel. Försök igen.");
+                    break;
+                case 'FI':
+                default:
+                    alert("Jotain meni pieleen. Yritä uudelleen.");
+                    break;
+            }
         }
     });
 
