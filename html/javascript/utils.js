@@ -1,5 +1,7 @@
 'use strict';
 
+// API pyynnöt 
+
 import { baseUrl, menuURL, menuURL2 } from "./variables.js";
 
 function getSelectedLanguage() {

@@ -1,5 +1,6 @@
 'use strict';
 
+// lisää suosikit taulu
 document.addEventListener("DOMContentLoaded", () => {
     const selectedLanguage = getSelectedLanguage();
 

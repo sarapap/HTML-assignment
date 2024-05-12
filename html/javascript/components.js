@@ -1,5 +1,7 @@
 'use strict';
 
+// tässä tiedostossa komponentteja page2.js sivua varten
+
 // Funktion kielen vaihtoon
 function getSelectedLanguage() {
     const kieli = document.getElementById('kieli');

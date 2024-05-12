@@ -276,7 +276,7 @@ const populateCities = async () => {
     });
 };
 
-// search ravintolat
+// etsi ravintolat
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.querySelector('input[type="search"]');
 

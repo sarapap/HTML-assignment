@@ -295,7 +295,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* profiilikuva */
 
-localStorage.removeItem('profilePictureURL');
+localStorage.removeItem('profilePictureFilename');
+
 document.addEventListener('DOMContentLoaded', async function () {
     const profilePictureInput = document.getElementById('picture');
     const profilePicture = document.getElementById('profile-picture');
@@ -309,23 +310,18 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const userID = parsedPayload.user_id;
 
-    const storedProfilePictureURL = localStorage.getItem('profilePictureURL');
-    if (storedProfilePictureURL) {
-        profilePicture.src = storedProfilePictureURL;
+    const storedProfilePic = localStorage.getItem('profilePictureFilename');
+    if (storedProfilePic) {
+        profilePicture.src = `../../uploads/${storedProfilePic}`;
     } else {
         try {
             const response = await fetch(`http://localhost:3000/api/v1/users/avatar/${userID}`);
             if (response.ok) {
                 const userData = await response.json();
-                console.log(userData);
 
-                const profilePictureURL = userData.userPic;
-                console.log(profilePictureURL)
-                profilePicture.src = profilePictureURL;
-                console.log(profilePictureURL)
-                localStorage.setItem('profilePictureURL', profilePictureURL);
-            } else {
-                console.error("Profiilikuvan nouto epäonnistui:", response.status);
+                const profilePictureFilename = userData.userPic;
+                profilePicture.src = `../../uploads/${profilePictureFilename}`;
+                localStorage.setItem('profilePictureFilename', profilePictureFilename);
             }
         } catch (error) {
             switch (selectedLanguage) {
@@ -384,9 +380,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             if (response.ok) {
                 const result = await response.json();
-                const profilePictureURL = result.userPic;
-                profilePicture.src = profilePictureURL;
-                localStorage.setItem('profilePictureURL', profilePictureURL);
+                const profilePictureFilename = result.userPic;
+                profilePicture.src = `../../uploads/${profilePictureFilename}`;
+                localStorage.setItem('profilePictureFilename', profilePictureFilename);
                 switch (selectedLanguage) {
                     case 'EN':
                         alert("Profile picture added successfully.");
@@ -431,6 +427,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     profilePictureInput.addEventListener("change", previewProfilePicture);
 });
+
 
 
 

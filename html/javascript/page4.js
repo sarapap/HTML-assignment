@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const translations = {
                 EN: {
                     emptyFields: 'All required fields must be filled.',
-                    faile: "Username is already taken. Please choose another username."
+                    failed: "Username is already taken. Please choose another username."
                 },
                 SV: {
                     emptyFields: 'Alla obligatoriska fält måste fyllas i.',
