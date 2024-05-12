@@ -77,12 +77,12 @@ function displayRestaurants(restaurants) {
             map.setView([userLat, userLon], 13);
 
             const redIcon = L.icon({
-                iconUrl: 'css/kuvat/redmarker.png',
+                iconUrl: '../css/kuvat/redmarker.png',
                 iconSize: [70, 60],
             });
 
             const defaultIcon = L.icon({
-                iconUrl: 'css/kuvat/marker.png',
+                iconUrl: '../css/kuvat/marker.png',
                 iconSize: [45, 45],
             });
 
