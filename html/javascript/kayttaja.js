@@ -324,6 +324,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 localStorage.setItem('profilePictureFilename', profilePictureFilename);
             }
         } catch (error) {
+            const selectedLanguage = getSelectedLanguage();
             switch (selectedLanguage) {
                 case 'EN':
                     alert("An error occurred: " + error.message);
