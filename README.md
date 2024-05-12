@@ -22,7 +22,10 @@ Käyttäjä pystyy myös kirjautuneena tallentamaan ravintolan suosikkeihin, ja 
 Jos käyttäjä ei ole kirjautunut, tästä ilmoitetaan käyttäjälle.
 
 
+
+
 Asennusohjeet:
+
 
 
 Terminaaliin:
