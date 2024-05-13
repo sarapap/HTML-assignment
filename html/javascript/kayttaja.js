@@ -319,9 +319,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (response.ok) {
                 const userData = await response.json();
 
-                const profilePictureFilename = userData.userPic;
-                profilePicture.src = `../../uploads/${profilePictureFilename}`;
-                localStorage.setItem('profilePictureFilename', profilePictureFilename);
+                if (userData.hasOwnProperty('userPic')) {
+                    const fileName = userData.userPic;
+                    userData.userPicURL = `http://localhost:3000/uploads/${fileName}`;
+                    delete userData.userPic;
+                    localStorage.setItem('profilePictureURL', userData.userPicURL);
+                }
+
+                profilePicture.src = userData.userPicURL;
             }
         } catch (error) {
             const selectedLanguage = getSelectedLanguage();
@@ -381,9 +386,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             if (response.ok) {
                 const result = await response.json();
-                const profilePictureFilename = result.userPic;
-                profilePicture.src = `../../uploads/${profilePictureFilename}`;
-                localStorage.setItem('profilePictureFilename', profilePictureFilename);
+                if (result.hasOwnProperty('userPicURL')) {
+                    profilePicture.src = result.userPicURL;
+                    localStorage.setItem('profilePictureURL', result.userPicURL);
+                }
                 switch (selectedLanguage) {
                     case 'EN':
                         alert("Profile picture added successfully.");
