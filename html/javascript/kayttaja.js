@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const userData = await response.json();
 
                 const profilePictureFilename = userData.userPic;
-                profilePicture.src = `../uploads/${profilePictureFilename}`;
+                profilePicture.src = `../../uploads/${profilePictureFilename}`;
                 localStorage.setItem('profilePictureFilename', profilePictureFilename);
             }
         } catch (error) {
