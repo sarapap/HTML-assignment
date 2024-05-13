@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const userData = await response.json();
 
                 const profilePictureFilename = userData.userPic;
-                profilePicture.src = `../../uploads/${profilePictureFilename}`;
+                profilePicture.src = `../uploads/${profilePictureFilename}`;
                 localStorage.setItem('profilePictureFilename', profilePictureFilename);
             }
         } catch (error) {
@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (response.ok) {
                 const result = await response.json();
                 const profilePictureFilename = result.userPic;
-                profilePicture.src = `../../uploads/${profilePictureFilename}`;
+                profilePicture.src = `../uploads/${profilePictureFilename}`;
                 localStorage.setItem('profilePictureFilename', profilePictureFilename);
                 switch (selectedLanguage) {
                     case 'EN':
