@@ -134,6 +134,10 @@ dialog {
     height: auto;
 }
 
+#eisuosikkeja {
+    margin-left: 20px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -171,7 +175,9 @@ button:hover {
 
 /* footer */
 
-
+footer {
+    padding: 10px;
+}
 
 /* media */
 

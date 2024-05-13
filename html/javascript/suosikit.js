@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         FI: {
             noFavorites: "Ei suosikkeja. Lisää ravintoloita suosikkeihin!",
-            alertLogin: "Ole hyvä ja kirjaudu sisään nähdäksesi suosikkisi.",
+            alertLogin: "Kirjaudu sisään nähdäksesi suosikkisi.",
             deleteButton: "Poista",
             nameColumn: "Nimi",
             addressColumn: "Osoite",
@@ -32,8 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const token = localStorage.getItem("authToken");
+
+    const eisuosikkeja = document.getElementById("eisuosikkeja");
     if (!token) {
-        alert(translations[selectedLanguage].alertLogin);
+        eisuosikkeja.innerHTML = translations[selectedLanguage].alertLogin;
         return;
     }
 
