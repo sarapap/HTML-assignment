@@ -1,6 +1,6 @@
-[Linkki serveriin]()
+[Linkki serveriin](https://users.metropolia.fi/~sarapap/HTML-assignment/)
 
-[Linkki suoraan etusivulle]()
+[Linkki suoraan etusivulle](https://users.metropolia.fi/~sarapap/HTML-assignment/html/fi/page1.html)
 
 
 Tämä nettisivu esittelee Suomen Opiskelijaravintolat, joka tarjoaa käyttäjälle mahdollisuuden tarkastella eri opiskelijaravintoloita Suomessa. 
